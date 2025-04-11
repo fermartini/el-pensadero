@@ -1,9 +1,10 @@
 ---
-import NavBar from '../components/NavBar.astro';
-import '../style/global.css'
+import NavBar from "../components/NavBar.astro";
+import "../style/global.css";
 ---
+
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -11,18 +12,24 @@ import '../style/global.css'
 		<meta name="generator" content={Astro.generator} />
 		<title>El Pensadero</title>
 	</head>
-	<body class="font-spectral">
+	<body class="font-spectral overflow-x-hidden min-h-screen">
+		<div class="relative h-fit w-full bg-slate-950 ">
+			<!-- ESTE DIV ES EL CIRCULO DEL BORDE IZQUIERDO -->
+			<div class="absolute  bottom-0 left-[-20%] right-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div>
+			<!-- ESTE DIV ES EL CIRCULO DEL BORDE DERECHO -->
+			<div class="absolute bottom-0 right-[-20%] top-[10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div>
 			<NavBar />
 			<slot />
-		
+		</div>
 	</body>
-</html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+	<style>
+		html,
+		body {
+			margin: 0;
+			width: 100%;
+			height: 100%;
+			color: gray;
+		}
+	</style>
+</html>
