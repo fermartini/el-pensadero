@@ -1,0 +1,30 @@
+---
+title: Harry y Hermione ¿Casi novios? + 4 datos del universo de Harry Potter
+author: El Pensadero
+img: /img/datos/harryYHermoineSeBesan.jpg
+description: ¿Sabías que Harry y Hermione casi fueron pareja? Descubre 5 datos sorprendentes del mundo mágico que te harán replantear muchas cosas.
+date: 12-04-2025
+readtime: 4 min
+slug: 5-datos-curiosos-1
+tags: [datos curiosos, harry potter, teoría, personajes, magia]
+category: Datos
+lang: es
+---
+
+### 1. **Harry y Hermione: ¿El verdadero romance?**  
+En los primeros borradores de *Harry Potter*, J.K. Rowling consideró seriamente que Hermione Granger y Harry Potter podrían haber sido una pareja. En las primeras versiones de la saga, Ron Weasley quedaba relegado a un segundo plano, mientras que la relación entre Harry y Hermione era mucho más estrecha, algo que se reflejaba en sus muchas escenas juntos. Sin embargo, Rowling cambió de rumbo, y la relación con Ron prevaleció, aunque admitió que, en retrospectiva, la elección de pareja se debió más a un impulso nostálgico que a la lógica narrativa.
+
+### 2. **La conexión oculta entre Voldemort, Dumbledore y Harry**  
+Aunque nunca se menciona en las películas, los tres personajes más importantes de la saga comparten un ancestro en común: Ignotus Peverell, el dueño original de la Capa de Invisibilidad. Este detalle conecta a Voldemort, Dumbledore y Harry de manera directa, uniendo sus destinos de una manera inesperada.
+
+### 3. **Un actor cambió en la saga sin que nadie lo notara**  
+Vincent Crabbe, uno de los secuaces de Draco Malfoy, desaparece en *Las Reliquias de la Muerte*. En su lugar aparece Blaise Zabini, debido a problemas legales del actor que interpretaba a Crabbe, Jamie Waylett. Este cambio, que pasa desapercibido para muchos, refleja cómo una circunstancia externa afectó la historia dentro de la saga.
+
+### 4. **Hogwarts no siempre tuvo baños**  
+En los primeros siglos de la existencia de Hogwarts, los magos no necesitaban baños; simplemente usaban hechizos para deshacerse de sus desechos. Esta curiosidad fue revelada por J.K. Rowling en Pottermore y pone en perspectiva lo antiguo y rudimentario que podía ser el castillo en sus inicios.
+
+### 5. **¿Por qué los Dementores afectan tanto a Harry?**  
+Los Dementores son criaturas aterradoras que se alimentan de la felicidad. Pero, ¿por qué afectan más a Harry? La respuesta se encuentra en sus traumas: desde la muerte de sus padres hasta los abusos con los Dursley, Harry ha sufrido más que la mayoría. Rowling ha mencionado que los Dementores fueron inspirados por su propia experiencia con la depresión, lo que les da un impacto aún más profundo en el joven mago.
+
+---
+

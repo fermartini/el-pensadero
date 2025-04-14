@@ -22,6 +22,35 @@ export default {
 					'50%': { transform: 'translate(-30px,-500px)' },
 				},
 			},
+			keyframes: {
+				fadeIn: {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' },
+				},
+				fadeOut: {
+					'0%': { opacity: '1' },
+					'100%': { opacity: '0' },
+				},
+			},
+			animation: {
+				fadeIn: 'fadeIn 0.5s ease-out forwards',
+				fadeOut: 'fadeOut 0.3s ease-in forwards',
+			},
+			keyframes: {
+				fadeInScale: {
+				  '0%': { opacity: '0', transform: 'scale(0.95)' },
+				  '100%': { opacity: '1', transform: 'scale(1)' },
+				},
+				fadeOutScale: {
+				  '0%': { opacity: '1', transform: 'scale(1)' },
+				  '100%': { opacity: '0', transform: 'scale(0.95)' },
+				}
+			  },
+			  animation: {
+				fadeInScale: 'fadeInScale 0.3s ease-out forwards',
+				fadeOutScale: 'fadeOutScale 0.2s ease-in forwards',
+			  },
+			  
 		},
 		plugins: [],
 	}

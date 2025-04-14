@@ -1,6 +1,7 @@
 ---
 import NavBar from "../components/NavBar.astro";
 import ParticulasMagicas from "../components/ParticulasMagicas.jsx";
+import { ClientRouter } from "astro:transitions";
 
 import "../style/global.css";
 ---
@@ -11,23 +12,30 @@ import "../style/global.css";
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
 		<meta name="generator" content={Astro.generator} />
 		<title>El Pensadero</title>
+		<ClientRouter />
 	</head>
-	<body class="font-spectral overflow-x-hidden min-h-screen relative ">
-		<div class="absolute inset-0 z-10  ">
+	<body class="font-spectral overflow-x-hidden min-h-screen relative">
+		<div class="absolute inset-0 z-10 pointer-events-none">
 			<ParticulasMagicas client:visible />
 		</div>
-		
 
-		<div class="relative h-fit w-full bg-slate-950 "> 
+		<div class="relative h-fit w-full bg-slate-950 z-0 ">
 			<!-- ESTE DIV ES EL CIRCULO DEL BORDE IZQUIERDO -->
-			 <div class=" absolute  bottom-0 left-[-20%] right-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div>
+			<div
+				class="absolute bottom-0 left-[-20%] right-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"
+			>
+			</div>
 			<!-- ESTE DIV ES EL CIRCULO DEL BORDE DERECHO -->
-			 <div class="absolute bottom-0 right-[-20%] top-[10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div> 
+			<div
+				class="absolute bottom-0 right-[-20%] top-[10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"
+			>
+			</div>
 			<NavBar />
 			<slot />
-		</div> 
+		</div>
 	</body>
 
 	<style>
@@ -40,3 +48,10 @@ import "../style/global.css";
 		}
 	</style>
 </html>
+
+
+<script>
+  document.fonts.ready.then(() => {
+    document.body.classList.add('fonts-loaded');
+  });
+</script>
