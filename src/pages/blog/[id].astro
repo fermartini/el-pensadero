@@ -29,17 +29,12 @@ const { Content } = await render(post);
 ---
 
 <Layout>
-  <div class="flex">
-    <aside>
-      <img
-        class="rounded-t-lg"
-        src={img}
-        alt={title}
-        transition:name={`img-${slug}`}
-      />
-    </aside>
-    <h2>{title}</h2>
-  </div>
-
-  <Content />
+  <main class="h-full w-full gap-7 items-center justify-center mt-20">
+    <article class="w-full flex flex-col items-center justify-center">
+      <h1 class="text-4xl font-bold text-[#928952] mb-5">{title}</h1>
+      <p class="mb-5 text-gray-400">{description}</p>
+      <img src={img} alt={title} transition:name={`img-${slug}`} />
+      <Content />
+    </article>
+  </main>
 </Layout>

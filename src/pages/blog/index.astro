@@ -6,46 +6,117 @@ const posts = await getCollection("posts");
 ---
 
 <Layout>
-  <div class="h-full w-full grid grid-cols-3 gap-7 items-center justify-center">
-    {
-      posts.map((post: any) => {
-        const { data } = post;
-        const {
-          title,
-          author,
-          img,
-          description,
-          date,
-          readtime,
-          slug,
-          tags,
-          category,
-          lang,
-        } = data;
-        return (
-          <div>
-            <a
-              href={`/blog/${slug}`}
-              class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow-sm md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-            >
-              <img
-                class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-                src={img}
-                alt=""
-                transition:name={`img-${slug}`}
-              />
-              <div class="flex flex-col justify-between p-4 leading-normal">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  {title}
-                </h5>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                  {description}
-                </p>
-              </div>
-            </a>
-          </div>
-        );
-      })
-    }
-  </div>
+  <main class="h-full w-full flex gap-7 items-center justify-center">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mx-auto mt-32 max-w-2xl lg:mx-0">
+        <h2
+          class="text-4xl font-semibold tracking-tight text-pretty sm:text-5xl text-[#928952]"
+        >
+          EL BLOG DE HARRY POTTER
+        </h2>
+        <p class="mt-2 text-lg/8">Noticias, teorias, datos y mucha magia.</p>
+      </div>
+      <div
+        class="mx-auto mt-10 grid grid-col-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-2"
+      >
+        {
+          posts.map((post: any) => {
+            const { data } = post;
+            const {
+              title,
+              author,
+              img,
+              description,
+              date,
+              readtime,
+              slug,
+              tags,
+              important,
+              category,
+              lang,
+            } = data;
+            return (
+              <article
+                class:list={[
+                  "flex   items-start justify-between gap-5 flex-col",
+                  {
+                    "lg:col-span-2 lg:flex-row": important,
+                    "col-span-1 ": !important,
+                  },
+                ]}
+              >
+                <div
+                  class:list={[
+                    "flex items-center justify-cente",
+                    {
+                      "w-full": !important,
+                    },
+                  ]}
+                >
+                  <a href={`/blog/${slug}`}>
+                    <img
+                      src={img}
+                      alt={title}
+                      transition:name={`img-${slug}`}
+                    />
+                  </a>
+                </div>
+                <div class="col-span-3">
+                  <div class="flex items-center gap-x-4 text-xs ">
+                    <time datetime="2020-03-16" class="text-gray-500">
+                      {date}
+                    </time>
+                    <a
+                      href={`/blog/${slug}`}
+                      class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
+                    >
+                      {category}
+                    </a>
+                  </div>
+                  <div class="group relative">
+                    <h3
+                      class:list={[
+                        "mt-3 font-semibold text-gray-200 group-hover:text-gray-600",
+                        {
+                          "text-3xl": important,
+                          "text-lg": !important,
+                        },
+                      ]}
+                    >
+                      <a href={`/blog/${slug}`}>
+                        <span class="absolute inset-0" />
+                        {title}
+                      </a>
+                    </h3>
+                    <p class="mt-5 line-clamp-3 text-sm/6 text-gray-400">
+                      {description}
+                    </p>
+                  </div>
+                  <div class="relative flex items-end justify-around gap-x-4">
+                    <div class="text-sm/6">
+                      <p class="font-semibold text-gray-200">
+                        <a href={`/blog/${slug}`}>
+                          <span class="absolute inset-0" />
+                          Por {author}
+                        </a>
+                      </p>
+                      <p class="text-gray-500">Lectura: {readtime}</p>
+                    </div>
+                    <div class="justify-center  flex z-10">
+                      <a
+                        href={`/blog/${slug}`}
+                        class="text-white border-slate-600 rounded-xl p-5 border text-2xl font-medium mt-10 hover:border-[#928952] transition-all"
+                      >
+                        🪄 Leer Mas
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            );
+          })
+        }
+      </div>
+    </div>
+  </main>
 </Layout>

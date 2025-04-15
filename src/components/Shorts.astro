@@ -21,11 +21,11 @@ function getVideoId(src: string) {
   id="shorts"
   class="min-h-screen w-full flex flex-col items-center justify-center px-4"
 >
-  <h2 class="text-4xl font-cinzel text-center text-[#928952] mb-10">
+  <h2 class="text-4xl font-cinzel text-center text-[#928952] mb-10  pt-20">
     Shorts mágicos
   </h2>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl ">
     {
       shorts.map((video: Video) => {
       
@@ -71,6 +71,9 @@ function getVideoId(src: string) {
         );
       })
     }
+  </div>
+  <div class="mt-10">
+    <a href="https://www.youtube.com/@elpensadero-HP?sub_confirmation=1" target="_blank" class="text-white border-slate-600 rounded-xl border text-2xl p-5 font-medium hover:border-[#928952]  transition-all">✨ Más Videos</a>
   </div>
     <!-- 👇 Modal para reproducir el video -->
     <dialog id="video-modal" class="h-screen w-screen bg-transparent" >

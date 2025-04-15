@@ -15,7 +15,7 @@ export default {
 			keyframes: {
 				flotar1: {
 					'0%, 100%': { transform: 'translate(0, 0)' },
-					'50%': { transform: 'translate(50px,500px)' },
+					'50%': { transform: 'translate(5000px,50000px)' },
 				},
 				flotar2: {
 					'0%, 100%': { transform: 'translate(0, 0)' },

@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/mdx": "^4.2.4",
     "@astrojs/react": "^4.2.3",
     "@astrojs/tailwind": "^6.0.2",
     "@fontsource/cinzel-decorative": "^5.2.5",
