@@ -12,6 +12,7 @@ const posts = defineCollection({
         tags: z.array(z.string()),
         category: z.string(),
         lang: z.string(),
+        important: z.boolean(),
     })
 })
 

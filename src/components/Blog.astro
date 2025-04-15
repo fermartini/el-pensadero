@@ -2,74 +2,94 @@
 import { getCollection } from "astro:content";
 
 const posts = await getCollection("posts");
+// Función para mezclar los posts aleatoriamente
+const shuffleArray = (posts: any) => {
+  for (let i = posts.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [posts[i], posts[j]] = [posts[j], posts[i]]; // Intercambia los elementos
+  }
+  return posts;
+};
+
+// Mezcla aleatoriamente los posts
+const shuffledPosts = shuffleArray([...posts]);
+
+const limitedPosts = shuffledPosts.slice(0, 3);
 
 type Post = {
-	data: {
-		title: string;
-		img: string;
-		description: string;
-		slug: string;
-	};
+  data: {
+    title: string;
+    img: string;
+    description: string;
+    slug: string;
+  };
 };
 ---
 
-<section aria-labelledby="ultimas noticias de harry potter z-50	" id="blog">
-    <h2 class="text-4xl font-cinzel text-center text-[#928952] mb-10">
-        Ultimas noticias
-    </h2>
-    <div class="md:flex justify-center gap-8 grid grid-cols-1">
-        {
-            posts.map((post: Post) => {
-                const { data } = post;
-                const { title, img, description, slug } = data;
-                return (
-                    <article class="flex flex-col  max-w-sm border rounded-lg shadow-sm bg-gray-800 border-gray-700">
-                        <a href={`/blog/${slug}`}>
-                            <img
-                                class="rounded-t-lg"
-                                src={img}
-                                alt={title}
-                                transition:name={`img-${slug}`}
-                            />
-                        </a>
-                        <div class="p-5 flex flex-col flex-grow">
-                            <a href={`/blog/${slug}`}>
-                                <h5 class="mb-2 text-2xl font-bold tracking-tight  text-white">
-                                    {title}
-                                </h5>
-                            </a>
-                            <div class="mt-auto">
-                                <p class="mb-3 font-normal text-gray-400">
-                                    {description}
-                                </p>
-                            </div>
-                            <div class="mt-auto">
-                                <a
-                                    href={`/blog/${slug}`}
-                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white 0 rounded-lg  focus:ring-4 focus:outline-none  bg-gray-600 hover:bg-[#928952] focus:ring-gray-800"
-                                >
-                                    Leer Mas
-                                    <svg
-                                        class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 14 10"
-                                    >
-                                        <path
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M1 5h12m0 0L9 1m4 4L9 9"
-                                        />
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                );
-            })
-        }
-    </div>
+<section aria-labelledby="ultimas noticias de harry potter z-50" id="blog">
+  <h2 class="text-4xl font-cinzel text-center text-[#928952] mb-10 pt-20">
+    Ultimas noticias
+  </h2>
+  <div class="md:flex justify-center gap-8 grid grid-cols-1">
+    {
+      limitedPosts.map((post: Post) => {
+        const { data } = post;
+        const { title, img, description, slug } = data;
+        return (
+          <article class="flex flex-col m-5 xl:m-0  max-w-sm border rounded-lg shadow-sm bg-gray-800 border-gray-700">
+            <a href={`/blog/${slug}`}>
+              <img
+                class="rounded-t-lg"
+                src={img}
+                alt={title}
+                transition:name={`img-${slug}`}
+              />
+            </a>
+            <div class="p-5 flex flex-col flex-grow">
+              <a href={`/blog/${slug}`}>
+                <h5 class="mb-2 text-xl xl:text-2xl font-bold tracking-tight  text-white">
+                  {title}
+                </h5>
+              </a>
+              <div class="mt-auto">
+                <p class="mb-3 font-normal text-gray-400 text-sm xl:text-lg">
+                  {description}
+                </p>
+              </div>
+              <div class="mt-auto">
+                <a
+                  href={`/blog/${slug}`}
+                  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white 0 rounded-lg  focus:ring-4 focus:outline-none  bg-gray-600 hover:bg-[#928952] focus:ring-gray-800"
+                >
+                  Leer Mas
+                  <svg
+                    class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 14 10"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        );
+      })
+    }
+  </div>
+  <div class="justify-center w-full flex">
+    <a
+      href="/blog"
+      class="text-white border-slate-600 rounded-xl p-5 border text-2xl font-medium mt-10 hover:border-[#928952] transition-all"
+      >🪄 Más artículos mágicos</a
+    >
+  </div>
 </section>
