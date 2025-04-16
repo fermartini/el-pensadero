@@ -1,10 +1,10 @@
 import { useCallback } from "react";
 import { Particles } from "react-tsparticles";
-import { loadFull } from "tsparticles";
+import { loadSlim } from "tsparticles-slim";
 
 export default function ParticulasMagicas() {
   const particlesInit = useCallback(async (engine) => {
-    await loadFull(engine);
+    await loadSlim(engine);
   }, []);
 
   return (

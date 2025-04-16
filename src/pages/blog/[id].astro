@@ -12,28 +12,32 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { data } = post;
-const {
-  title,
-  author,
-  img,
-  description,
-  date,
-  readtime,
-  slug,
-  tags,
-  category,
-  lang,
-} = data;
+const { title, img, description, slug } = data;
 
 const { Content } = await render(post);
 ---
 
 <Layout>
-  <main class="h-full w-full gap-7 items-center justify-center mt-20">
-    <article class="w-full flex flex-col items-center justify-center">
-      <h1 class="text-4xl font-bold text-[#928952] mb-5">{title}</h1>
-      <p class="mb-5 text-gray-400">{description}</p>
-      <img src={img} alt={title} transition:name={`img-${slug}`} />
+  <main
+    class="h-full w-full gap-7 flex items-center justify-center mt-20 mx-auto px-4"
+  >
+    <article class="max-w-5xl w-full flex flex-col items-center justify-center">
+      <h1 class="text-5xl font-bold text-[#928952] mb-5 text-center">
+        {title}
+      </h1>
+
+      <p class="mb-5 text-xl text-gray-400 text-center">{description}</p>
+
+      <img
+        src={img}
+        alt={title}
+        transition:name={`img-${slug}`}
+        width="1408"
+        height="768"
+        class="w-full h-auto rounded-xl shadow-lg"
+        loading="lazy"
+      />
+
       <Content />
     </article>
   </main>

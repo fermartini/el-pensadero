@@ -1,0 +1,32 @@
+---
+const { title = null, imgSrc = null, imgAlt = "" } = Astro.props;
+import { Image } from "astro:assets";
+---
+
+<section class="mt-6 grid grid-col-1">
+  {
+    title && (
+      <header class="">
+        <h2 class="text-4xl font-semibold mt-6 text-gray-100">{title}</h2>
+      </header>
+    )
+  }
+
+  <div class="leading-loose text-gray-300 text-lg w-fit mt-3">
+    <slot />
+  </div>
+  <div>
+    {
+      imgSrc && (
+        <Image
+          class="mt-4"
+          src={imgSrc}
+          alt={imgAlt}
+          width="1408"
+          height="768"
+          loading="lazy"
+        />
+      )
+    }
+  </div>
+</section>

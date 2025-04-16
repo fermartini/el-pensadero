@@ -2,7 +2,7 @@
 import shorts from "../data/videos.json";
 
 
-interface Video {
+type Video = {
   title: string;
   description: string;
   src: string;
@@ -10,12 +10,10 @@ interface Video {
   type: string;
   thumbnail: string;
   uploadDate: string;
+  videoId: string;
 }
 
-function getVideoId(src: string) {
-  const idMatch = src.match(/embed\/([a-zA-Z0-9_-]+)/);
-  return idMatch ? idMatch[1] : "";
-}
+
 ---
 <section
   id="shorts"
@@ -82,7 +80,7 @@ function getVideoId(src: string) {
           <button
             class="absolute top-6 right-10 bg-red-900 text-white rounded-full p-3 z-10 close-btn"
           >✕</button>
-          <img src="img/youtube-harry-modal.jpg" alt="Harry espera emocionado el video" id="harry-modal">
+          <img src="img/youtube-harry-modal.webp" alt="Harry espera emocionado el video" id="harry-modal">
           <iframe
             id="modal-iframe"
             class="w-full h-full rounded-xl"
