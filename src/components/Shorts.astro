@@ -1,5 +1,6 @@
 ---
 import shorts from "../data/videos.json";
+import { Image } from "astro:assets";
 
 
 type Video = {
@@ -34,12 +35,15 @@ type Video = {
             data-title={video.title}
             
           >
-            <img
+            <Image
               src={video.thumbnail}
               alt={video.title}
-              class="w-full h-full object-cover transition-opacity duration-300"
-              loading="lazy"
+              width="768"
+              height="1408" 
             />
+
+          
+            
             <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition overlay">
               <svg
                 class="w-12 h-12 text-white"
@@ -80,7 +84,14 @@ type Video = {
           <button
             class="absolute top-6 right-10 bg-red-900 text-white rounded-full p-3 z-10 close-btn"
           >✕</button>
-          <img src="img/youtube-harry-modal.webp" alt="Harry espera emocionado el video" id="harry-modal">
+          <img 
+            src="img/youtube-harry-modal.webp" 
+            class="rounded-xl shadow-lg mx-auto my-6"
+
+            alt="Harry espera emocionado el video" 
+            id="harry-modal"
+            width="768"
+            height="1408">
           <iframe
             id="modal-iframe"
             class="w-full h-full rounded-xl"
