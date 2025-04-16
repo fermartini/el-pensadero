@@ -5,8 +5,9 @@
         "src": "https://www.youtube.com/embed/f3rRvuxD75Q",
         "id": "dumbledoreEnamorado",
         "type": "short",
-        "thumbnail": "https://img.youtube.com/vi/f3rRvuxD75Q/maxresdefault.jpg",
-        "uploadDate": "2025-01-27T09:00:00+00:00"
+        "thumbnail": "/img/videos/dumbledore-batalla-magica-grindelwald.webp",
+        "uploadDate": "2025-01-27T09:00:00+00:00",
+        "videoId": "f3rRvuxD75Q"
     },
     {
         "title": "Ron y Hermione casi no fueron pareja en la historia de Harry Potter",
@@ -14,8 +15,9 @@
         "src": "https://www.youtube.com/embed/PXlaRyHrlGI",
         "id": "HarryyHermione",
         "type": "short",
-        "thumbnail": "https://img.youtube.com/vi/PXlaRyHrlGI/maxresdefault.jpg",
-        "uploadDate": "2025-03-20T15:00:00+00:00"
+        "thumbnail":"/img/videos/harry-hermione-ron-enamorados.webp",
+        "uploadDate": "2025-03-20T15:00:00+00:00",
+        "videoId": "PXlaRyHrlGI"
     },
     {
         "title": "Las muertes más impactantes de personajes en la saga de Harry Potter – análisis y curiosidades mágicas",
@@ -23,7 +25,8 @@
         "src": "https://www.youtube.com/embed/gtoVX7ya7l4",
         "id": "muertesEnHarryPotter",
         "type": "short",
-        "thumbnail": "https://img.youtube.com/vi/gtoVX7ya7l4/maxresdefault.jpg",
-        "uploadDate": "2025-02-14T18:00:00+00:00"
+        "thumbnail": "/img/videos/muertes-del-mundo-magico.webp",
+        "uploadDate": "2025-02-14T18:00:00+00:00",
+        "videoId": "gtoVX7ya7l4"
     }
 ]
