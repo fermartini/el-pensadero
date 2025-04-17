@@ -3,6 +3,9 @@ import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Footer from "../../components/Footer.astro";
 type Post = {
+  id: string;
+  slug: string;
+  body: string;
   data: {
     title: string;
     author: string;
@@ -16,10 +19,11 @@ type Post = {
   };
 };
 
-const posts: Post[] = await getCollection("posts");
+const posts = (await getCollection("posts")) as unknown as Post[];
 
 const importantTrue = posts.filter((post) => post.data.important === true);
-const importantFalse = posts.filter((post) => post.data.important === false);
+
+const importantFalse = posts.filter((post) => post.data.important !== true);
 
 // Crear un array vacío para agregar los elementos en el orden correcto
 let orderedItems = [];
@@ -34,12 +38,12 @@ while (i < importantTrue.length || j < importantFalse.length) {
     i++;
   }
 
-  // Añadir 4 false
-  for (let k = 0; k < 4; k++) {
-    if (j < importantFalse.length) {
-      orderedItems.push(importantFalse[j]);
-      j++;
-    }
+  // Añadir hasta 4 no importantes si quedan
+  let added = 0;
+  while (added < 4 && j < importantFalse.length) {
+    orderedItems.push(importantFalse[j]);
+    j++;
+    added++;
   }
 }
 ---
