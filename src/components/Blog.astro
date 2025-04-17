@@ -21,7 +21,7 @@ type Post = {
 
 <section aria-labelledby="noticias-title" id="blog">
   <h2
-    class="text-4xl font-cinzel text-center text-[#928952] mb-10 pt-20"
+    class="text-3xl md:text-6xl font-cinzel text-center text-[#928952] mb-10 pt-20"
     id="noticias-title"
   >
     Últimas noticias
@@ -33,7 +33,7 @@ type Post = {
         const { title, img, description, slug } = data;
         return (
           <article class="flex flex-col m-5 xl:m-0  max-w-sm border rounded-lg shadow-sm bg-gray-800 border-gray-700">
-            <a href={`/blog/${slug}`}>
+            <a href={`/blog/${slug}`} aria-label={`Leer más sobre: ${title}`}>
               <img
                 class="rounded-t-lg"
                 src={img}
@@ -41,6 +41,8 @@ type Post = {
                 transition:name={`img-${slug}`}
                 width="1408"
                 height="768"
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, 33vw"
               />
             </a>
             <div class="p-5 flex flex-col flex-grow">
@@ -58,6 +60,7 @@ type Post = {
                 <a
                   href={`/blog/${slug}`}
                   class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white 0 rounded-lg  focus:ring-4 focus:outline-none  bg-gray-600 hover:bg-[#928952] focus:ring-gray-800"
+                  aria-label={`Leer más sobre: ${title}`}
                 >
                   Leer Mas
                   <svg

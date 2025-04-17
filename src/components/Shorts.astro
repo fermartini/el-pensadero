@@ -1,7 +1,7 @@
 ---
 import shorts from "../data/videos.json";
-import { Image } from "astro:assets";
 import Button from "./Button.astro";
+import { YouTube } from "@astro-community/astro-embed-youtube";
 
 const generateVideoJSONLD = (video: Video) => {
   return JSON.stringify({
@@ -32,7 +32,9 @@ type Video = {
   id="shorts"
   class="min-h-screen w-full flex flex-col items-center justify-center px-4"
 >
-  <h2 class="text-4xl font-cinzel text-center text-[#928952] mb-10 pt-20">
+  <h2
+    class="text-3xl md:text-6xl font-cinzel text-center text-[#928952] mb-10 pt-20"
+  >
     Shorts mágicos
   </h2>
 
@@ -42,33 +44,25 @@ type Video = {
     {
       shorts.map((video: Video) => {
         return (
-          <div
+          <article
             class="video-card relative group w-full max-w-[360px] aspect-[9/16] overflow-hidden rounded-xl shadow-lg cursor-pointer"
             data-src={video.src}
             data-title={video.title}
+            aria-label={`Video corto: ${video.title}`}
           >
-            <Image
-              src={video.thumbnail}
-              alt={video.title}
-              width="768"
-              height="1408"
+            <YouTube
+              id={video.videoId}
+              poster={video.thumbnail}
+              title={video.title}
+              class="w-full h-full object-cover"
+              playlabel={`Reproducir: ${video.title}`}
             />
-
-            <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition overlay">
-              <svg
-                class="w-12 h-12 text-white"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </div>
 
             <script
               type="application/ld+json"
               set:html={generateVideoJSONLD(video)}
             />
-          </div>
+          </article>
         );
       })
     }
@@ -78,90 +72,4 @@ type Video = {
     slug="https://www.youtube.com/@elpensadero_HP?sub_confirmation=1"
     blank="_blank"
   />
-  <!-- 👇 Modal para reproducir el video -->
-  <dialog id="video-modal" class="h-screen w-screen bg-transparent">
-    <div class="backdrop:bg-black/80 rounded-xl p-0 z-50 flex justify-center">
-      <div class="relative w-[90vw] max-w-[480px] aspect-[9/16]">
-        <button
-          class="absolute top-6 right-10 bg-red-900 text-white rounded-full p-3 z-10 close-btn"
-          >✕</button
-        >
-        <img
-          src="img/youtube-harry-modal.webp"
-          class="rounded-xl shadow-lg mx-auto my-6"
-          alt="Harry espera emocionado el video"
-          id="harry-modal"
-          width="768"
-          height="1408"
-        />
-        <iframe
-          id="modal-iframe"
-          class="w-full h-full rounded-xl"
-          src=""
-          allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
-      </div>
-    </div>
-  </dialog>
 </section>
-
-<script is:client-load>
-  function initializeModal() {
-    const modal = document.getElementById("video-modal");
-    const iframe = document.getElementById("modal-iframe");
-    const imgModal = document.getElementById("harry-modal");
-
-    document.querySelectorAll(".video-card").forEach((card) => {
-      card.addEventListener("click", () => {
-        const src = card.getAttribute("data-src");
-        iframe.src = `${src}?autoplay=1&controls=0`;
-        modal?.showModal();
-        setTimeout(() => {
-          imgModal.classList.add("hidden");
-        }, 500);
-        iframe.classList.remove("animate-fadeOutScale");
-        iframe.classList.add("animate-fadeInScale");
-      });
-    });
-
-    document.querySelector(".close-btn")?.addEventListener("click", () => {
-      iframe.classList.remove("animate-fadeInScale");
-      iframe.classList.add("animate-fadeOutScale");
-      setTimeout(() => {
-        modal.close();
-        setTimeout(() => {
-          imgModal.classList.remove("hidden");
-        }, 500);
-        iframe.src = "";
-      }, 200);
-    });
-
-    modal?.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.close();
-        setTimeout(() => {
-          imgModal.classList.remove("hidden");
-        }, 500);
-        iframe.src = "";
-      }
-    });
-
-    modal?.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        modal.close();
-        setTimeout(() => {
-          imgModal.classList.remove("hidden");
-        }, 500);
-        iframe.src = "";
-      }
-    });
-  }
-
-  // Ejecutar al cargar la página
-  initializeModal();
-
-  // Re-ejecutar después de cada transición de vista
-  document.addEventListener("astro:after-swap", () => {
-    initializeModal();
-  });
-</script>
