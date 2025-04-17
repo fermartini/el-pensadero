@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Button from "../../components/Button.astro";
 import Footer from "../../components/Footer.astro";
+import { YouTube } from "@astro-community/astro-embed-youtube";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -14,9 +15,46 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { data } = post;
-const { title, img, description, slug } = data;
+const { title, img, description, slug, videoId, date, author } = data;
 
 const { Content } = await render(post);
+
+const generateBlogJSONLD = (video: any) => {
+  return JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: title,
+    description: description,
+    image: img,
+    url: `https://elpensadero.vercel.app/blog/${slug}`,
+    datePublished: date,
+    author: {
+      "@type": "Person",
+      name: author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: author,
+      logo: {
+        "@type": "ImageObject",
+        url: "https://elpensadero.vercel.app/favicon.png",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://elpensadero.vercel.app/blog/${slug}`,
+    },
+    video: {
+      "@type": "VideoObject",
+      name: title,
+      description: description,
+      thumbnailUrl: img,
+      uploadDate: date,
+      embedUrl: `https://www.youtube.com/embed/${videoId}`,
+      contentUrl: `https://www.youtube.com/watch?v=${videoId}`,
+    },
+  });
+};
 ---
 
 <Layout title={title} description={description} img={img} url={`/blog/${slug}`}>
@@ -30,18 +68,16 @@ const { Content } = await render(post);
 
       <h2 class="mb-5 text-xl text-gray-400 text-center">{description}</h2>
 
-      <img
-        src={img}
-        alt={title}
-        transition:name={`img-${slug}`}
-        width="1408"
-        height="768"
+      <YouTube
+        id={videoId}
+        poster={img}
         class="w-full h-auto rounded-xl shadow-lg"
-        loading="lazy"
+        playlabel={`Reproducir: ${title}`}
       />
+      <script type="application/ld+json" set:html={generateBlogJSONLD(data)} />
 
       <Content />
-      <Button title="🪄 VOLVER" slug="/blog" />
+      <Button title="🔙 VOLVER 🧙‍♂️" slug="/blog" />
     </article>
   </main>
   <Footer />

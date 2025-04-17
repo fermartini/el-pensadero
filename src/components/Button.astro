@@ -4,6 +4,7 @@ const { title, slug, blank = null } = Astro.props;
 
 <div class="justify-center w-full flex">
   <a
+    rel={`prefetch${blank ? " noopener noreferrer" : ""}`}
     href={slug}
     class="text-white border-slate-600 rounded-xl p-5 border text-2xl font-medium mt-10 hover:border-[#928952] transition-all"
     target={blank}>{title}</a
