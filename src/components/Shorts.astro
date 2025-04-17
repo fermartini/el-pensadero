@@ -56,8 +56,7 @@ type Video = {
             </div>
 
             <!-- 👇 JSON-LD por video -->
-            <script type="application/ld+json">
-              {JSON.stringify({
+            <script type="application/ld+json">{
                   "@context": "https://schema.org",
                   "@type": "VideoObject",
                   "name": video.title,
@@ -65,7 +64,7 @@ type Video = {
                   "uploadDate": video.uploadDate,
                   "contentUrl": `https://www.youtube.com/watch?v=${videoId}`,
                   "embedUrl": `https://www.youtube.com/embed/${videoId}`
-                })}
+                }
             </script>
           </div>
         );
