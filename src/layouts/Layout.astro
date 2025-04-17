@@ -3,6 +3,13 @@ import NavBar from "../components/NavBar.astro";
 import ParticulasMagicas from "../components/ParticulasMagicas.jsx";
 import { ClientRouter } from "astro:transitions";
 
+const analyticsScript = `
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-KWE5R48J1P");
+`;
+
 const {
   title,
   description,
@@ -33,15 +40,7 @@ import "../style/global.css";
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KWE5R48J1P"
     ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-KWE5R48J1P");
-    </script>
+    <script set:html={analyticsScript} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
