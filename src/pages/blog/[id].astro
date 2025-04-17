@@ -73,6 +73,7 @@ const generateBlogJSONLD = (video: any) => {
         poster={img}
         class="w-full h-auto rounded-xl shadow-lg"
         playlabel={`Reproducir: ${title}`}
+        transition:name={`img-${slug}`}
       />
       <script type="application/ld+json" set:html={generateBlogJSONLD(data)} />
 
