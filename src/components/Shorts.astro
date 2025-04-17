@@ -3,6 +3,19 @@ import shorts from "../data/videos.json";
 import { Image } from "astro:assets";
 import Button from "./Button.astro";
 
+const generateVideoJSONLD = (video: Video) => {
+  return JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": video.title,
+    "description": video.description,
+    "uploadDate": video.uploadDate,
+    "contentUrl": `https://www.youtube.com/watch?v=${video.videoId}`,
+    "embedUrl": `https://www.youtube.com/embed/${video.videoId}`,
+    "thumbnailUrl": `https://elpensadero.vercel.app${video.thumbnail}`
+  })
+}
+
 
 type Video = {
   title: string;

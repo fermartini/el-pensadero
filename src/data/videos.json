@@ -6,7 +6,7 @@
         "id": "dumbledoreEnamorado",
         "type": "short",
         "thumbnail": "/img/videos/dumbledore-batalla-magica-grindelwald.webp",
-        "uploadDate": "2025-01-27T09:00:00+00:00",
+        "uploadDate": "2025-01-27T09:00:00-03:00",
         "videoId": "f3rRvuxD75Q"
     },
     {
@@ -16,7 +16,7 @@
         "id": "HarryyHermione",
         "type": "short",
         "thumbnail":"/img/videos/harry-hermione-ron-enamorados.webp",
-        "uploadDate": "2025-03-20T15:00:00+00:00",
+        "uploadDate": "2025-03-20T11:00:00-03:00",
         "videoId": "PXlaRyHrlGI"
     },
     {
@@ -26,7 +26,7 @@
         "id": "muertesEnHarryPotter",
         "type": "short",
         "thumbnail": "/img/videos/muertes-del-mundo-magico.webp",
-        "uploadDate": "2025-02-14T18:00:00+00:00",
+        "uploadDate": "2025-02-14T10:00:00-03:00",
         "videoId": "gtoVX7ya7l4"
     }
 ]
