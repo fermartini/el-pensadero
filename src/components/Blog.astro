@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import Button from "./Button.astro";
 
 const posts = await getCollection("posts");
 
@@ -82,11 +83,5 @@ type Post = {
       })
     }
   </div>
-  <div class="justify-center w-full flex">
-    <a
-      href="/blog"
-      class="text-white border-slate-600 rounded-xl p-5 border text-2xl font-medium mt-10 hover:border-[#928952] transition-all"
-      >🪄 Más artículos mágicos</a
-    >
-  </div>
+  <Button title="🪄 Más artículos mágicos" slug="/blog" />
 </section>
