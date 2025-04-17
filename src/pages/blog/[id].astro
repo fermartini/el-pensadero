@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import Button from "../../components/Button.astro";
+import Footer from "../../components/Footer.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -39,6 +41,8 @@ const { Content } = await render(post);
       />
 
       <Content />
+      <Button title="🪄 VOLVER" slug="/blog" />
     </article>
   </main>
+  <Footer />
 </Layout>

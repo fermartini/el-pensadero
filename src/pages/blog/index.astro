@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/Footer.astro";
 type Post = {
   data: {
     title: string;
@@ -46,13 +47,15 @@ while (i < importantTrue.length || j < importantFalse.length) {
 <Layout>
   <main class="h-full w-full flex gap-7 items-center justify-center">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="mx-auto mt-32 max-w-2xl lg:mx-0">
-        <h2
-          class="text-4xl font-semibold tracking-tight text-pretty sm:text-5xl text-[#928952]"
+      <div class="mx-auto mt-32 lg:mx-0">
+        <h1
+          class="text-4xl font-semibold tracking-tight text-pretty sm:text-6xl text-[#928952] text-center"
         >
           EL BLOG DE HARRY POTTER
+        </h1>
+        <h2 class="mt-2 text-lg/8 sm:text-xl text-center">
+          Un rincón para fans: teorías, datos y toda la magia de Harry Potter.
         </h2>
-        <p class="mt-2 text-lg/8">Noticias, teorias, datos y mucha magia.</p>
       </div>
       <div
         class="mx-auto mt-10 grid grid-col-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-2"
@@ -96,6 +99,8 @@ while (i < importantTrue.length || j < importantFalse.length) {
                       src={img}
                       alt={title}
                       transition:name={`img-${slug}`}
+                      width="1408"
+                      height="768"
                     />
                   </a>
                 </div>
@@ -165,4 +170,5 @@ while (i < importantTrue.length || j < importantFalse.length) {
       </div>
     </div>
   </main>
+  <Footer />
 </Layout>

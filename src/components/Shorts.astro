@@ -1,6 +1,7 @@
 ---
 import shorts from "../data/videos.json";
 import { Image } from "astro:assets";
+import Button from "./Button.astro";
 
 
 type Video = {
@@ -62,7 +63,6 @@ type Video = {
                   "@type": "VideoObject",
                   "name": video.title,
                   "description": video.description,
-                  "thumbnailUrl": video.thumbnail,
                   "uploadDate": video.uploadDate,
                   "contentUrl": `https://www.youtube.com/watch?v=${videoId}`,
                   "embedUrl": `https://www.youtube.com/embed/${videoId}`
@@ -74,9 +74,7 @@ type Video = {
       })
     }
   </div>
-  <div class="mt-10">
-    <a href="https://www.youtube.com/@elpensadero-HP?sub_confirmation=1" target="_blank" class="text-white border-slate-600 rounded-xl border text-2xl p-5 font-medium hover:border-[#928952]  transition-all">✨ Más Videos</a>
-  </div>
+  <Button title="✨ Más Videos" slug="https://www.youtube.com/@elpensadero_HP?sub_confirmation=1" blank="_blank"/>
     <!-- 👇 Modal para reproducir el video -->
     <dialog id="video-modal" class="h-screen w-screen bg-transparent" >
       <div class="backdrop:bg-black/80 rounded-xl p-0 z-50  flex justify-center">
