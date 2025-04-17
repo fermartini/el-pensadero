@@ -3,6 +3,13 @@ import NavBar from "../components/NavBar.astro";
 import ParticulasMagicas from "../components/ParticulasMagicas.jsx";
 import { ClientRouter } from "astro:transitions";
 
+const {
+  title,
+  description,
+  url,
+  img = "/img/banner-el-pensadero.webp",
+} = Astro.props;
+
 import "../style/global.css";
 ---
 
@@ -14,7 +21,26 @@ import "../style/global.css";
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
 
     <meta name="generator" content={Astro.generator} />
-    <title>El Pensadero</title>
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="Harry Potter, teorías Harry Potter, datos curiosos, El Pensadero, diferencias libros películas, magia, Hogwarts, Dumbledore, Ron, What If Harry Potter"
+    />
+    <meta
+      name="author"
+      content="El Pensadero - Harry Potter Teorías y Curiosidades"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={`https://elpensadero.vercel.app${url}`} />
+    <meta property="og:image" content={img} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={img} />
+
+    <title>{title}</title>
     <ClientRouter />
   </head>
   <body class="font-spectral overflow-x-hidden min-h-screen relative">
