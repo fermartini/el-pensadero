@@ -5,7 +5,7 @@
         "src": "https://www.youtube.com/embed/f3rRvuxD75Q",
         "id": "dumbledoreEnamorado",
         "type": "short",
-        "thumbnail": "/img/videos/dumbledore-batalla-magica-grindelwald.webp",
+        "thumbnail": "/assets/img/videos/dumbledore-batalla-magica-grindelwald.webp",
         "uploadDate": "2025-01-27T09:00:00-03:00",
         "videoId": "f3rRvuxD75Q"
     },
@@ -15,7 +15,7 @@
         "src": "https://www.youtube.com/embed/PXlaRyHrlGI",
         "id": "HarryyHermione",
         "type": "short",
-        "thumbnail":"/img/videos/harry-hermione-ron-enamorados.webp",
+        "thumbnail":"/assets/img/videos/harry-hermione-ron-enamorados.webp",
         "uploadDate": "2025-03-20T11:00:00-03:00",
         "videoId": "PXlaRyHrlGI"
     },
@@ -25,7 +25,7 @@
         "src": "https://www.youtube.com/embed/gtoVX7ya7l4",
         "id": "muertesEnHarryPotter",
         "type": "short",
-        "thumbnail": "/img/videos/muertes-del-mundo-magico.webp",
+        "thumbnail": "/assets/img/videos/muertes-del-mundo-magico.webp",
         "uploadDate": "2025-02-14T10:00:00-03:00",
         "videoId": "gtoVX7ya7l4"
     }
