@@ -45,6 +45,16 @@ import "../style/global.css";
       name="twitter:image"
       content={`https://elpensadero.vercel.app${img}`}
     />
+    <style>
+      html,
+      body {
+        scroll-behavior: smooth;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        color: gray;
+      }
+    </style>
 
     <title>{title}</title>
     <ClientRouter />
@@ -79,20 +89,5 @@ import "../style/global.css";
       <NavBar />
       <slot />
     </div>
-  </body><style>
-    html,
-    body {
-      scroll-behavior: smooth;
-      margin: 0;
-      width: 100%;
-      height: 100%;
-      color: gray;
-    }
-  </style>
+  </body>
 </html>
-
-<script>
-  document.fonts.ready.then(() => {
-    document.body.classList.add("fonts-loaded");
-  });
-</script>
