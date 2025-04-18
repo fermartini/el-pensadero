@@ -7,6 +7,7 @@ const posts = defineCollection({
         img: z.string(),
         description: z.string(),
         date: z.string(),
+        dateFormatted: z.string(),
         readtime: z.string(),
         slug: z.string(),
         tags: z.array(z.string()),
@@ -14,6 +15,7 @@ const posts = defineCollection({
         lang: z.string(),
         videoId: z.string(),
         important: z.boolean(),
+        durationVideo: z.string(),
     })
 })
 

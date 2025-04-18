@@ -15,44 +15,63 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { data } = post;
-const { title, img, description, slug, videoId, date, author, category } = data;
+const {
+  title,
+  img,
+  description,
+  slug,
+  videoId,
+  date,
+  author,
+  category,
+  dateFormatted,
+  tags,
+  durationVideo,
+} = data;
 
 const { Content } = await render(post);
 
-const generateBlogJSONLD = (video: any) => {
+const generateBlogJSONLD = (post: any) => {
   return JSON.stringify({
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    headline: title,
-    description: description,
-    image: img,
-    url: `https://elpensadero.vercel.app/blog/${slug}`,
-    datePublished: date,
+    headline: post.data.title,
+    description: post.data.description,
+    image: `https://elpensadero.vercel.app${post.data.img}`,
+    url: `https://elpensadero.vercel.app/blog/${post.data.slug}`,
+    datePublished: post.data.dateFormatted,
+    dateModified: post.data.dateFormatted,
     author: {
       "@type": "Person",
-      name: author,
+      name: post.data.author,
     },
     publisher: {
       "@type": "Organization",
-      name: author,
+      name: "El Pensadero",
+      url: "https://elpensadero.vercel.app",
       logo: {
         "@type": "ImageObject",
         url: "https://elpensadero.vercel.app/favicon.png",
+        width: "48", // Add dimensions
+        height: "48",
       },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://elpensadero.vercel.app/blog/${slug}`,
+      "@id": `https://elpensadero.vercel.app/blog/${post.data.slug}`,
     },
     video: {
       "@type": "VideoObject",
-      name: title,
-      description: description,
-      thumbnailUrl: img,
-      uploadDate: date,
-      embedUrl: `https://www.youtube.com/embed/${videoId}`,
-      contentUrl: `https://www.youtube.com/watch?v=${videoId}`,
+      name: post.data.title,
+      description: post.data.description,
+      thumbnailUrl: `https://elpensadero.vercel.app${post.data.img}`,
+      duration: durationVideo,
+      uploadDate: post.data.dateFormatted,
+      embedUrl: `https://www.youtube.com/embed/${post.data.videoId}`,
+      contentUrl: `https://www.youtube.com/watch?v=${post.data.videoId}`,
     },
+    keywords: post.data.tags.join(", "),
+    articleSection: post.data.category,
   });
 };
 ---
@@ -75,7 +94,7 @@ const generateBlogJSONLD = (video: any) => {
         playlabel={`Reproducir: ${title}`}
         transition:name={`img-${slug}`}
       />
-      <script type="application/ld+json" set:html={generateBlogJSONLD(data)} />
+      <script type="application/ld+json" set:html={generateBlogJSONLD(post)} />
 
       <Content />
       <Button title="🔙 VOLVER 🧙‍♂️" slug="/blog" />
