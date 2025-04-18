@@ -2,6 +2,7 @@
 import NavBar from "../components/NavBar.astro";
 import ParticulasMagicas from "../components/ParticulasMagicas.jsx";
 import { ClientRouter } from "astro:transitions";
+import Analytics from "@vercel/analytics/astro";
 
 const {
   title,
@@ -62,6 +63,7 @@ import "../style/global.css";
       name="google-site-verification"
       content="Lzz4GUNIS9wSvaAtClUBTWKVkKNR16FIRwcgBjMlLrM"
     />
+    <Analytics mode="production" server:defer />
   </head>
   <body class="font-spectral overflow-x-hidden min-h-screen relative">
     <div class="absolute inset-0 z-10 pointer-events-none">
