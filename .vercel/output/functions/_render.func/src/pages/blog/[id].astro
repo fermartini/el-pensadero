@@ -1,0 +1,104 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Button from "../../components/Button.astro";
+import Footer from "../../components/Footer.astro";
+import { YouTube } from "@astro-community/astro-embed-youtube";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  return posts.map((post: any) => ({
+    params: { id: post.data.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { data } = post;
+const {
+  title,
+  img,
+  description,
+  slug,
+  videoId,
+  date,
+  author,
+  category,
+  dateFormatted,
+  tags,
+  durationVideo,
+} = data;
+
+const { Content } = await render(post);
+
+const generateBlogJSONLD = (post: any) => {
+  return JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.data.title,
+    description: post.data.description,
+    image: `https://elpensadero.vercel.app${post.data.img}`,
+    url: `https://elpensadero.vercel.app/blog/${post.data.slug}`,
+    datePublished: post.data.dateFormatted,
+    dateModified: post.data.dateFormatted,
+    author: {
+      "@type": "Person",
+      name: post.data.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "El Pensadero",
+      url: "https://elpensadero.vercel.app",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://elpensadero.vercel.app/favicon.png",
+        width: "48", // Add dimensions
+        height: "48",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://elpensadero.vercel.app/blog/${post.data.slug}`,
+    },
+    video: {
+      "@type": "VideoObject",
+      name: post.data.title,
+      description: post.data.description,
+      thumbnailUrl: `https://elpensadero.vercel.app${post.data.img}`,
+      duration: durationVideo,
+      uploadDate: post.data.dateFormatted,
+      embedUrl: `https://www.youtube.com/embed/${post.data.videoId}`,
+      contentUrl: `https://www.youtube.com/watch?v=${post.data.videoId}`,
+    },
+    keywords: post.data.tags.join(", "),
+    articleSection: post.data.category,
+  });
+};
+---
+
+<Layout title={title} description={description} img={img} url={`/blog/${slug}`}>
+  <main
+    class="h-full w-full gap-7 flex items-center justify-center mt-20 mx-auto px-4"
+  >
+    <article class="max-w-5xl w-full flex flex-col items-center justify-center">
+      <h1 class="text-5xl font-bold text-[#928952] mb-5 text-center">
+        {title}
+      </h1>
+
+      <h2 class="mb-5 text-xl text-gray-400 text-center">{description}</h2>
+
+      <YouTube
+        id={videoId}
+        poster={img}
+        class="w-full h-auto rounded-xl shadow-lg"
+        playlabel={`Reproducir: ${title}`}
+        transition:name={`img-${slug}`}
+      />
+      <script type="application/ld+json" set:html={generateBlogJSONLD(post)} />
+
+      <Content />
+      <Button title="🔙 VOLVER 🧙‍♂️" slug="/blog" />
+    </article>
+  </main>
+  <Footer />
+</Layout>
