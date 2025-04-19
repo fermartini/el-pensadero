@@ -1,20 +1,16 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Footer from "../../components/Footer.astro";
+import GameHouseHogwarts from "../../components/games/GameHouseHogwarts.astro";
 ---
 
 <Layout
   title="Juegos - El Pensadero"
   description="Juegos y preguntas sobre el universo de Harry Potter"
   url="/juegos"
->
-  <div class="h-[100vh] w-full flex items-center justify-center">
-    <h1
-      class="opacity-0 animate-fadeIn font-cinzel font-semibold text-5xl xl:text-9xl text-center text-[#928952] drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)]"
-    >
-      PROXIMAMENTE....
-    </h1>
-  </div>
+  ><main class="">
+    <GameHouseHogwarts />
+  </main>
 
   <Footer />
 </Layout>
