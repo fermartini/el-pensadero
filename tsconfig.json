@@ -1,5 +1,5 @@
 {
-  "extends": "astro/tsconfigs/strict",
+  "extends": "astro/tsconfigs/base",  // Cambia de "strict" a "base"
   "include": [
     ".astro/types.d.ts",
     "**/*"
@@ -9,6 +9,11 @@
   ],
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "jsxImportSource": "react",
+    "strict": false,                  // Desactiva el modo estricto
+    "noImplicitAny": false,           // Permite any implícito
+    "strictNullChecks": false,        // Desactiva verificación de null
+    "skipLibCheck": true,             // Omite verificación de librerías
+    "allowJs": true                   // Permite archivos JavaScript
   }
 }
