@@ -8,6 +8,7 @@ const {
   description,
   url,
   img = "/assets/img/banner-el-pensadero.webp",
+  background = true 
 } = Astro.props;
 
 import "../style/global.css";
@@ -76,8 +77,9 @@ import "../style/global.css";
     </div>
 
     <div class="relative h-fit bg-slate-950 z-0 overflow-hidden">
-      <!-- ESTE DIV ES EL CIRCULO DEL BORDE IZQUIERDO -->
-      <div
+      {
+        background && (
+        <div
         class="absolute bottom-0 left-[-50%] top-[-5%] xl:left-[-20%] xl:right-0 xl:top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"
       >
       </div>
@@ -86,6 +88,10 @@ import "../style/global.css";
         class="absolute bottom-0 left-[50%] md:left-[90%] top-[10%] xl:top-[12%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"
       >
       </div>
+        )
+      }
+      <!-- ESTE DIV ES EL CIRCULO DEL BORDE IZQUIERDO -->
+      
       <NavBar />
       <slot />
     </div>
