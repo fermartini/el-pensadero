@@ -53,7 +53,7 @@ while (i < importantTrue.length || j < importantFalse.length) {
   description="Descubrí nuevas teorías, datos curiosos y diferencias entre los libros y las pelis del mundo mágico"
   url="/blog"
 >
-  <main class="h-full w-full flex gap-7 items-center justify-center">
+  <main class="h-full w-full flex gap-7 items-center justify-center mb-10">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="mx-auto mt-32 lg:mx-0">
         <h1
@@ -87,7 +87,7 @@ while (i < importantTrue.length || j < importantFalse.length) {
             return (
               <article
                 class:list={[
-                  "flex   items-start justify-between gap-5 flex-col bg-gray-600 bg-opacity-20 rounded-xl",
+                  "flex   items-start justify-between gap-5 flex-col bg-gray-600 bg-opacity-20 rounded-2xl",
                   {
                     "lg:col-span-2 lg:flex-row": important,
                     "col-span-1 ": !important,
@@ -96,7 +96,7 @@ while (i < importantTrue.length || j < importantFalse.length) {
               >
                 <div
                   class:list={[
-                    "flex items-center justify-cente",
+                    "flex items-center justify-cente rounded-xl",
                     {
                       "w-full": !important,
                     },
@@ -109,6 +109,7 @@ while (i < importantTrue.length || j < importantFalse.length) {
                       transition:name={`img-${slug}`}
                       width="1408"
                       height="768"
+                      class="rounded-lg"
                     />
                   </a>
                 </div>
@@ -151,7 +152,7 @@ while (i < importantTrue.length || j < importantFalse.length) {
                       {description}
                     </p>
                   </div>
-                  <div class="relative flex items-end justify-around gap-x-4 ">
+                  <div class="relative flex items-end justify-around gap-x-4 mb-5 ">
                     <div class="text-sm/6 p-5">
                       <p class="font-semibold text-gray-200">
                         <a href={`/blog/${slug}`}>
@@ -164,7 +165,7 @@ while (i < importantTrue.length || j < importantFalse.length) {
                     <div class="justify-center  flex z-10 ">
                       <a
                         href={`/blog/${slug}`}
-                        class="text-white border-slate-600 rounded-xl p-5 border text-2xl font-medium mt-10 hover:border-[#928952] transition-all"
+                        class="text-white border-slate-600 rounded-xl p-5 border text-2xl font-medium mt-10 hover:border-[#928952] transition-all text-nowrap"
                       >
                         🪄 Leer Mas
                       </a>

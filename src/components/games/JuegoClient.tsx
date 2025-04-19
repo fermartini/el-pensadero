@@ -53,10 +53,10 @@ export default function JuegoClient({ questions }: Props) {
   };
 
   return (
-    <div className="flex justify-center flex-col items-center mt-20  p-4">
+    <div className="flex justify-center flex-col items-center   p-4">
       <div className="">
-      <h2 className="text- xl md:text-3xl font-cinzel text-center text-[#928952] mb-5">
-    Queres saber cual es tu casa de Hogwarts?
+      <h2 className="text- xl md:text-3xl font-cinzel text-center text-gray-400 mb-5">
+      ¿Quieres saber cual es tu casa de Hogwarts?
   </h2>
       </div>
       
