@@ -21,9 +21,17 @@ type Post = {
 
 const posts = (await getCollection("posts")) as unknown as Post[];
 
-const importantTrue = posts.filter((post) => post.data.important === true);
+const importantTrue = posts
+  .filter((post) => post.data.important === true)
+  .sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
 
-const importantFalse = posts.filter((post) => post.data.important !== true);
+const importantFalse = posts
+  .filter((post) => post.data.important !== true)
+  .sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
 
 // Crear un array vacío para agregar los elementos en el orden correcto
 let orderedItems = [];
@@ -46,6 +54,7 @@ while (i < importantTrue.length || j < importantFalse.length) {
     added++;
   }
 }
+orderedItems = orderedItems.reverse();
 ---
 
 <Layout
