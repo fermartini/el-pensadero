@@ -8,7 +8,7 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://elpensadero.vercel.app",
+  site: "https://www.elpensaderohp.com",
   integrations: [react(), tailwind(),mdx(),sitemap() ],
   
 });
