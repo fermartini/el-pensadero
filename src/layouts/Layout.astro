@@ -1,6 +1,7 @@
 ---
 import NavBar from "../components/NavBar.astro";
 import ParticulasMagicas from "../components/ParticulasMagicas.jsx";
+import Analytics from '@vercel/analytics/astro'
 import { ClientRouter } from "astro:transitions";
 
 const {
@@ -39,13 +40,14 @@ import "../style/global.css";
   <meta property="og:url" content={`https://elpensaderohp.com${url}`} /> <!-- Cambiado de vercel.app a tu dominio -->
   <meta property="og:image" content={`https://elpensaderohp.com${img}`} /> <!-- Cambiado de vercel.app a tu dominio -->
   <meta property="og:site_name" content="El Pensadero - HP" /> <!-- ¡Nuevo! -->
-
+    
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={`https://elpensaderohp.com${img}`} /> <!-- Cambiado de vercel.app a tu dominio -->
   <meta name="twitter:site" content="@tu_usuario_twitter" /> <!-- Opcional: agrega tu @ -->
+   <link rel="preconnect" href="https://vitals.vercel-insights.com" />
 
   <!-- Schema.org para el nombre del sitio -->
   <script type="application/ld+json">
@@ -80,8 +82,10 @@ import "../style/global.css";
     name="google-site-verification"
     content="Lzz4GUNIS9wSvaAtClUBTWKVkKNR16FIRwcgBjMlLrM"
   />
+  <Analytics/>
 </head>
   <body class="font-spectral overflow-x-hidden min-h-screen relative">
+    <main>
     <div class="absolute inset-0 z-10 pointer-events-none">
       <ParticulasMagicas client:visible />
     </div>
@@ -112,5 +116,6 @@ import "../style/global.css";
       <NavBar />
       <slot />
     </div>
+    </main>
   </body>
 </html>

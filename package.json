@@ -19,6 +19,7 @@
     "@fontsource/spectral": "^5.2.5",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.2",
+    "@vercel/analytics": "^1.5.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-tsparticles": "^2.12.2",
