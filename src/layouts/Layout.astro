@@ -9,7 +9,8 @@ const {
   description,
   url,
   img = "/assets/img/banner-el-pensadero.webp",
-  background = true
+  background = true,
+  tags = []
 } = Astro.props;
 
 import "../style/global.css";
@@ -26,7 +27,7 @@ import "../style/global.css";
   <meta name="description" content={description} />
   <meta
     name="keywords"
-    content="Harry Potter, teorías Harry Potter, datos curiosos, El Pensadero, diferencias libros películas, magia, Hogwarts, Dumbledore, Ron, What If Harry Potter"
+    content={`Harry Potter, teorías Harry Potter, datos curiosos, El Pensadero, diferencias libros películas, magia, Hogwarts, Dumbledore, Ron, What If Harry Potter, ${tags.join(", ")}`}
   />
   <meta
     name="author"
