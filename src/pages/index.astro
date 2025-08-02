@@ -5,37 +5,37 @@ import Loader from "../components/Loader.astro";
 
 export const prerender = true;
 
-const supportedLangs = ['es', 'en'];
-const defaultLang = 'es'; // Valor por defecto para SSR (prerender)
-
-// Solo se ejecuta en el cliente (importante!)
-const userLang = typeof window !== 'undefined' 
-  ? (localStorage.getItem('preferredLang') || 
-     (navigator.language.startsWith('es') ? 'es' : 'en'))
-  : defaultLang;
+// Valores DEFAULT para SSR (prerender)
+const defaultLang = 'es';
+const defaultTitle = 'El Pensadero HP - Teorías Mágicas Reveladas';
+const defaultDesc = 'Portal a las teorías mejor guardadas del universo Harry Potter';
 ---
 
 <Layout
-  title={userLang === 'es' 
-      ? 'El Pensadero HP - Teorías Mágicas Reveladas' 
-      : 'The HP Pensive - Magic Theories Uncovered'}
-  description={
-    userLang === 'es'
-      ? 'Portal a las teorías mejor guardadas del universo Harry Potter. Redirigiendo a contenido exclusivo...'
-      : 'Gateway to the best-kept Harry Potter theories. Redirecting to exclusive content...'
-  }
+  title={defaultTitle}
+  description={defaultDesc}
   url="/"
 >
   <main class="relative h-[calc(100vh-100px)] xl:min-h-screen w-full flex flex-col items-center justify-center">
-    <section class="flex flex-col items-center justify-center border px-10 my-10 rounded-full">
-      <Loader client:load /> {/* 'client:load' es crucial */}
+    <section class="flex flex-col items-center justify-center px-10 my-10 rounded-full">
+      <Loader client:load />
     </section>
 
     <script is:inline>
-      // Redirección después de 1.5s (evita flash)
-      setTimeout(() => {
-        window.location.href = `/${userLang}`;
-      }, 800);
+      // Detección COMPLETA del lado del cliente
+      const supportedLangs = ['es', 'en'];
+      const preferredLang = localStorage.getItem('preferredLang');
+      const browserLang = navigator.language.startsWith('es') ? 'es' : 'en';
+      const userLang = preferredLang || browserLang;
+
+      // Redirección con validación
+      if (supportedLangs.includes(userLang)) {
+        setTimeout(() => {
+          window.location.href = `/${userLang}`;
+        }, 800); // 800ms es el punto óptimo
+      } else {
+        window.location.href = '/es'; // Fallback
+      }
     </script>
   </main>
 </Layout>
