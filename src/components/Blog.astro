@@ -47,7 +47,7 @@ type Post = {
         const { title, img, description, slug } = data;
         return (
           <article class="flex flex-col m-5 xl:m-0  max-w-sm border rounded-lg shadow-sm bg-gray-800 border-gray-700">
-            <a href={`/blog/${slug}`} aria-label={`Leer más sobre: ${title}`}>
+            <a href={`/${lang}/blog/${slug}`} aria-label={`Leer más sobre: ${title}`}>
               <img
                 class="rounded-t-lg"
                 src={img}
@@ -60,7 +60,7 @@ type Post = {
               />
             </a>
             <div class="p-5 flex flex-col flex-grow">
-              <a href={`/blog/${slug}`}>
+              <a href={`/${lang}/blog/${slug}`}>
                 <h3 class="mb-2 text-xl xl:text-2xl font-bold tracking-tight  text-white">
                   {title}
                 </h3>

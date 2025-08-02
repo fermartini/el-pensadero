@@ -1,4 +1,6 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import Loader from "../components/Loader.astro"
 // src/pages/index.astro
 export const prerender = true;
 
@@ -26,3 +28,15 @@ return new Response(null, {
   headers: { Location: `/${userLang}` }
 });
 --- 
+
+<Layout
+  title={userLang === 'es' 
+      ? 'El Pensadero HP - Teorías Mágicas Reveladas' 
+      : 'The HP Pensive - Magic Theories Uncovered'}
+  description={
+    userLang === 'es'
+      ? 'Portal a las teorías mejor guardadas del universo Harry Potter. Redirigiendo a contenido exclusivo...'
+      : 'Gateway to the best-kept Harry Potter theories. Redirecting to exclusive content...'
+  }
+  url=`/`
+><Loader/></Layout>

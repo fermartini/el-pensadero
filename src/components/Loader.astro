@@ -1,0 +1,50 @@
+---
+// MagicalSpinner.astro - Componente spinner mágico reutilizable
+const { size = 'md', className = '' } = Astro.props;
+
+const sizeClasses = {
+  sm: 'w-16 h-16',
+  md: 'w-24 h-24', 
+  lg: 'w-32 h-32',
+  xl: 'w-40 h-40'
+};
+---
+
+<div class={`relative ${sizeClasses[size]} ${className}`}>
+  <!-- Varita mágica central -->
+  <div class="absolute inset-0 animate-spin">
+    <div class="w-0.5 h-3/4 bg-gradient-to-t from-amber-800 to-amber-600 rounded-full mx-auto"></div>
+    <div class="w-2 h-2 bg-yellow-300 rounded-full mx-auto -mt-1 animate-pulse shadow-lg shadow-yellow-300/50"></div>
+  </div>
+
+  <!-- Chispas mágicas giratorias -->
+  {Array.from({ length: 6 }, (_, i) => (
+    <div 
+      class="absolute w-1 h-1 bg-yellow-300 rounded-full animate-ping left-1/2 top-2" 
+      style={`transform: rotate(${i * 60}deg) translateY(-${size === 'sm' ? '24' : size === 'md' ? '32' : size === 'lg' ? '40' : '48'}px); animation-delay: ${i * 0.2}s;`}
+    ></div>
+  ))}
+
+  
+  <!-- Partículas flotantes alrededor -->
+  {Array.from({ length: 4 }, (_, i) => (
+    <div 
+      class="absolute w-0.5 h-0.5 bg-yellow-200 rounded-full animate-bounce" 
+      style={`left: ${20 + i * 20}%; top: ${20 + (i % 2) * 60}%; animation-delay: ${i * 0.5}s; animation-duration: 2s;`}
+    ></div>
+  ))}
+</div>
+
+<style>
+  /* Animación personalizada para las chispas */
+  @keyframes sparkle {
+    0%, 100% { 
+      opacity: 1; 
+      transform: scale(1); 
+    }
+    50% { 
+      opacity: 0.3; 
+      transform: scale(1.5); 
+    }
+  }
+</style>
