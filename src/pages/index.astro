@@ -39,4 +39,13 @@ return new Response(null, {
       : 'Gateway to the best-kept Harry Potter theories. Redirecting to exclusive content...'
   }
   url=`/`
-><Loader/></Layout>
+><main
+    class="relative h-[calc(100vh-100px)] xl:min-h-screen w-full flex flex-col items-center justify-center"
+  >
+    <section
+      id="loader"
+      class="flex flex-col items-center justify-center border px-10 my-10 rounded-full"
+    >
+      <Loader/>
+    </section>
+  </main></Layout>
