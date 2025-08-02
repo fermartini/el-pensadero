@@ -13,11 +13,18 @@ const {
   tags = []
 } = Astro.props;
 
+const { lang } = Astro.params;
+
+const currentLang = lang || 'es'; // Default a español si no hay parámetro
+
+
+
+
 import "../style/global.css";
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={currentLang}>
   <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
@@ -83,11 +90,28 @@ import "../style/global.css";
 
   <title>{title}</title>
   <link rel="canonical" href={`https://elpensaderohp.com${Astro.url.pathname}`} />
+
+   <link 
+  rel="alternate" 
+  hreflang="es" 
+  href={`https://elpensaderohp.com${url}`} 
+/>
+<link 
+  rel="alternate" 
+  hreflang="en" 
+  href={`https://elpensaderohp.com${url}`} 
+/>
+<link 
+  rel="alternate" 
+  hreflang="x-default" 
+  href={`https://elpensaderohp.com/es${url}`} 
+/>
   <ClientRouter />
   <Analytics/>
 </head>
   <body class="font-spectral overflow-x-hidden min-h-screen relative">
     <main>
+      
     <div class="absolute inset-0 z-10 pointer-events-none">
       <ParticulasMagicas client:visible />
     </div>
@@ -115,7 +139,7 @@ import "../style/global.css";
       }
       <!-- ESTE DIV ES EL CIRCULO DEL BORDE IZQUIERDO -->
       
-      <NavBar />
+      <NavBar lang={currentLang}/>
       <slot />
     </div>
     </main>

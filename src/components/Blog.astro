@@ -1,8 +1,20 @@
 ---
 import { getCollection } from "astro:content";
 import Button from "./Button.astro";
+import type { BlogProps } from "../types.d.ts";
+import type { string } from "astro:schema";
+export interface Props extends BlogProps {}
 
-const posts = await getCollection("posts");
+export const prerender = true;
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'en' } }
+  ];
+}
+const { blog, lang, titleButton, readMore } = Astro.props as { blog: string; lang: string; titleButton: string; readMore: string; };
+
+const posts = await getCollection("posts", ({ data }) => data.lang === lang);
 
 // Mezcla aleatoriamente los posts
 const shuffledPosts = posts.toSorted(() => 0.5 - Math.random());
@@ -17,6 +29,8 @@ type Post = {
     slug: string;
   };
 };
+
+
 ---
 
 <section aria-labelledby="noticias-title" id="blog">
@@ -24,7 +38,7 @@ type Post = {
     class="text-3xl md:text-6xl font-cinzel text-center text-[#928952] mb-10 pt-20"
     id="noticias-title"
   >
-    Últimas noticias
+    {blog}
   </h2>
   <div class="md:flex justify-center gap-8 grid grid-cols-1">
     {
@@ -58,11 +72,11 @@ type Post = {
               </div>
               <div class="mt-auto">
                 <a
-                  href={`/blog/${slug}`}
+                  href={`${lang}/blog/${slug}`}
                   class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white 0 rounded-lg  focus:ring-4 focus:outline-none  bg-gray-600 hover:bg-[#928952] focus:ring-gray-800"
                   aria-label={`Leer más sobre: ${title}`}
                 >
-                  Leer Mas
+                  {readMore}
                   <svg
                     class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
                     aria-hidden="true"
@@ -86,5 +100,5 @@ type Post = {
       })
     }
   </div>
-  <Button title="🪄 Más artículos mágicos" slug="/blog" />
+  <Button title=`🪄 ${titleButton}` slug=`${lang}/blog` />
 </section>

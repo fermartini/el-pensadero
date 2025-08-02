@@ -1,42 +1,82 @@
+---
+import esFlag from "../assets/flags/es.svg?url";
+import usFlag from "../assets/flags/us.svg?url";
+const { lang = "es" } = Astro.props;
+
+const games = lang == "es" ? "juegos" : "Games";
+const [_, langs, section] = Astro.url.pathname.split("/");
+
+const url = section != undefined ? `/${section}` : "";
+---
+<script is:inline>
+  // Función para cambiar idioma y guardar preferencia
+  function changeLanguage(newLang) {
+    localStorage.setItem('preferredLang', newLang);
+  }
+</script>
+
 <nav
   class="fixed w-full z-20 top-0 start-0 border-b border-gray-900 dark:border-gray-800"
 >
   <div
-    class="max-w-screen-xl flex flex-wrap justify-end xl:items-center xl:justify-center mx-auto p-4 backdrop-blur-sm"
+    class="max-w-screen-xl flex flex-wrap justify-between xl:items-center xl:justify-center mx-auto p-4 backdrop-blur-sm"
   >
-    <div class="items-center justify-between flex md:w-auto md:order-1">
+    <div class="items-center justify-between flex md:w-auto">
       <ul
         class="flex md:p-0 rounded-lg md:gap-52 space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 font-bold"
       >
         <li>
           <a
-            href="/#home"
-            class="block py-2 px-3 text-gray-300 hover:text-[#928952] hover:scale-110 transition-all"
-            aria-current="page">Home</a
+            href={url !== "" ? `/${lang}` : null}
+            class={`block py-2 px-3 text-gray-300 hover:text-[#928952] hover:scale-110 transition-all"}`}
+            aria-current="page"
           >
+            Home
+          </a>
         </li>
         <li>
           <a
-            href="/blog"
-            class="block py-2 px-3 text-gray-300 hover:text-[#928952] hover:scale-110 transition-all"
+            href={url != `/${lang}/blog` ? `/${lang}/blog` : null}
+            class={`block py-2 px-3 text-gray-300 hover:text-[#928952] hover:scale-110 transition-all"}`}
             >Blog</a
           >
         </li>
         <li>
           <a
-            href="/#shorts"
+            href={url != `/${lang}/games` ? `/${lang}/games` : null}
             class="block py-2 px-3 text-gray-300 hover:text-[#928952] hover:scale-110 transition-all"
-            >Videos</a
+            >{games}</a
           >
         </li>
-        <li>
+        <div class="flex justify-end w-fit align-top">
           <a
-            href="/juegos"
-            class="block py-2 px-3 text-gray-300 hover:text-[#928952] hover:scale-110 transition-all"
-            >Juegos</a
+            class={`inline-block h-5 cursor-pointer"`}
+            role="img"
+            aria-label="Español"
+            href={lang == "en" ? `/es${url}` : null}
+            onclick="changeLanguage('es')"
+            ><img
+              src={esFlag}
+              alt="Bandera España"
+              class={`${lang == "es" ? "w-10" : "w-5"} transition-all`}
+            /></a
           >
-        </li>
+          |
+          <a
+            class={`inline-block h-5 cursor-pointer"`}
+            role="img"
+            aria-label="English"
+            href={lang == "es" ? `/en${url}` : null}
+            onclick="changeLanguage('en')"
+            ><img
+              src={usFlag}
+              alt="Bandera EEUU"
+              class={`${lang == "en" ? "w-10" : "w-5"} transition-all`}
+            /></a
+          >
+        </div>
       </ul>
     </div>
   </div>
 </nav>
+

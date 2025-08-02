@@ -1,27 +1,28 @@
 ---
-import Home from "../components/Home.astro";
-import Shorts from "../components/Shorts.astro";
-import Layout from "../layouts/Layout.astro";
-import Blog from "../components/Blog.astro";
-import Footer from "../components/Footer.astro";
-import HogwartsSortingQuiz from "../components/games/HogwartsSortingQuiz";
----
+// src/pages/index.astro
+export const prerender = true;
 
-<Layout
-  title="El Pensadero - Teorías y curiosidades de Harry Potter"
-  description="Explorá teorías perturbadoras del universo de Harry Potter. Datos oscuros, curiosidades y secretos que ni Dumbledore quería que descubras. Bienvenido a El Pensadero."
-  url="/"
->
-  <Home />
-  <Blog />
-  <h2
-    class="text-3xl md:text-6xl font-cinzel text-center text-[#928952] mb-10 pt-20"
-    id="noticias-title"
-  >
-    Juego Destacado
-  </h2>
-  <HogwartsSortingQuiz client:load  />
-  <Shorts />
+// Opción 1: Redirección fija a español
+return new Response(null, {
+  status: 302,
+  headers: { Location: '/es' }
+});
 
-  <Footer />
-</Layout>
+// Opción 2: Redirección inteligente (recomendado)
+const supportedLangs = ['es', 'en'];
+const defaultLang = 'es';
+
+// Detecta el idioma del navegador
+const browserLang = typeof navigator !== 'undefined' 
+  ? navigator.language.split('-')[0] 
+  : defaultLang;
+
+const userLang = supportedLangs.includes(browserLang) 
+  ? browserLang 
+  : defaultLang;
+
+return new Response(null, {
+  status: 302,
+  headers: { Location: `/${userLang}` }
+});
+--- 

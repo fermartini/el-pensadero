@@ -1,0 +1,97 @@
+---
+import Home from "../../components/Home.astro";
+import Shorts from "../../components/Shorts.astro";
+import Layout from "../../layouts/Layout.astro";
+import Blog from "../../components/Blog.astro";
+import Footer from "../../components/Footer.astro";
+import HogwartsSortingQuiz from "../../components/games/HogwartsSortingQuiz";
+import type { HomeContent } from "../../types.d.ts";
+import type { GamesContent } from "../../types.d.ts";
+// src/pages/[lang]/index.astro
+export const prerender = true; // Para Static Site Generation (SSG)
+
+// 1. Define los idiomas soportados
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } }, // Español
+    { params: { lang: 'en' } }  // Inglés
+  ];
+}
+
+// 2. Obtiene el parámetro de la URL
+const { lang } = Astro.params;
+
+// 3. Carga el contenido correspondiente
+const {frontmatter } = await import(`../../content/${lang}/home.md`) as { frontmatter: HomeContent };
+const { frontmatter: game } = (await import(`../../content/${lang}/games.md`)) as {
+  frontmatter: GamesContent;
+};
+
+
+const titleGame = game.titleGame;
+const descriptionGame = game.descriptionGame;
+const hat = game.hat;
+const start = game.start;
+const cualities = game.cualities;
+const fundador = game.fundador;
+const element = game.element;
+const yes = game.yes;
+const thinks = game.thinks;
+const again = game.again;
+const back = game.back;
+const ask = game.ask;
+const of = game.of;
+const interesting = game.interesting;
+const finishGame = game.finishGame;
+
+const title = frontmatter.title
+const subTitle = frontmatter.subTitle
+const labelledby = frontmatter.labelledby
+const blog = frontmatter.blog
+const games = frontmatter.games
+const titleLayout = frontmatter.titleLayout
+const descriptionLayout = frontmatter.descriptionLayout
+const titleButton = frontmatter.titleButton
+const readMore = frontmatter.readMore
+
+---
+
+<Layout
+  title={titleLayout}
+  description={descriptionLayout}
+  url=`/${lang}`
+>
+  <Home title={title} subTitle={subTitle} labelledby={labelledby}/>
+  <Blog blog={blog} lang={lang} titleButton={titleButton} readMore={readMore}/>
+
+
+  <h2
+    class="text-3xl md:text-6xl font-cinzel text-center text-[#928952] mb-10 pt-20"
+    id="noticias-title"
+  >
+  {games}
+    
+  </h2>
+  <HogwartsSortingQuiz
+      client:load
+      lang={lang}
+      titleGame={titleGame}
+      descriptionGame={descriptionGame}
+      hat={hat}
+      start={start}
+      finishGame={finishGame}
+      cualities={cualities}
+      fundador={fundador}
+      element={element}
+      yes={yes}
+      thinks={thinks}
+      again={again}
+      back={back}
+      ask={ask}
+      of={of}
+      interesting={interesting}
+    />
+  <Shorts />
+
+  <Footer />
+</Layout>

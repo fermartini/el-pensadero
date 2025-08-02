@@ -1,14 +1,17 @@
 ---
 import { getCollection, render } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
-import Button from "../../components/Button.astro";
-import Footer from "../../components/Footer.astro";
+import Layout from "../../../layouts/Layout.astro";
+import Button from "../../../components/Button.astro";
+import Footer from "../../../components/Footer.astro";
 import { YouTube } from "@astro-community/astro-embed-youtube";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("posts");
+    const posts = await getCollection("posts");
+    
   return posts.map((post: any) => ({
-    params: { id: post.data.slug },
+    params: { 
+      lang: post.data.lang,
+      id: post.data.slug },
     props: { post },
   }));
 }
@@ -25,8 +28,9 @@ const {
   author,
   category,
   dateFormatted,
+  lang,
   tags,
-  durationVideo,
+  durationVideo
 } = data;
 
 const { Content } = await render(post);
@@ -76,7 +80,7 @@ const generateBlogJSONLD = (post: any) => {
 };
 ---
 
-<Layout title={title} description={description} img={img} url={`/blog/${slug}`} tags={tags}>
+<Layout title={title} description={description} img={img} url={`/${lang}/blog/${slug}`} tags={tags}>
   <main
     class="h-full w-full gap-7 flex items-center justify-center mt-20 mx-auto px-4"
   >
@@ -97,7 +101,7 @@ const generateBlogJSONLD = (post: any) => {
       <script type="application/ld+json" set:html={generateBlogJSONLD(post)} />
 
       <Content />
-      <Button title="🔙 VOLVER 🧙‍♂️" slug="/blog" />
+      <Button title="🔙 VOLVER 🧙‍♂️" slug=`/${lang}/blog` />
     </article>
   </main>
   <Footer />

@@ -1,0 +1,21 @@
+---
+title: "ONLINE HARRY POTTER GAMES"
+titleLayout: "Games - The Pensieve"
+descriptionLayout: "Games and quizzes from the Wizarding World of Harry Potter"
+titleGame: "The Sorting Hat"
+descriptionGame: "Welcome to Hogwarts, young wizard. It's time to discover which house you belong to..."
+hat:  "Hmm... difficult, very difficult. Let me look into your mind..."
+start: "Start Sorting"
+finishGame: "You have been sorted!"
+cualities: "Traits"
+fundador: "Founder"
+element: "Element"
+yes: "Yes"
+thinks: "will be perfect for you. Have a wonderful time at Hogwarts!"
+again: "Take the Quiz Again"
+back: "Return to Start"
+ask: "Question"
+of: "of"
+interesting: "Interesting... very interesting..."
+
+---

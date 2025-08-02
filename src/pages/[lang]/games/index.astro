@@ -1,0 +1,73 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Footer from "../../../components/Footer.astro";
+import HogwartsSortingQuiz from "../../../components/games/HogwartsSortingQuiz";
+import type { GamesContent } from "../../../types.d.ts";
+export const prerender = true;
+export function getStaticPaths() {
+  return [
+    { params: { lang: "es" } }, // Español
+    { params: { lang: "en" } }, // Inglés
+  ];
+}
+
+const { lang } = Astro.params;
+// 3. Carga el contenido correspondiente
+const { frontmatter } = (await import(`../../../content/${lang}/games.md`)) as {
+  frontmatter: GamesContent;
+};
+
+const title = frontmatter.title;
+const titleLayout = frontmatter.titleLayout;
+const descriptionLayout = frontmatter.descriptionLayout;
+const titleGame = frontmatter.titleGame;
+const descriptionGame = frontmatter.descriptionGame;
+const hat = frontmatter.hat;
+const start = frontmatter.start;
+const cualities = frontmatter.cualities;
+const fundador = frontmatter.fundador;
+const element = frontmatter.element;
+const yes = frontmatter.yes;
+const thinks = frontmatter.thinks;
+const again = frontmatter.again;
+const back = frontmatter.back;
+const ask = frontmatter.ask;
+const of = frontmatter.of;
+const interesting = frontmatter.interesting;
+const finishGame = frontmatter.finishGame;
+---
+
+<Layout
+  title={titleLayout}
+  description={descriptionLayout}
+  url=`/${lang}/games`
+  background={false}
+  ><main class="min-h-screen">
+    <h1
+      class="opacity-0 animate-fadeIn font-cinzel font-semibold text-2xl md:text-5xl mt-20 mb-5 text-center text-[#928952] drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)]"
+    >
+      {title}
+    </h1>
+    <HogwartsSortingQuiz
+      client:load
+      lang={lang}
+      titleGame={titleGame}
+      descriptionGame={descriptionGame}
+      hat={hat}
+      start={start}
+      finishGame={finishGame}
+      cualities={cualities}
+      fundador={fundador}
+      element={element}
+      yes={yes}
+      thinks={thinks}
+      again={again}
+      back={back}
+      ask={ask}
+      of={of}
+      interesting={interesting}
+    />
+  </main>
+</Layout>
+
+<Footer />

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 
+
 interface Question {
   question: string
   answers: {
@@ -17,7 +18,7 @@ interface ShuffledAnswer {
   text: string
 }
 
-const questions: Question[] = [
+const questionsES: Question[] = [
   {
     question: "¿Qué cualidad valoras más?",
     answers: {
@@ -155,6 +156,145 @@ const questions: Question[] = [
   },
 ]
 
+const questionsEN: Question[] = [
+  {
+    question: "What quality do you value the most?",
+    answers: {
+      a: "Bravery",
+      b: "Intelligence",
+      c: "Determination",
+      d: "Loyalty",
+    },
+  },
+  {
+    question: "How would you resolve a conflict?",
+    answers: {
+      a: "By confronting it directly",
+      b: "By negotiating with logic",
+      c: "By manipulating it to my advantage",
+      d: "By seeking a fair solution for everyone",
+    },
+  },
+  {
+    question: "What would be your ideal role in a team?",
+    answers: {
+      a: "The brave leader",
+      b: "The strategist",
+      c: "The one who makes the hard decisions",
+      d: "The one who keeps harmony",
+    },
+  },
+  {
+    question: "Which magical creature would you choose as a companion?",
+    answers: {
+      a: "A lion",
+      b: "A raven",
+      c: "A snake",
+      d: "A badger",
+    },
+  },
+  {
+    question: "What’s your biggest flaw?",
+    answers: {
+      a: "Impulsiveness",
+      b: "Pride",
+      c: "Excessive ambition",
+      d: "Insecurity",
+    },
+  },
+  {
+    question: "What would you do if your friend broke the rules?",
+    answers: {
+      a: "Cover for them if it was for a good reason",
+      b: "Explain why it was a mistake",
+      c: "See how I could use it to my advantage",
+      d: "Go with them to admit the mistake",
+    },
+  },
+  {
+    question: "What motivates you the most?",
+    answers: {
+      a: "Honor",
+      b: "Knowledge",
+      c: "Power",
+      d: "Community",
+    },
+  },
+  {
+    question: "If you had a time-turner, how would you use it?",
+    answers: {
+      a: "To save someone",
+      b: "To study more",
+      c: "To change my fate",
+      d: "To enjoy more time with loved ones",
+    },
+  },
+  {
+    question: "How do you react to a challenge?",
+    answers: {
+      a: "Face it head-on",
+      b: "Analyze it and find a logical solution",
+      c: "Look for a way to come out on top",
+      d: "Ask for help if needed",
+    },
+  },
+  {
+    question: "What’s your favorite activity?",
+    answers: {
+      a: "Sports or adventures",
+      b: "Reading or learning something new",
+      c: "Planning goals",
+      d: "Spending time with friends",
+    },
+  },
+  {
+    question: "What kind of leader do you prefer?",
+    answers: {
+      a: "Bold and inspiring",
+      b: "Rational and intelligent",
+      c: "Strong and determined",
+      d: "Fair and empathetic",
+    },
+  },
+  {
+    question: "What would your Patronus be?",
+    answers: {
+      a: "A wolf",
+      b: "An owl",
+      c: "A fox",
+      d: "A dog",
+    },
+  },
+  {
+    question: "What would you do if you won the House Cup?",
+    answers: {
+      a: "Celebrate with excitement",
+      b: "Analyze how we won",
+      c: "Use it to gain respect",
+      d: "Thank everyone for their teamwork",
+    },
+  },
+  {
+    question: "What type of magic attracts you the most?",
+    answers: {
+      a: "Offensive spells",
+      b: "Ancient and complex magic",
+      c: "Dark or forbidden magic",
+      d: "Protective enchantments",
+    },
+  },
+  {
+    question: "How would you prefer to spend a Saturday?",
+    answers: {
+      a: "Doing something exciting",
+      b: "Reading or playing wizard chess",
+      c: "Planning future goals",
+      d: "Relaxing with friends",
+    },
+  },
+]
+
+
 const houses = {
   a: "Gryffindor",
   b: "Ravenclaw",
@@ -162,7 +302,7 @@ const houses = {
   d: "Hufflepuff",
 }
 
-const houseInfo = {
+const houseInfoES = {
   Gryffindor: {
     colors: "from-red-600 to-yellow-500",
     bgColor: "bg-red-900/20",
@@ -209,7 +349,72 @@ const houseInfo = {
   },
 }
 
-export default function HogwartsSortingQuiz() {
+const houseInfoEN = {
+  Gryffindor: {
+    colors: "from-red-600 to-yellow-500",
+    bgColor: "bg-red-900/20",
+    borderColor: "border-red-500/50",
+    textColor: "text-red-300",
+    description: "Brave, daring, and chivalrous. Gryffindors never back down from a challenge.",
+    traits: ["Bravery", "Daring", "Chivalry", "Determination"],
+    founder: "Godric Gryffindor",
+    element: "Fire",
+    emoji: "🦁",
+  },
+  Ravenclaw: {
+    colors: "from-blue-600 to-cyan-400",
+    bgColor: "bg-blue-900/20",
+    borderColor: "border-blue-500/50",
+    textColor: "text-blue-300",
+    description: "Intelligent, creative, and wise. Ravenclaws value knowledge above all.",
+    traits: ["Intelligence", "Wisdom", "Creativity", "Wit"],
+    founder: "Rowena Ravenclaw",
+    element: "Air",
+    emoji: "🦅",
+  },
+  Slytherin: {
+    colors: "from-green-600 to-emerald-400",
+    bgColor: "bg-green-900/20",
+    borderColor: "border-green-500/50",
+    textColor: "text-green-300",
+    description: "Ambitious, cunning, and determined. Slytherins will do whatever it takes to succeed.",
+    traits: ["Ambition", "Cunning", "Determination", "Leadership"],
+    founder: "Salazar Slytherin",
+    element: "Water",
+    emoji: "🐍",
+  },
+  Hufflepuff: {
+    colors: "from-yellow-600 to-amber-400",
+    bgColor: "bg-yellow-900/20",
+    borderColor: "border-yellow-500/50",
+    textColor: "text-yellow-300",
+    description: "Loyal, fair, and hardworking. Hufflepuffs value friendship and justice.",
+    traits: ["Loyalty", "Fairness", "Patience", "Hard Work"],
+    founder: "Helga Hufflepuff",
+    element: "Earth",
+    emoji: "🦡",
+  },
+}
+
+
+export default function HogwartsSortingQuiz({ 
+  lang, 
+  titleGame,
+  descriptionGame,
+  hat,
+  start,
+  finishGame,
+  cualities,
+  fundador,
+  element,
+  yes,
+  thinks,
+  again,
+  back,
+  ask,
+  of,
+  interesting
+}) {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers] = useState<string[]>([])
   const [showResult, setShowResult] = useState(false)
@@ -217,7 +422,10 @@ export default function HogwartsSortingQuiz() {
   const [shuffledAnswers, setShuffledAnswers] = useState<ShuffledAnswer[]>([])
   const [selectedAnswer, setSelectedAnswer] = useState<string>("")
   const [isAnimating, setIsAnimating] = useState(false)
+  
 
+  const questions = lang == 'es' ? questionsES : questionsEN
+  const houseInfo = lang == 'es' ? houseInfoES : houseInfoEN
   // Mezclar respuestas para la pregunta actual
   useEffect(() => {
     if (quizStarted && currentQuestion < questions.length) {
@@ -298,11 +506,11 @@ export default function HogwartsSortingQuiz() {
             <div className="text-center space-y-6 p-8">
               <div className="text-8xl animate-bounce">🎩</div>
               <h1 className="text-4xl font-bold bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-500 bg-clip-text text-transparent">
-                ⚡ El Sombrero Seleccionador ⚡
+                ⚡ {titleGame} ⚡
               </h1>
               <p className="text-xl text-gray-300 leading-relaxed">
-                Bienvenido a Hogwarts, joven mago. Es hora de descubrir a qué casa perteneces...
-              </p>
+                {descriptionGame}
+                </p>
             </div>
 
             <div className="p-8 space-y-8">
@@ -319,12 +527,12 @@ export default function HogwartsSortingQuiz() {
               </div>
 
               <div className="text-center space-y-4">
-                <p className="text-gray-400 italic">"Hmm... difícil, muy difícil. Déjame ver dentro de tu mente..."</p>
+                <p className="text-gray-400 italic">{hat}</p>
                 <button
                   onClick={startQuiz}
                   className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-4 px-8 text-xl transform hover:scale-105 transition-all duration-300 shadow-lg rounded-lg"
                 >
-                  🎩 Comenzar Selección
+                  🎩 {start}
                 </button>
               </div>
             </div>
@@ -351,7 +559,7 @@ export default function HogwartsSortingQuiz() {
               <h1 className={`text-5xl font-bold bg-gradient-to-r ${houseData.colors} bg-clip-text text-transparent`}>
                 ¡{resultHouse.toUpperCase()}!
               </h1>
-              <p className="text-2xl text-gray-300 font-semibold">🎉 ¡Has sido seleccionado! 🎉</p>
+              <p className="text-2xl text-gray-300 font-semibold">🎉{finishGame} 🎉</p>
             </div>
 
             <div className="space-y-8 p-8">
@@ -360,7 +568,7 @@ export default function HogwartsSortingQuiz() {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <h3 className={`text-xl font-bold ${houseData.textColor} mb-3`}>🌟 Cualidades:</h3>
+                    <h3 className={`text-xl font-bold ${houseData.textColor} mb-3`}>🌟 {cualities}</h3>
                     <ul className="space-y-2">
                       {houseData.traits.map((trait, index) => (
                         <li key={index} className="text-gray-300 flex items-center">
@@ -372,11 +580,11 @@ export default function HogwartsSortingQuiz() {
 
                   <div className="space-y-4">
                     <div>
-                      <h4 className={`font-bold ${houseData.textColor}`}>👑 Fundador:</h4>
+                      <h4 className={`font-bold ${houseData.textColor}`}>👑 {fundador}:</h4>
                       <p className="text-gray-300">{houseData.founder}</p>
                     </div>
                     <div>
-                      <h4 className={`font-bold ${houseData.textColor}`}>🔮 Elemento:</h4>
+                      <h4 className={`font-bold ${houseData.textColor}`}>🔮 {element}:</h4>
                       <p className="text-gray-300">{houseData.element}</p>
                     </div>
                   </div>
@@ -385,20 +593,20 @@ export default function HogwartsSortingQuiz() {
 
               <div className="text-center space-y-4">
                 <p className="text-gray-400 italic text-lg">
-                  "Sí... {resultHouse} será perfecto para ti. ¡Que tengas una excelente estadía en Hogwarts!"
+                  {yes}... {resultHouse} {thinks}
                 </p>
                 <div className="flex gap-4 justify-center">
                   <button
                     onClick={resetQuiz}
                     className="bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 font-bold py-3 px-6 rounded-lg"
                   >
-                    🔄 Hacer Quiz de Nuevo
+                    🔄 {again}
                   </button>
                   <button
                     onClick={() => window.location.reload()}
                     className={`bg-gradient-to-r ${houseData.colors} font-bold py-3 px-6 transform hover:scale-105 transition-all rounded-lg`}
                   >
-                    🎮 Volver al Inicio
+                    🎮 {back}
                   </button>
                 </div>
               </div>
@@ -418,7 +626,7 @@ export default function HogwartsSortingQuiz() {
           <div className="space-y-4 p-6 border-b border-purple-500/30">
             <div className="flex justify-between items-center">
               <span className="text-purple-300 font-semibold">
-                Pregunta {currentQuestion + 1} de {questions.length}
+                {ask} {currentQuestion + 1} {of} {questions.length}
               </span>
               <div className="text-4xl opacity-70">🎩</div>
             </div>
@@ -453,7 +661,7 @@ export default function HogwartsSortingQuiz() {
             </div>
 
             <div className="text-center pt-4">
-              <p className="text-gray-400 italic">"Interesante... muy interesante..."</p>
+              <p className="text-gray-400 italic">{interesting}</p>
             </div>
           </div>
         </div>
