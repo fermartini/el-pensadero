@@ -10,5 +10,6 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   site: "https://www.elpensaderohp.com",
   integrations: [react(), tailwind(),mdx(),sitemap() ],
+  output: 'server'
   
 });

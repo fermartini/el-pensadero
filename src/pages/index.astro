@@ -1,33 +1,19 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Loader from "../components/Loader.astro"
 // src/pages/index.astro
+import Layout from "../layouts/Layout.astro";
+import Loader from "../components/Loader.astro";
+
 export const prerender = true;
 
-// Opción 1: Redirección fija a español
-return new Response(null, {
-  status: 302,
-  headers: { Location: '/es' }
-});
-
-// Opción 2: Redirección inteligente (recomendado)
 const supportedLangs = ['es', 'en'];
-const defaultLang = 'es';
+const defaultLang = 'es'; // Valor por defecto para SSR (prerender)
 
-// Detecta el idioma del navegador
-const browserLang = typeof navigator !== 'undefined' 
-  ? navigator.language.split('-')[0] 
+// Solo se ejecuta en el cliente (importante!)
+const userLang = typeof window !== 'undefined' 
+  ? (localStorage.getItem('preferredLang') || 
+     (navigator.language.startsWith('es') ? 'es' : 'en'))
   : defaultLang;
-
-const userLang = supportedLangs.includes(browserLang) 
-  ? browserLang 
-  : defaultLang;
-
-return new Response(null, {
-  status: 302,
-  headers: { Location: `/${userLang}` }
-});
---- 
+---
 
 <Layout
   title={userLang === 'es' 
@@ -38,14 +24,18 @@ return new Response(null, {
       ? 'Portal a las teorías mejor guardadas del universo Harry Potter. Redirigiendo a contenido exclusivo...'
       : 'Gateway to the best-kept Harry Potter theories. Redirecting to exclusive content...'
   }
-  url=`/`
-><main
-    class="relative h-[calc(100vh-100px)] xl:min-h-screen w-full flex flex-col items-center justify-center"
-  >
-    <section
-      id="loader"
-      class="flex flex-col items-center justify-center border px-10 my-10 rounded-full"
-    >
-      <Loader/>
+  url="/"
+>
+  <main class="relative h-[calc(100vh-100px)] xl:min-h-screen w-full flex flex-col items-center justify-center">
+    <section class="flex flex-col items-center justify-center border px-10 my-10 rounded-full">
+      <Loader client:load /> {/* 'client:load' es crucial */}
     </section>
-  </main></Layout>
+
+    <script is:inline>
+      // Redirección después de 1.5s (evita flash)
+      setTimeout(() => {
+        window.location.href = `/${userLang}`;
+      }, 800);
+    </script>
+  </main>
+</Layout>
