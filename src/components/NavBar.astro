@@ -6,12 +6,15 @@ const { lang = "es", slugLang = "" } = Astro.props;
 const games = lang == "es" ? "juegos" : "Games";
 const [_, langs, section] = Astro.url.pathname.split("/");
 
-const url = section != undefined ? `/${section}`  : "";
+
+
+const url = section != undefined ? `/${section}` : "";
 ---
+
 <script is:inline>
   // Función para cambiar idioma y guardar preferencia
-  function changeLanguage(newLang) {
-    localStorage.setItem('preferredLang', newLang);
+  function changeLanguage(lang) {
+    localStorage.setItem("preferredLang", lang);
   }
 </script>
 
@@ -48,35 +51,23 @@ const url = section != undefined ? `/${section}`  : "";
             >{games}</a
           >
         </li>
-        <div class="flex justify-end w-fit align-top">
-          <a
-            class={`inline-block h-5 cursor-pointer"`}
-            role="img"
-            aria-label="Español"
-            href={lang == "en" ? `/es${url}/${slugLang}` : null}
-            onclick="changeLanguage('es')"
-            ><img
-              src={esFlag}
-              alt="Bandera España"
-              class={`${lang == "es" ? "w-10" : "w-5"} transition-all`}
-            /></a
-          >
-          |
-          <a
-            class={`inline-block h-5 cursor-pointer"`}
-            role="img"
-            aria-label="English"
-            href={lang == "es" ? `/en${url}/${slugLang}` : null}
-            onclick="changeLanguage('en')"
-            ><img
-              src={usFlag}
-              alt="Bandera EEUU"
-              class={`${lang == "en" ? "w-10" : "w-5"} transition-all`}
-            /></a
-          >
+        <div class="flex justify-end w-fit align-top" >
+          <a href={lang == "en" ? `/es${url}/${slugLang}` : `/en${url}/${slugLang}`}  class=" flex gap-1 md:gap-2 cursor-pointer w-fit h-fit" role="img" onclick={lang == 'es'? "changeLanguage('en')" : "changeLanguage('es')"}>
+            <img
+                src={esFlag}
+                alt="Bandera España"
+                class={`${lang == "es" ? "w-10" : "w-5"} transition-all h-fit`}
+
+              />
+            
+            |<img
+                src={usFlag}
+                alt="Bandera EEUU"
+                class={`${lang == "en" ? "w-10" : "w-5"} transition-all h-fit`}
+              />
+          </a>
         </div>
       </ul>
     </div>
   </div>
 </nav>
-
