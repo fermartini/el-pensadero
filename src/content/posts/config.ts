@@ -16,6 +16,7 @@ const posts = defineCollection({
         videoId: z.string(),
         important: z.boolean(),
         durationVideo: z.string(),
+        slugLang: z.string()
     })
 })
 

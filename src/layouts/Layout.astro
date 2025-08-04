@@ -10,7 +10,8 @@ const {
   url,
   img = "/assets/img/banner-el-pensadero.webp",
   background = true,
-  tags = []
+  tags = [],
+  slugLang = ""
 } = Astro.props;
 
 const { lang } = Astro.params;
@@ -139,7 +140,7 @@ import "../style/global.css";
       }
       <!-- ESTE DIV ES EL CIRCULO DEL BORDE IZQUIERDO -->
       
-      <NavBar lang={currentLang}/>
+      <NavBar lang={currentLang} slugLang={slugLang}/>
       <slot />
     </div>
     </main>

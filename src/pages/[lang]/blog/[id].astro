@@ -30,7 +30,8 @@ const {
   dateFormatted,
   lang,
   tags,
-  durationVideo
+  durationVideo,
+  slugLang
 } = data;
 
 const { Content } = await render(post);
@@ -80,7 +81,7 @@ const generateBlogJSONLD = (post: any) => {
 };
 ---
 
-<Layout title={title} description={description} img={img} url={`/${lang}/blog/${slug}`} tags={tags}>
+<Layout title={title} description={description} img={img} url={`/${lang}/blog/${slug}`} tags={tags} slugLang={slugLang}>
   <main
     class="h-full w-full gap-7 flex items-center justify-center mt-20 mx-auto px-4"
   >
