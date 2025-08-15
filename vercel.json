@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/",
+      "destination": "/es",
+      "permanent": true
+    },
+    {
       "source": "/blog",
       "destination": "/es/blog",
       "permanent": true
