@@ -15,12 +15,5 @@
       "destination": "/es/blog",
       "permanent": true
     }
-  ],
-  "limits": {
-    "rate": {
-      "max": 100, 
-      "window": 10,  
-      "key": "ip" 
-    }
-  }
+  ]
 }
