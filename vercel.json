@@ -14,11 +14,13 @@
       "source": "/blog/",
       "destination": "/es/blog",
       "permanent": true
-    },
-    {
-      "source": "/blog/:slug",
-      "destination": "/es/blog/:slug",
-      "permanent": true
     }
-  ]
+  ],
+  "limits": {
+    "rate": {
+      "max": 100, 
+      "window": 10,  
+      "key": "ip" 
+    }
+  }
 }
