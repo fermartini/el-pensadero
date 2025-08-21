@@ -6,20 +6,17 @@ const { lang = "es", slugLang = "" } = Astro.props;
 const games = lang == "es" ? "juegos" : "Games";
 const [_, langs, section] = Astro.url.pathname.split("/");
 
-
+const isHome = Astro.url.pathname === `/${lang}` || Astro.url.pathname === `/${lang}/`;
 
 const url = section != undefined ? `/${section}` : "";
+
+
+
 ---
 
-<script is:inline>
-  // Función para cambiar idioma y guardar preferencia
-  function changeLanguage(lang) {
-    localStorage.setItem("preferredLang", lang);
-  }
-</script>
 
 <nav
-  class="fixed w-full z-20 top-0 start-0 border-b border-gray-900 dark:border-gray-800"
+  class="fixed w-full z-50 top-0 start-0 border-b border-gray-900 dark:border-gray-800"
 >
   <div
     class="max-w-screen-xl flex flex-wrap justify-between xl:items-center xl:justify-center mx-auto p-4 backdrop-blur-sm"
@@ -30,7 +27,7 @@ const url = section != undefined ? `/${section}` : "";
       >
         <li>
           <a
-            href={url !== "" ? `/${lang}` : null}
+            href={isHome?  null : `/${lang}` }
             class={`block py-2 px-3 text-gray-300 hover:text-[#928952] hover:scale-110 transition-all"}`}
             aria-current="page"
           >
