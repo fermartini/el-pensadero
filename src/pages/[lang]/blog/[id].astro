@@ -90,6 +90,8 @@ const generateBlogJSONLD = (post: any) => {
   url={`/${lang}/blog/${slug}`}
   tags={tags}
   slugLang={slugLang}
+  canonical=`https://elpensaderohp.com/es/blog/${slug}`
+  alternate=`https://elpensaderohp.com/en/blog/${slug}`
 >
   <main
     class="h-full w-full gap-7 flex items-center justify-center mt-20 mx-auto px-4 pb-10"

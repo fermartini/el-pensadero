@@ -11,7 +11,9 @@ const {
   img = "/assets/img/banner-el-pensadero.webp",
   background = true,
   tags = [],
-  slugLang = ""
+  slugLang = "",
+  canonical = "https://elpensaderohp.com/es",
+  alternate = "https://elpensaderohp.com/en"
 } = Astro.props;
 
 const { lang } = Astro.params;
@@ -90,23 +92,12 @@ import "../style/global.css";
   />
 
   <title>{title}</title>
-  <link rel="canonical" href={`https://elpensaderohp.com${Astro.url.pathname}`} />
+  <link rel="canonical" href={canonical} />
+  <link rel="alternate" hreflang="es" href={canonical} />
+  <link rel="alternate" hreflang="en" href={alternate} />
+  <link rel="alternate" hreflang="x-default"  href={canonical} />
 
-   <link 
-  rel="alternate" 
-  hreflang="es" 
-  href={`https://elpensaderohp.com${url}`} 
-/>
-<link 
-  rel="alternate" 
-  hreflang="en" 
-  href={`https://elpensaderohp.com${url}`} 
-/>
-<link 
-  rel="alternate" 
-  hreflang="x-default" 
-  href={`https://elpensaderohp.com/es${url}`} 
-/>
+
   <ClientRouter />
   <Analytics/>
 </head>
