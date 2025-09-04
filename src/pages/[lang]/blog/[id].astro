@@ -36,6 +36,8 @@ const {
   slugLang,
 } = data;
 
+const langDif = lang == 'es'? 'en' : 'es'
+
 const { Content } = await render(post);
 
 const generateBlogJSONLD = (post: any) => {
@@ -44,8 +46,8 @@ const generateBlogJSONLD = (post: any) => {
     "@type": "BlogPosting",
     headline: post.data.title,
     description: post.data.description,
-    image: `https://elpensadero.vercel.app${post.data.img}`,
-    url: `https://elpensadero.vercel.app/blog/${post.data.slug}`,
+    image: `https://elpensaderohp.com${post.data.img}`,
+    url: `https://elpensaderohp.com/${lang}/blog/${post.data.slug}`,
     datePublished: post.data.dateFormatted,
     dateModified: post.data.dateFormatted,
     author: {
@@ -55,23 +57,23 @@ const generateBlogJSONLD = (post: any) => {
     publisher: {
       "@type": "Organization",
       name: "El Pensadero",
-      url: "https://elpensadero.vercel.app",
+      url: "https://elpensaderohp.com.app",
       logo: {
         "@type": "ImageObject",
-        url: "https://elpensadero.vercel.app/favicon.png",
+        url: "https://elpensaderohp.com/favicon.png",
         width: "48", // Add dimensions
         height: "48",
       },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://elpensadero.vercel.app/blog/${post.data.slug}`,
+      "@id": `https://elpensaderohp.com/${lang}/blog/${post.data.slug}`,
     },
     video: {
       "@type": "VideoObject",
       name: post.data.title,
       description: post.data.description,
-      thumbnailUrl: `https://elpensadero.vercel.app${post.data.img}`,
+      thumbnailUrl: `https://elpensaderohp.com${post.data.img}`,
       duration: durationVideo,
       uploadDate: post.data.dateFormatted,
       embedUrl: `https://www.youtube.com/embed/${post.data.videoId}`,
@@ -90,8 +92,8 @@ const generateBlogJSONLD = (post: any) => {
   url={`/${lang}/blog/${slug}`}
   tags={tags}
   slugLang={slugLang}
-  canonical=`https://elpensaderohp.com/es/blog/${slug}`
-  alternate=`https://elpensaderohp.com/en/blog/${slug}`
+  canonical={`https://elpensaderohp.com/${lang}/blog/${slug}`}
+  alternate={`https://elpensaderohp.com/${langDif}/blog/${slug}`}
 >
   <main
     class="h-full w-full gap-7 flex items-center justify-center mt-20 mx-auto px-4 pb-10"

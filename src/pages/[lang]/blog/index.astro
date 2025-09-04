@@ -15,6 +15,7 @@ export function getStaticPaths() {
 }
 
 const { lang } = Astro.params;
+const langDif = lang == 'es' ? 'en' : 'es'
 const posts = await getCollection("posts", ({ data }) => data.lang === lang);
 const { frontmatter } = await import(`../../../content/${lang}/blog.md`) as { frontmatter: BlogContent };
 
@@ -59,9 +60,9 @@ orderedItems = orderedItems.reverse();
 <Layout
   title={titleLayout}
   description={descriptionLayour}
-  url=`/${lang}/blog`
-  canonical=`https://elpensaderohp.com/es/blog/`
-  alternate=`https://elpensaderohp.com/en/blog/`
+  url={`/${lang}/blog`}
+  canonical={`https://elpensaderohp.com/${lang}/blog/`}
+  alternate={`https://elpensaderohp.com/${langDif}/blog/`}
 >
   <main class="h-full w-full flex gap-7 items-center justify-center mb-10">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">

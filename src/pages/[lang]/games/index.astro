@@ -12,6 +12,7 @@ export function getStaticPaths() {
 }
 
 const { lang } = Astro.params;
+const langDif = lang == 'es'? 'en' : 'es'
 // 3. Carga el contenido correspondiente
 const { frontmatter } = (await import(`../../../content/${lang}/games.md`)) as {
   frontmatter: GamesContent;
@@ -42,8 +43,8 @@ const finishGame = frontmatter.finishGame;
   description={descriptionLayout}
   url=`/${lang}/games`
   background={false}
-  canonical=`https://elpensaderohp.com/es/games/`
-  alternate=`https://elpensaderohp.com/en/games/`
+  canonical=`https://elpensaderohp.com/${lang}/games/`
+  alternate=`https://elpensaderohp.com/${langDif}/games/`
   ><main class="min-h-screen">
     <h1
       class="opacity-0 animate-fadeIn font-cinzel font-semibold text-2xl md:text-5xl mt-20 mb-5 text-center text-[#928952] drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)]"

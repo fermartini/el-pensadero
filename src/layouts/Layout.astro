@@ -4,6 +4,8 @@ import ParticulasMagicas from "../components/ParticulasMagicas.jsx";
 import Analytics from '@vercel/analytics/astro'
 import { ClientRouter } from "astro:transitions";
 
+const { lang } = Astro.params;
+const langDif = lang == 'es' ? 'en' : 'es'
 const {
   title,
   description,
@@ -12,11 +14,9 @@ const {
   background = true,
   tags = [],
   slugLang = "",
-  canonical = "https://elpensaderohp.com/es",
-  alternate = "https://elpensaderohp.com/en"
+  canonical = `https://elpensaderohp.com/${lang}`,
+  alternate = `https://elpensaderohp.com/${langDif}`
 } = Astro.props;
-
-const { lang } = Astro.params;
 
 const currentLang = lang || 'es'; // Default a español si no hay parámetro
 
@@ -93,9 +93,9 @@ import "../style/global.css";
 
   <title>{title}</title>
   <link rel="canonical" href={canonical} />
-  <link rel="alternate" hreflang="es" href={canonical} />
-  <link rel="alternate" hreflang="en" href={alternate} />
-  <link rel="alternate" hreflang="x-default"  href={canonical} />
+  <link rel="alternate" hreflang={lang} href={canonical} />
+  <link rel="alternate" hreflang={langDif} href={alternate} />
+  <link rel="alternate" hreflang="x-default"  href="https://elpensaderohp.com" />
 
 
   <ClientRouter />
