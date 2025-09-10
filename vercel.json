@@ -16,12 +16,12 @@
       "permanent": true
     },
     {
-      "source": "/blog/:slug*",
+      "source": "/blog/:slug+",
       "destination": "/es/blog/:slug*",
       "permanent": true
     },
     {
-      "source": "/blog/:slug*/",
+      "source": "/blog/:slug+/",
       "destination": "/es/blog/:slug*",
       "permanent": true
     }
