@@ -498,11 +498,11 @@ export default function HogwartsSortingQuiz({
 
   if (!quizStarted) {
     return (
-      <div className="min-h-screen relative overflow-hidden">
+      <div className=" relative overflow-hidden">
         <div className="absolute " />
 
-        <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
-          <div className="w-full max-w-2xl bg-gray-900/95 border-2 border-yellow-500/50 text-white shadow-2xl rounded-lg">
+        <div className="relative z-10  flex items-center justify-center p-4">
+          <div className="w-full max-w-2xl h-full bg-gray-900/95 border-2 border-yellow-500/50 text-white shadow-2xl rounded-lg">
             <div className="text-center space-y-6 p-8">
               <div className="text-8xl animate-bounce">🎩</div>
               <h1 className="text-4xl font-bold bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-500 bg-clip-text text-transparent">
@@ -547,12 +547,12 @@ export default function HogwartsSortingQuiz({
     const houseData = houseInfo[resultHouse as keyof typeof houseInfo]
 
     return (
-      <div className="min-h-screen relative overflow-hidden">
+      <div className=" relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/70 via-purple-900/80 to-black/90" />
 
-        <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
+        <div className="relative z-10  flex items-center justify-center p-4">
           <div
-            className={`w-full max-w-3xl bg-gray-900/95 border-2 ${houseData.borderColor} text-white shadow-2xl animate-pulse rounded-lg`}
+            className={`w-full max-w-3xl h-full bg-gray-900/95 border-2 ${houseData.borderColor} text-white shadow-2xl animate-pulse rounded-lg`}
           >
             <div className="text-center space-y-6 p-8">
               <div className="text-8xl animate-bounce mb-4">{houseData.emoji}</div>
@@ -618,11 +618,11 @@ export default function HogwartsSortingQuiz({
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="relative overflow-hidden">
       <div className="absolute inset-0 " />
 
-      <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
-        <div className="w-full max-w-2xl bg-gray-900/95 border-2 border-purple-500/50 text-white shadow-2xl rounded-lg">
+      <div className="relative z-10 flex items-center justify-center p-4">
+        <div className="w-full max-w-2xl h-full bg-gray-900/95 border-2 border-purple-500/50 text-white shadow-2xl rounded-lg">
           <div className="space-y-4 p-6 border-b border-purple-500/30">
             <div className="flex justify-between items-center">
               <span className="text-purple-300 font-semibold">

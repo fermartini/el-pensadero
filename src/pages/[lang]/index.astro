@@ -64,15 +64,14 @@ const readMore = frontmatter.readMore
   <Home title={title} subTitle={subTitle} labelledby={labelledby}/>
   <Blog blog={blog} lang={lang} titleButton={titleButton} readMore={readMore}/>
 
-
+  <section class="min-h-screen">
   <h2
     class="text-3xl md:text-6xl font-cinzel text-center text-[#928952] mb-10 pt-20"
     id="noticias-title"
   >
   {games}
     
-  </h2>
-  <HogwartsSortingQuiz
+  </h2> <HogwartsSortingQuiz
       client:load
       lang={lang}
       titleGame={titleGame}
@@ -91,6 +90,7 @@ const readMore = frontmatter.readMore
       of={of}
       interesting={interesting}
     />
+ </section>
   <Shorts />
 
   <Footer />

@@ -5,6 +5,8 @@ import Button from "../../../components/Button.astro";
 import Footer from "../../../components/Footer.astro";
 import { YouTube } from "@astro-community/astro-embed-youtube";
 import Blog from "../../../components/Blog.astro";
+import HogwartsSortingQuiz from "../../../components/games/HogwartsSortingQuiz";
+import type { HomeContent } from "../../../types.d.ts";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -37,6 +39,10 @@ const {
 } = data;
 
 const langDif = lang == 'es'? 'en' : 'es'
+
+const {frontmatter } = await import(`../../../content/${lang}/home.md`) as { frontmatter: HomeContent };
+
+const game = frontmatter.games
 
 const { Content } = await render(post);
 
@@ -96,7 +102,7 @@ const generateBlogJSONLD = (post: any) => {
   alternate={`https://elpensaderohp.com/${langDif}/blog/${slug}`}
 >
   <main
-    class="h-full w-full gap-7 flex items-center justify-center mt-20 mx-auto px-4 pb-10"
+    class="h-full w-full gap-7 flex flex-col items-center justify-center mt-20 mx-auto px-4 pb-10"
   >
     <article class="max-w-5xl w-full flex flex-col items-center justify-center">
       <h1 class="text-5xl font-bold text-[#928952] mb-5 text-center">
@@ -115,6 +121,7 @@ const generateBlogJSONLD = (post: any) => {
       <script type="application/ld+json" set:html={generateBlogJSONLD(post)} />
 
       <Content />
+      <Button title={lang == "es"? "🪄 VOLVER" : "🪄 BACK"} slug=`/${lang}/blog` />
       <div class="mt-12 mb-8 w-full">
         <div
           class="flex flex-wrap gap-4 justify-center items-center max-w-2xl mx-auto"
@@ -229,8 +236,36 @@ const generateBlogJSONLD = (post: any) => {
           
         </div>
       </div>
-      <Blog blog={lang == "es"? "Del Pensadero para vos" : "The Pensieve’s Pick for You"} lang={lang} titleButton={lang == "es"? "Volver" : "Back"} readMore={lang == "es"? "Leer Mas" : "Read More"}/>
+
     </article>
+    
+          <section class="min-h-screen">
+  <h2
+    class="text-3xl md:text-6xl font-cinzel text-center text-[#928952] mb-10 pt-20"
+    id="noticias-title"
+  >
+    {game}
+  </h2><HogwartsSortingQuiz
+      client:load
+      lang="es"
+      titleGame="El Sombrero Seleccionador" 
+      descriptionGame="Bienvenido a Hogwarts, joven mago. Es hora de descubrir a qué casa perteneces..." 
+      hat="Hmm... difícil, muy difícil. Déjame ver dentro de tu mente..."
+      start="Comenzar Selección"
+      finishGame="¡Has sido seleccionado!"
+      cualities="Cualidades"
+      fundador="Fundador"
+      element="Elemento"
+      yes="Sí"
+      thinks="será perfecto para ti. ¡Que tengas una excelente estadía en Hogwarts!"
+      again="Hacer Quiz de Nuevo"
+      back="Volver al Inicio"
+      ask="Pregunta"
+      of="de"
+      interesting="Interesante... muy interesante..."
+    />
+    </section>  
+      <Blog blog={lang == "es"? "Del Pensadero para vos" : "The Pensieve’s Pick for You"} lang={lang} titleButton={lang == "es"? "Volver" : "Back"} readMore={lang == "es"? "Leer Mas" : "Read More"}/>
   </main>
   <Footer />
 </Layout>
