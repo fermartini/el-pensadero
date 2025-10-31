@@ -4,16 +4,21 @@ import usFlag from "../assets/flags/us.svg?url";
 const { lang = "es", slugLang = "" } = Astro.props;
 
 const games = lang == "es" ? "juegos" : "Games";
-const [_, langs, section] = Astro.url.pathname.split("/");
 
-const isHome = Astro.url.pathname === `/${lang}` || Astro.url.pathname === `/${lang}/`;
+// --- LÓGICA MEJORADA PARA SABER QUÉ PÁGINA ESTÁ ACTIVA ---
+const pathname = Astro.url.pathname;
+const isHome = pathname === `/${lang}` || pathname === `/${lang}/`;
+const isBlog = pathname.startsWith(`/${lang}/blog`);
+const isGames = pathname.startsWith(`/${lang}/games`);
 
-const url = section != undefined ? `/${section}` : "";
-
-
-
+// --- Lógica para el link de cambio de idioma ---
+// Usamos 'section' para saber si estamos en 'blog' o 'games'
+const [_, _lang, section] = pathname.split("/");
+const currentSection = section != undefined ? `/${section}` : "";
+const langSwitchUrl = lang == "en" 
+  ? `/es${currentSection}/${slugLang}` 
+  : `/en${currentSection}/${slugLang}`;
 ---
-
 
 <nav
   class="fixed w-full z-50 top-0 start-0 border-b border-gray-900 dark:border-gray-800"
@@ -27,41 +32,48 @@ const url = section != undefined ? `/${section}` : "";
       >
         <li>
           <a
-            href={isHome?  null : `/${lang}` }
-            class={`block py-2 px-3 text-gray-300 hover:text-[#928952] hover:scale-110 transition-all"}`}
-            aria-current="page"
+            href={`/${lang}`}
+            class="block py-2 px-3 text-gray-300 hover:text-[#928952] hover:scale-110 transition-all"
+            aria-current={isHome ? "page" : false}
           >
             Home
           </a>
         </li>
         <li>
           <a
-            href={url != `/${lang}/blog` ? `/${lang}/blog` : null}
-            class={`block py-2 px-3 text-gray-300 hover:text-[#928952] hover:scale-110 transition-all"}`}
-            >Blog</a
+            href={`/${lang}/blog`}
+            class="block py-2 px-3 text-gray-300 hover:text-[#928952] hover:scale-110 transition-all"
+            aria-current={isBlog ? "page" : false}
           >
+            Blog
+          </a>
         </li>
         <li>
           <a
-            href={url != `/${lang}/games` ? `/${lang}/games` : null}
+            href={`/${lang}/games`}
             class="block py-2 px-3 text-gray-300 hover:text-[#928952] hover:scale-110 transition-all"
-            >{games}</a
+            aria-current={isGames ? "page" : false}
           >
+            {games}
+          </a>
         </li>
-        <div class="flex justify-end w-fit align-top" >
-          <a href={lang == "en" ? `/es${url}/${slugLang}` : `/en${url}/${slugLang}`}  class=" flex gap-1 md:gap-2 cursor-pointer w-fit h-fit" role="img" onclick={lang == 'es'? "changeLanguage('en')" : "changeLanguage('es')"}>
+        <div class="flex justify-end w-fit align-top">
+          <a
+            href={langSwitchUrl}
+            class="flex gap-1 md:gap-2 cursor-pointer w-fit h-fit items-center"
+            aria-label={lang == 'es' ? 'Change to English' : 'Cambiar a Español'}
+          >
             <img
-                src={esFlag}
-                alt="Bandera España"
-                class={`${lang == "es" ? "w-10" : "w-5"} transition-all h-fit`}
-
-              />
-            
-            |<img
-                src={usFlag}
-                alt="Bandera EEUU"
-                class={`${lang == "en" ? "w-10" : "w-5"} transition-all h-fit`}
-              />
+              src={esFlag}
+              alt="Bandera España"
+              class={`${lang == "es" ? "w-10" : "w-5"} transition-all h-fit`}
+            />
+            <span class="text-gray-300">|</span>
+            <img
+              src={usFlag}
+              alt="Bandera EEUU"
+              class={`${lang == "en" ? "w-10" : "w-5"} transition-all h-fit`}
+            />
           </a>
         </div>
       </ul>
