@@ -120,7 +120,7 @@ const generateBlogJSONLD = (post: any) => {
       <script type="application/ld+json" set:html={generateBlogJSONLD(post)} />
 
       <Content />
-      <Button title={lang == "es"? "🪄 VOLVER" : "🪄 BACK"} slug=`/${lang}/blog` />
+      <Button title={lang == "es"? "🪄 VOLVER" : "🪄 BACK"} slug=`/${lang}/blog` aria={lang == "es"? "Volver al blog" : "Back to Blog"}  />
       <div class="mt-12 mb-8 w-full">
         <div
           class="flex flex-wrap gap-4 justify-center items-center max-w-2xl mx-auto"
