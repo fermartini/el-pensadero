@@ -12,7 +12,6 @@ const {
   url,
   img = "/assets/img/banner-el-pensadero.webp",
   background = true,
-  tags = [],
   slugLang = "",
   canonical = `https://elpensaderohp.com/${lang}`,
   alternate = `https://elpensaderohp.com/${langDif}`
@@ -37,12 +36,9 @@ import "../style/global.css";
   <meta name="description" content={description} />
   <meta
     name="keywords"
-    content={`Harry Potter, teorías Harry Potter, datos curiosos, El Pensadero, diferencias libros películas, magia, Hogwarts, Dumbledore, Ron, What If Harry Potter, ${tags.join(", ")}`}
+    content={` ${tags.join(", ")}`}
   />
-  <meta
-    name="author"
-    content="El Pensadero - Harry Potter Teorías y Curiosidades"
-  />
+ 
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
