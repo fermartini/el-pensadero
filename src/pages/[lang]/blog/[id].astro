@@ -85,7 +85,6 @@ const generateBlogJSONLD = (post: any) => {
       embedUrl: `https://www.youtube.com/embed/${post.data.videoId}`,
       contentUrl: `https://www.youtube.com/watch?v=${post.data.videoId}`,
     },
-    keywords: post.data.tags.join(", "),
     articleSection: post.data.category,
   });
 };
