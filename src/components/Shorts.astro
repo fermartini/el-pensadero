@@ -12,10 +12,15 @@ const generateVideoJSONLD = (video: Video) => {
     uploadDate: video.uploadDate,
     contentUrl: `https://www.youtube.com/watch?v=${video.videoId}`,
     embedUrl: `https://www.youtube.com/embed/${video.videoId}`,
-    thumbnailUrl: `https://elpensadero.vercel.app${video.thumbnail}`,
+    thumbnailUrl: `https://elpensaderohp.com${video.thumbnail}`,
     duration: video.duration,
   });
 };
+
+const {lang} = Astro.props;
+
+const h1 = lang == "es" ? "Shorts mágicos" : "Wizarding Shorts"
+const arias = lang == "es" ? "Ver mas videos de youtube" : "See More Videos on YouTube"
 
 type Video = {
   title: string;
@@ -37,7 +42,7 @@ type Video = {
   <h2
     class="text-3xl md:text-6xl font-cinzel text-center text-[#928952] mb-10 pt-20"
   >
-    Shorts mágicos
+    {h1}
   </h2>
 
   <div
@@ -70,9 +75,9 @@ type Video = {
     }
   </div>
   <Button
-    title="✨ Más Videos"
+    title="✨ + Videos"
     slug="https://www.youtube.com/@elpensadero_HP?sub_confirmation=1"
     blank="_blank"
-aria="Ver mas videos de youtube"
+    aria={arias}
   />
 </section>
