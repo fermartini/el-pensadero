@@ -100,5 +100,5 @@ type Post = {
       })
     }
   </div>
-  <Button title=`🪄 ${titleButton}` slug=`/${lang}/blog` />
+  <Button title=`🪄 ${titleButton}` slug=`/${lang}/blog` aria={lang == "es"? "Ir al blog" : "Go To Blog"}/>
 </section>
