@@ -5,6 +5,9 @@ const {
   imgSrc = null,
   imgAlt = "",
   loading = "lazy",
+  css= "text-gray-100",
+  width="1408",
+  height="768",
 } = Astro.props;
 ---
 
@@ -12,7 +15,7 @@ const {
   {
     title && (
       <header class="">
-        <h3 class="text-4xl font-semibold mt-6 text-gray-100">{title}</h3>
+        <h3 class={`${css} text-4xl font-semibold mt-6  `}>{title}</h3>
       </header>
     )
   }
@@ -27,8 +30,8 @@ const {
           class="mt-4"
           src={imgSrc}
           alt={imgAlt}
-          width="1408"
-          height="768"
+          width={width}
+          height={height}
           loading={loading}
         />
       )
