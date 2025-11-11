@@ -63,7 +63,7 @@ const generateBlogJSONLD = (post: any) => {
     publisher: {
       "@type": "Organization",
       name: "El Pensadero",
-      url: "https://elpensaderohp.com.app",
+      url: "https://elpensaderohp.com",
       logo: {
         "@type": "ImageObject",
         url: "https://elpensaderohp.com/favicon.png",
@@ -85,7 +85,6 @@ const generateBlogJSONLD = (post: any) => {
       embedUrl: `https://www.youtube.com/embed/${post.data.videoId}`,
       contentUrl: `https://www.youtube.com/watch?v=${post.data.videoId}`,
     },
-    keywords: post.data.tags.join(", "),
     articleSection: post.data.category,
   });
 };
@@ -96,10 +95,10 @@ const generateBlogJSONLD = (post: any) => {
   description={description}
   img={img}
   url={`/${lang}/blog/${slug}`}
-  tags={tags}
   slugLang={slugLang}
   canonical={`https://elpensaderohp.com/${lang}/blog/${slug}`}
-  alternate={`https://elpensaderohp.com/${langDif}/blog/${slug}`}
+  alternate={`https://elpensaderohp.com/${langDif}/blog/${slugLang}`}
+  type="article"
 >
   <main
     class="h-full w-full gap-7 flex flex-col items-center justify-center mt-20 mx-auto px-4 pb-10"
@@ -121,7 +120,7 @@ const generateBlogJSONLD = (post: any) => {
       <script type="application/ld+json" set:html={generateBlogJSONLD(post)} />
 
       <Content />
-      <Button title={lang == "es"? "🪄 VOLVER" : "🪄 BACK"} slug=`/${lang}/blog` />
+      <Button title={lang == "es"? "🪄 VOLVER" : "🪄 BACK"} slug=`/${lang}/blog` aria={lang == "es"? "Volver al blog" : "Back to Blog"}  />
       <div class="mt-12 mb-8 w-full">
         <div
           class="flex flex-wrap gap-4 justify-center items-center max-w-2xl mx-auto"

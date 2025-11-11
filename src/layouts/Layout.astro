@@ -12,10 +12,10 @@ const {
   url,
   img = "/assets/img/banner-el-pensadero.webp",
   background = true,
-  tags = [],
   slugLang = "",
   canonical = `https://elpensaderohp.com/${lang}`,
-  alternate = `https://elpensaderohp.com/${langDif}`
+  alternate = `https://elpensaderohp.com/${langDif}`,
+  type = "website"
 } = Astro.props;
 
 const currentLang = lang || 'es'; // Default a español si no hay parámetro
@@ -35,17 +35,10 @@ import "../style/global.css";
 
   <meta name="generator" content={Astro.generator} />
   <meta name="description" content={description} />
-  <meta
-    name="keywords"
-    content={`Harry Potter, teorías Harry Potter, datos curiosos, El Pensadero, diferencias libros películas, magia, Hogwarts, Dumbledore, Ron, What If Harry Potter, ${tags.join(", ")}`}
-  />
-  <meta
-    name="author"
-    content="El Pensadero - Harry Potter Teorías y Curiosidades"
-  />
+ 
 
   <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content={type} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={`https://elpensaderohp.com${url}`} /> <!-- Cambiado de vercel.app a tu dominio -->
@@ -57,8 +50,8 @@ import "../style/global.css";
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={`https://elpensaderohp.com${img}`} /> <!-- Cambiado de vercel.app a tu dominio -->
-  <meta name="twitter:site" content="@tu_usuario_twitter" /> <!-- Opcional: agrega tu @ -->
-   <link rel="preconnect" href="https://vitals.vercel-insights.com" />
+  <meta name="twitter:site" content="@elpensadero_hp" /> 
+  <link rel="preconnect" href="https://vitals.vercel-insights.com" />
 
   <!-- Schema.org para el nombre del sitio -->
   <script type="application/ld+json">
