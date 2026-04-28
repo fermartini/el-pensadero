@@ -26,24 +26,26 @@ const {
   </div>
 
   <div class="z-10 flex flex-col items-center w-full max-w-6xl mx-auto">
-    <h1
-      class="opacity-0 animate-fadeIn font-cinzel font-bold text-5xl sm:text-7xl md:text-8xl xl:text-[9rem] text-center text-transparent bg-clip-text bg-gradient-to-b from-[#FFF8D6] to-[#B39D4E] drop-shadow-[0_0_20px_rgba(218,165,32,0.4)] leading-tight tracking-wide mb-6"
-    >
-      {title}
-    </h1>
-    <span
-      class="opacity-0 animate-fadeIn font-cormorant italic text-lg sm:text-2xl md:text-3xl text-center text-gray-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] mb-16 max-w-4xl px-4"
-      style="animation-delay: 0.2s;"
-    >
-      {subTitle}
-    </span>
+    <div class="max-w-6xl w-full mx-auto text-center px-4">
+      <h1
+        class="opacity-0 animate-fadeIn font-cinzel font-bold text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-center text-transparent bg-clip-text bg-gradient-to-b from-[#FFF8D6] to-[#B39D4E] drop-shadow-[0_0_30px_rgba(218,165,32,0.5)] leading-[0.9] tracking-tighter mb-8 [text-wrap:balance]"
+      >
+        {title}
+      </h1>
+      <span
+        class="opacity-0 animate-fadeIn block font-cormorant italic text-lg sm:text-xl md:text-2xl text-center text-gray-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] mb-20 px-4 max-w-3xl mx-auto"
+        style="animation-delay: 0.2s;"
+      >
+        {subTitle}
+      </span>
+    </div>
 
     <!-- Interactive Navigation Grid (GTA 6 / Premium Style) -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full px-4 sm:px-0">
       
       <!-- Card 1: Blog -->
       <a href="#blog" class="opacity-0 animate-fadeIn group relative min-h-[18rem] md:min-h-[24rem] rounded-[2rem] overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 border border-white/5 hover:border-[#B39D4E]/40 flex flex-col justify-end shadow-2xl" style="animation-delay: 0.35s;">
-        <img src="/assets/img/icons/library-card.png" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700 scale-110 group-hover:scale-100" alt="Blog" />
+        <img src="/assets/img/icons/library-card.webp" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700 scale-110 group-hover:scale-100" alt="Blog" />
         <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent z-10"></div>
         <div class="relative z-30 p-8 md:p-10 transition-transform duration-500">
           <span class="text-[#B39D4E] font-cinzel text-xs md:text-sm uppercase tracking-[0.3em] mb-3 block drop-shadow-lg">{cardLibrary}</span>
@@ -55,11 +57,11 @@ const {
 
       <!-- Card 2: Games (The Main Hook) -->
       <a href={`/${lang}/games`} class="opacity-0 animate-fadeIn group relative min-h-[20rem] md:min-h-[28rem] md:-mt-8 rounded-[2.5rem] overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.04] hover:-translate-y-4 shadow-[0_0_50px_rgba(0,0,0,0.5)] hover:shadow-[0_0_60px_rgba(218,165,32,0.2)] border border-[#B39D4E]/20 hover:border-[#B39D4E]/60 flex flex-col justify-center items-center text-center px-6" style="animation-delay: 0.45s;">
-        <img src="/assets/img/icons/games-card.png" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-700 scale-110 group-hover:scale-100" alt="Games" />
+        <img src="/assets/img/icons/games-card.webp" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-700 scale-110 group-hover:scale-100" alt="Games" />
         <div class="absolute inset-0 bg-gradient-to-b from-slate-900/95 via-black/80 to-black/95 z-10"></div>
         <div class="relative z-30 flex flex-col items-center w-full">
           <div class="mb-6 md:mb-8 transform scale-110 group-hover:scale-125 transition-transform duration-700 drop-shadow-[0_0_20px_rgba(218,165,32,0.5)]">
-             <img src="/assets/img/icons/games-card.png" class="w-24 h-24 md:w-32 md:h-32 object-contain rounded-full border-2 border-[#B39D4E]/40 p-1" alt="Icon" />
+             <img src="/assets/img/icons/games-card.webp" class="w-24 h-24 md:w-32 md:h-32 object-contain rounded-full border-2 border-[#B39D4E]/40 p-1" alt="Icon" />
           </div>
           <span class="text-[#B39D4E] font-cinzel text-xs md:text-sm uppercase tracking-[0.3em] mb-3 block drop-shadow-lg">{cardGames}</span>
           <h2 class="text-3xl md:text-5xl font-cinzel font-bold text-white mb-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.4)] tracking-tight">{cardGamesTitle}</h2>
@@ -70,7 +72,7 @@ const {
 
       <!-- Card 3: Sorting Hat -->
       <a href="#featured-game" class="opacity-0 animate-fadeIn group relative min-h-[18rem] md:min-h-[24rem] rounded-[2rem] overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 border border-white/5 hover:border-[#B39D4E]/40 flex flex-col justify-end items-end text-right shadow-2xl" style="animation-delay: 0.55s;">
-        <img src="/assets/img/icons/hat-card.png" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700 scale-110 group-hover:scale-100" alt="Sorting Hat" />
+        <img src="/assets/img/icons/hat-card.webp" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700 scale-110 group-hover:scale-100" alt="Sorting Hat" />
         <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent z-10"></div>
         <div class="relative z-30 p-8 md:p-10 transition-transform duration-500">
           <span class="text-[#B39D4E] font-cinzel text-xs md:text-sm uppercase tracking-[0.3em] mb-3 block drop-shadow-lg">{cardSorting}</span>

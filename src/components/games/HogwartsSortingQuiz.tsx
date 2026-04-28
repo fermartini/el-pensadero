@@ -313,7 +313,7 @@ const houseInfoES = {
     founder: "Godric Gryffindor",
     element: "Fuego",
     emoji: "🦁",
-    img: "/assets/img/icons/gryffindor.png",
+    img: "/assets/img/icons/gryffindor.webp",
   },
   Ravenclaw: {
     colors: "from-blue-600 to-cyan-400",
@@ -325,7 +325,7 @@ const houseInfoES = {
     founder: "Rowena Ravenclaw",
     element: "Aire",
     emoji: "🦅",
-    img: "/assets/img/icons/ravenclaw.png",
+    img: "/assets/img/icons/ravenclaw.webp",
   },
   Slytherin: {
     colors: "from-green-600 to-emerald-400",
@@ -337,7 +337,7 @@ const houseInfoES = {
     founder: "Salazar Slytherin",
     element: "Agua",
     emoji: "🐍",
-    img: "/assets/img/icons/slytherin.png",
+    img: "/assets/img/icons/slytherin.webp",
   },
   Hufflepuff: {
     colors: "from-yellow-600 to-amber-400",
@@ -349,7 +349,7 @@ const houseInfoES = {
     founder: "Helga Hufflepuff",
     element: "Tierra",
     emoji: "🦡",
-    img: "/assets/img/icons/hufflepuff.png",
+    img: "/assets/img/icons/hufflepuff.webp",
   },
 }
 
@@ -364,7 +364,7 @@ const houseInfoEN = {
     founder: "Godric Gryffindor",
     element: "Fire",
     emoji: "🦁",
-    img: "/assets/img/icons/gryffindor.png",
+    img: "/assets/img/icons/gryffindor.webp",
   },
   Ravenclaw: {
     colors: "from-blue-600 to-cyan-400",
@@ -376,7 +376,7 @@ const houseInfoEN = {
     founder: "Rowena Ravenclaw",
     element: "Air",
     emoji: "🦅",
-    img: "/assets/img/icons/ravenclaw.png",
+    img: "/assets/img/icons/ravenclaw.webp",
   },
   Slytherin: {
     colors: "from-green-600 to-emerald-400",
@@ -388,7 +388,7 @@ const houseInfoEN = {
     founder: "Salazar Slytherin",
     element: "Water",
     emoji: "🐍",
-    img: "/assets/img/icons/slytherin.png",
+    img: "/assets/img/icons/slytherin.webp",
   },
   Hufflepuff: {
     colors: "from-yellow-600 to-amber-400",
@@ -400,7 +400,7 @@ const houseInfoEN = {
     founder: "Helga Hufflepuff",
     element: "Earth",
     emoji: "🦡",
-    img: "/assets/img/icons/hufflepuff.png",
+    img: "/assets/img/icons/hufflepuff.webp",
   },
 }
 
@@ -507,7 +507,7 @@ export default function HogwartsSortingQuiz({
     return (
       <div className="relative overflow-hidden min-h-[600px] flex items-center justify-center p-4">
         <div className="absolute inset-0 bg-slate-950">
-           <img src="/assets/img/icons/hat-card.png" className="absolute inset-0 w-full h-full object-cover opacity-20 blur-sm" alt="bg" />
+           <img src="/assets/img/icons/hat-card.webp" className="absolute inset-0 w-full h-full object-cover opacity-20 blur-sm" alt="bg" />
            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-950"></div>
         </div>
 
@@ -515,7 +515,7 @@ export default function HogwartsSortingQuiz({
           <div className="p-8 md:p-12 text-center space-y-8">
             <div className="relative inline-block group">
               <div className="absolute inset-0 bg-[#B39D4E]/20 blur-3xl rounded-full scale-150 animate-pulse"></div>
-              <img src="/assets/img/icons/hat-card.png" className="relative w-40 h-40 md:w-56 md:h-56 object-contain transform hover:scale-110 transition-transform duration-700 drop-shadow-[0_0_20px_rgba(218,165,32,0.4)]" alt="Sorting Hat" />
+              <img src="/assets/img/icons/hat-card.webp" className="relative w-40 h-40 md:w-56 md:h-56 object-contain transform hover:scale-110 transition-transform duration-700 drop-shadow-[0_0_20px_rgba(218,165,32,0.4)]" alt="Sorting Hat" />
             </div>
 
             <div className="space-y-4">
@@ -641,7 +641,7 @@ export default function HogwartsSortingQuiz({
   return (
     <div className="relative min-h-[600px] flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-slate-950">
-        <img src="/assets/img/icons/hat-card.png" className="absolute inset-0 w-full h-full object-cover opacity-10 grayscale" alt="bg" />
+        <img src="/assets/img/icons/hat-card.webp" className="absolute inset-0 w-full h-full object-cover opacity-10 grayscale" alt="bg" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-950"></div>
       </div>
 
@@ -657,7 +657,7 @@ export default function HogwartsSortingQuiz({
                   {questions[currentQuestion].question}
                 </h2>
               </div>
-              <img src="/assets/img/icons/hat-card.png" className="w-12 h-12 object-contain opacity-50" alt="Hat" />
+              <img src="/assets/img/icons/hat-card.webp" className="w-12 h-12 object-contain opacity-50" alt="Hat" />
             </div>
             
             <div className="relative w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
