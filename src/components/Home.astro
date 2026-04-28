@@ -1,42 +1,98 @@
 ---
-const {title, subTitle, labelledby} = Astro.props
+const {
+  title, 
+  subTitle, 
+  labelledby, 
+  lang, 
+  cardLibrary, 
+  cardGames, 
+  cardSorting,
+  cardBlogTitle,
+  cardBlogDesc,
+  cardGamesTitle,
+  cardGamesDesc,
+  cardSortingTitle,
+  cardSortingDesc
+} = Astro.props;
 ---
 
 <main
-  class="relative h-[calc(100vh-100px)] xl:min-h-screen w-full flex flex-col items-center justify-center"
+  class="relative min-h-screen w-full flex flex-col items-center justify-center pt-28 pb-16 px-4 z-10"
   aria-labelledby={labelledby}
 >
-  <h1
-    class="opacity-0 animate-fadeIn font-cinzel font-semibold text-5xl xl:text-9xl text-center text-[#928952] drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)]"
-  >
-    {title}
-    <span
-      class="font-cormorant font-extralight block text-lg xl:text-3xl mt-5 text-gray-400"
-    >
-    {subTitle}
-      
-    </span>
-  </h1>
+  <!-- Background Glow Effect specific to Home -->
+  <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none flex items-center justify-center">
+    <div class="w-[90vw] h-[90vw] md:w-[50vw] md:h-[50vw] rounded-full bg-[radial-gradient(circle_at_center,rgba(218,165,32,0.12),rgba(0,0,0,0))] blur-3xl mix-blend-screen animate-pulse"></div>
+  </div>
 
-  <!-- Flecha para scroll -->
-  <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 z-20">
-    <a href="#blog" class="text-xl text-white">
-      <div class="flex justify-center items-center">
-        <!-- Flecha mágica -->
-        <svg
-          xmlns="https://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          class="w-8 h-8 animate-bounce sm:w-10 sm:h-10 lg:w-12 lg:h-12"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M19 9l-7 7-7-7"></path>
-        </svg>
-      </div>
+  <div class="z-10 flex flex-col items-center w-full max-w-6xl mx-auto">
+    <h1
+      class="opacity-0 animate-fadeIn font-cinzel font-bold text-5xl sm:text-7xl md:text-8xl xl:text-[9rem] text-center text-transparent bg-clip-text bg-gradient-to-b from-[#FFF8D6] to-[#B39D4E] drop-shadow-[0_0_20px_rgba(218,165,32,0.4)] leading-tight tracking-wide mb-6"
+    >
+      {title}
+    </h1>
+    <span
+      class="opacity-0 animate-fadeIn font-cormorant italic text-lg sm:text-2xl md:text-3xl text-center text-gray-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] mb-16 max-w-4xl px-4"
+      style="animation-delay: 0.2s;"
+    >
+      {subTitle}
+    </span>
+
+    <!-- Interactive Navigation Grid (GTA 6 / Premium Style) -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full px-4 sm:px-0">
+      
+      <!-- Card 1: Blog -->
+      <a href="#blog" class="opacity-0 animate-fadeIn group relative min-h-[18rem] md:min-h-[24rem] rounded-[2rem] overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 border border-white/5 hover:border-[#B39D4E]/40 flex flex-col justify-end shadow-2xl" style="animation-delay: 0.35s;">
+        <img src="/assets/img/icons/library-card.png" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700 scale-110 group-hover:scale-100" alt="Blog" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent z-10"></div>
+        <div class="relative z-30 p-8 md:p-10 transition-transform duration-500">
+          <span class="text-[#B39D4E] font-cinzel text-xs md:text-sm uppercase tracking-[0.3em] mb-3 block drop-shadow-lg">{cardLibrary}</span>
+          <h2 class="text-3xl md:text-4xl font-cinzel text-white mb-3 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">{cardBlogTitle}</h2>
+          <p class="text-gray-300 font-spectral text-sm md:text-base leading-relaxed opacity-90 group-hover:text-white transition-colors">{cardBlogDesc}</p>
+        </div>
+        <div class="absolute bottom-0 left-0 h-1.5 w-0 bg-gradient-to-r from-[#B39D4E] to-[#FFF8D6] group-hover:w-full transition-all duration-700 ease-out z-40"></div>
+      </a>
+
+      <!-- Card 2: Games (The Main Hook) -->
+      <a href={`/${lang}/games`} class="opacity-0 animate-fadeIn group relative min-h-[20rem] md:min-h-[28rem] md:-mt-8 rounded-[2.5rem] overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.04] hover:-translate-y-4 shadow-[0_0_50px_rgba(0,0,0,0.5)] hover:shadow-[0_0_60px_rgba(218,165,32,0.2)] border border-[#B39D4E]/20 hover:border-[#B39D4E]/60 flex flex-col justify-center items-center text-center px-6" style="animation-delay: 0.45s;">
+        <img src="/assets/img/icons/games-card.png" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-700 scale-110 group-hover:scale-100" alt="Games" />
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-900/95 via-black/80 to-black/95 z-10"></div>
+        <div class="relative z-30 flex flex-col items-center w-full">
+          <div class="mb-6 md:mb-8 transform scale-110 group-hover:scale-125 transition-transform duration-700 drop-shadow-[0_0_20px_rgba(218,165,32,0.5)]">
+             <img src="/assets/img/icons/games-card.png" class="w-24 h-24 md:w-32 md:h-32 object-contain rounded-full border-2 border-[#B39D4E]/40 p-1" alt="Icon" />
+          </div>
+          <span class="text-[#B39D4E] font-cinzel text-xs md:text-sm uppercase tracking-[0.3em] mb-3 block drop-shadow-lg">{cardGames}</span>
+          <h2 class="text-3xl md:text-5xl font-cinzel font-bold text-white mb-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.4)] tracking-tight">{cardGamesTitle}</h2>
+          <p class="text-gray-300 font-spectral text-base md:text-lg max-w-[280px] mx-auto leading-relaxed group-hover:text-white transition-colors">{cardGamesDesc}</p>
+        </div>
+        <div class="absolute bottom-0 left-0 h-1.5 w-full bg-gradient-to-r from-transparent via-[#B39D4E] to-transparent z-40 shadow-[0_0_15px_#B39D4E]"></div>
+      </a>
+
+      <!-- Card 3: Sorting Hat -->
+      <a href="#featured-game" class="opacity-0 animate-fadeIn group relative min-h-[18rem] md:min-h-[24rem] rounded-[2rem] overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 border border-white/5 hover:border-[#B39D4E]/40 flex flex-col justify-end items-end text-right shadow-2xl" style="animation-delay: 0.55s;">
+        <img src="/assets/img/icons/hat-card.png" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700 scale-110 group-hover:scale-100" alt="Sorting Hat" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent z-10"></div>
+        <div class="relative z-30 p-8 md:p-10 transition-transform duration-500">
+          <span class="text-[#B39D4E] font-cinzel text-xs md:text-sm uppercase tracking-[0.3em] mb-3 block drop-shadow-lg">{cardSorting}</span>
+          <h2 class="text-3xl md:text-4xl font-cinzel text-white mb-3 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">{cardSortingTitle}</h2>
+          <p class="text-gray-300 font-spectral text-sm md:text-base leading-relaxed opacity-90 group-hover:text-white transition-colors">{cardSortingDesc}</p>
+        </div>
+        <div class="absolute bottom-0 right-0 h-1.5 w-0 bg-gradient-to-l from-[#B39D4E] to-[#FFF8D6] group-hover:w-full transition-all duration-700 ease-out z-40"></div>
+      </a>
+
+    </div>
+
+    </div>
+  </div>
+
+  <!-- Scroll Down Indicator -->
+  <div class="relative mt-12 md:mt-16 z-20 opacity-60 hover:opacity-100 transition-opacity">
+    <a href="#blog" class="flex flex-col items-center text-[#B39D4E]">
+      <span class="font-spectral text-xs tracking-widest uppercase mb-1">Explorar</span>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 md:w-6 md:h-6 animate-bounce">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
     </a>
   </div>
 </main>
+

@@ -11,4 +11,15 @@
     z-index: -1 !important;
     pointer-events: none;
   }
-  
+lite-youtube {
+  margin-inline: auto !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* Ensure blog images and videos are centered and full-width */
+.prose img, .prose video, .prose iframe {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}

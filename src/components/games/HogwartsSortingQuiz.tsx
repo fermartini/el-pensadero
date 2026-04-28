@@ -313,6 +313,7 @@ const houseInfoES = {
     founder: "Godric Gryffindor",
     element: "Fuego",
     emoji: "🦁",
+    img: "/assets/img/icons/gryffindor.png",
   },
   Ravenclaw: {
     colors: "from-blue-600 to-cyan-400",
@@ -324,6 +325,7 @@ const houseInfoES = {
     founder: "Rowena Ravenclaw",
     element: "Aire",
     emoji: "🦅",
+    img: "/assets/img/icons/ravenclaw.png",
   },
   Slytherin: {
     colors: "from-green-600 to-emerald-400",
@@ -335,6 +337,7 @@ const houseInfoES = {
     founder: "Salazar Slytherin",
     element: "Agua",
     emoji: "🐍",
+    img: "/assets/img/icons/slytherin.png",
   },
   Hufflepuff: {
     colors: "from-yellow-600 to-amber-400",
@@ -346,6 +349,7 @@ const houseInfoES = {
     founder: "Helga Hufflepuff",
     element: "Tierra",
     emoji: "🦡",
+    img: "/assets/img/icons/hufflepuff.png",
   },
 }
 
@@ -360,6 +364,7 @@ const houseInfoEN = {
     founder: "Godric Gryffindor",
     element: "Fire",
     emoji: "🦁",
+    img: "/assets/img/icons/gryffindor.png",
   },
   Ravenclaw: {
     colors: "from-blue-600 to-cyan-400",
@@ -371,6 +376,7 @@ const houseInfoEN = {
     founder: "Rowena Ravenclaw",
     element: "Air",
     emoji: "🦅",
+    img: "/assets/img/icons/ravenclaw.png",
   },
   Slytherin: {
     colors: "from-green-600 to-emerald-400",
@@ -382,6 +388,7 @@ const houseInfoEN = {
     founder: "Salazar Slytherin",
     element: "Water",
     emoji: "🐍",
+    img: "/assets/img/icons/slytherin.png",
   },
   Hufflepuff: {
     colors: "from-yellow-600 to-amber-400",
@@ -393,6 +400,7 @@ const houseInfoEN = {
     founder: "Helga Hufflepuff",
     element: "Earth",
     emoji: "🦡",
+    img: "/assets/img/icons/hufflepuff.png",
   },
 }
 
@@ -491,50 +499,56 @@ export default function HogwartsSortingQuiz({
     setCurrentQuestion(0)
     setAnswers([])
     setShowResult(false)
-    setSelectedAnswer("")
   }
 
   const progress = ((currentQuestion + 1) / questions.length) * 100
 
   if (!quizStarted) {
     return (
-      <div className=" relative overflow-hidden">
-        <div className="absolute " />
+      <div className="relative overflow-hidden min-h-[600px] flex items-center justify-center p-4">
+        <div className="absolute inset-0 bg-slate-950">
+           <img src="/assets/img/icons/hat-card.png" className="absolute inset-0 w-full h-full object-cover opacity-20 blur-sm" alt="bg" />
+           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-950"></div>
+        </div>
 
-        <div className="relative z-10  flex items-center justify-center p-4">
-          <div className="w-full max-w-2xl h-full bg-gray-900/95 border-2 border-yellow-500/50 text-white shadow-2xl rounded-lg">
-            <div className="text-center space-y-6 p-8">
-              <div className="text-8xl animate-bounce">🎩</div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-500 bg-clip-text text-transparent">
-                ⚡ {titleGame} ⚡
-              </h1>
-              <p className="text-xl text-gray-300 leading-relaxed">
-                {descriptionGame}
-                </p>
+        <div className="relative z-10 w-full max-w-2xl bg-slate-900/40 backdrop-blur-xl border border-[#B39D4E]/30 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+          <div className="p-8 md:p-12 text-center space-y-8">
+            <div className="relative inline-block group">
+              <div className="absolute inset-0 bg-[#B39D4E]/20 blur-3xl rounded-full scale-150 animate-pulse"></div>
+              <img src="/assets/img/icons/hat-card.png" className="relative w-40 h-40 md:w-56 md:h-56 object-contain transform hover:scale-110 transition-transform duration-700 drop-shadow-[0_0_20px_rgba(218,165,32,0.4)]" alt="Sorting Hat" />
             </div>
 
-            <div className="p-8 space-y-8">
-              <div className="grid grid-cols-2 gap-4">
-                {Object.entries(houseInfo).map(([house, info]) => (
-                  <div
-                    key={house}
-                    className={`p-4 rounded-lg ${info.bgColor} ${info.borderColor} border-2 text-center transform `}
-                  >
-                    <div className="text-4xl mb-2">{info.emoji}</div>
-                    <h3 className={`font-bold ${info.textColor}`}>{house}</h3>
-                  </div>
-                ))}
-              </div>
+            <div className="space-y-4">
+              <h1 className="text-4xl md:text-6xl font-cinzel font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#FFF8D6] to-[#B39D4E] drop-shadow-lg">
+                {titleGame}
+              </h1>
+              <p className="text-xl md:text-2xl font-spectral italic text-gray-300 leading-relaxed max-w-lg mx-auto">
+                "{descriptionGame}"
+              </p>
+            </div>
 
-              <div className="text-center space-y-4">
-                <p className="text-gray-400 italic">{hat}</p>
-                <button
-                  onClick={startQuiz}
-                  className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-4 px-8 text-xl transform hover:scale-105 transition-all duration-300 shadow-lg rounded-lg"
-                >
-                  🎩 {start}
-                </button>
-              </div>
+            <div className="grid grid-cols-4 gap-2 md:gap-4 py-4">
+              {Object.entries(houseInfo).map(([house, info]) => (
+                <div key={house} className="flex flex-col items-center group">
+                  <div className={`w-12 h-12 md:w-16 md:h-16 rounded-full bg-slate-800 border border-[#B39D4E]/20 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:border-[#B39D4E]/50 transition-all shadow-inner`}>
+                    {info.emoji}
+                  </div>
+                  <span className="text-[10px] md:text-xs font-cinzel text-gray-400 mt-2 uppercase tracking-tighter">{house}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="pt-6">
+              <button
+                onClick={startQuiz}
+                className="group relative px-10 py-5 bg-transparent overflow-hidden rounded-full border border-[#B39D4E]/50 hover:border-[#B39D4E] transition-all duration-500"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-[#B39D4E]/0 via-[#B39D4E]/20 to-[#B39D4E]/0 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                <span className="relative font-cinzel text-xl md:text-2xl text-[#B39D4E] tracking-widest uppercase flex items-center gap-3">
+                   🪄 {start}
+                </span>
+              </button>
+              <p className="mt-6 text-gray-500 font-spectral italic text-sm">{hat}</p>
             </div>
           </div>
         </div>
@@ -544,72 +558,79 @@ export default function HogwartsSortingQuiz({
 
   if (showResult) {
     const resultHouse = calculateResult()
-    const houseData = houseInfo[resultHouse as keyof typeof houseInfo]
+    const houseData = houseInfo[resultHouse as keyof typeof houseInfo] as any
 
     return (
-      <div className=" relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/70 via-purple-900/80 to-black/90" />
+      <div className="relative min-h-[700px] flex items-center justify-center p-4 overflow-hidden">
+        <div className={`absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-black`}></div>
+        <img src={houseData.img} className="absolute inset-0 w-full h-full object-cover opacity-20 blur-xl scale-110" alt="bg" />
 
-        <div className="relative z-10  flex items-center justify-center p-4">
-          <div
-            className={`w-full max-w-3xl h-full bg-gray-900/95 border-2 ${houseData.borderColor} text-white shadow-2xl animate-pulse rounded-lg`}
-          >
-            <div className="text-center space-y-6 p-8">
-              <div className="text-8xl animate-bounce mb-4">{houseData.emoji}</div>
-              <h1 className={`text-5xl font-bold bg-gradient-to-r ${houseData.colors} bg-clip-text text-transparent`}>
-                ¡{resultHouse.toUpperCase()}!
-              </h1>
-              <p className="text-2xl text-gray-300 font-semibold">🎉{finishGame} 🎉</p>
+        <div className={`relative z-10 w-full max-w-4xl bg-slate-900/60 backdrop-blur-2xl border-2 ${houseData.borderColor} rounded-[2rem] overflow-hidden shadow-2xl animate-fadeInScale`}>
+          <div className="grid md:grid-cols-2">
+            
+            {/* House Banner Section */}
+            <div className="relative h-64 md:h-auto overflow-hidden">
+              <img src={houseData.img} className="absolute inset-0 w-full h-full object-cover" alt={resultHouse} />
+              <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-slate-900 via-transparent to-transparent"></div>
+              <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+                 <div className="text-7xl md:text-9xl mb-4 drop-shadow-[0_0_30px_rgba(255,255,255,0.4)] animate-bounce">{houseData.emoji}</div>
+              </div>
             </div>
 
-            <div className="space-y-8 p-8">
-              <div className={`p-6 rounded-xl ${houseData.bgColor} ${houseData.borderColor} border-2`}>
-                <p className="text-lg text-center text-gray-200 leading-relaxed mb-6">{houseData.description}</p>
+            {/* Info Section */}
+            <div className="p-8 md:p-12 space-y-8">
+              <div className="space-y-2">
+                <h1 className={`text-5xl md:text-7xl font-cinzel font-bold text-transparent bg-clip-text bg-gradient-to-b ${houseData.colors} drop-shadow-lg`}>
+                  {resultHouse}
+                </h1>
+                <p className="text-xl text-gray-300 font-spectral italic">{finishGame}</p>
+              </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h3 className={`text-xl font-bold ${houseData.textColor} mb-3`}>🌟 {cualities}</h3>
-                    <ul className="space-y-2">
+              <div className={`p-6 rounded-2xl bg-black/40 border border-white/5 space-y-6`}>
+                <p className="text-lg text-gray-300 font-spectral leading-relaxed italic">"{houseData.description}"</p>
+
+                <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/10">
+                  <div className="space-y-3">
+                    <h3 className={`text-sm font-cinzel uppercase tracking-widest ${houseData.textColor}`}>{cualities}</h3>
+                    <div className="flex flex-wrap gap-2">
                       {houseData.traits.map((trait, index) => (
-                        <li key={index} className="text-gray-300 flex items-center">
-                          <span className="mr-2">✨</span> {trait}
-                        </li>
+                        <span key={index} className="px-3 py-1 rounded-full bg-white/5 text-xs text-gray-300 border border-white/10 flex items-center gap-1">
+                          ✨ {trait}
+                        </span>
                       ))}
-                    </ul>
+                    </div>
                   </div>
-
                   <div className="space-y-4">
                     <div>
-                      <h4 className={`font-bold ${houseData.textColor}`}>👑 {fundador}:</h4>
-                      <p className="text-gray-300">{houseData.founder}</p>
+                      <h4 className={`text-[10px] font-cinzel uppercase tracking-tighter ${houseData.textColor}`}>{fundador}</h4>
+                      <p className="text-sm font-spectral text-gray-300">{houseData.founder}</p>
                     </div>
                     <div>
-                      <h4 className={`font-bold ${houseData.textColor}`}>🔮 {element}:</h4>
-                      <p className="text-gray-300">{houseData.element}</p>
+                      <h4 className={`text-[10px] font-cinzel uppercase tracking-tighter ${houseData.textColor}`}>{element}</h4>
+                      <p className="text-sm font-spectral text-gray-300">{houseData.element}</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="text-center space-y-4">
-                <p className="text-gray-400 italic text-lg">
-                  {yes}... {resultHouse} {thinks}
-                </p>
-                <div className="flex gap-4 justify-center">
-                  <button
-                    onClick={resetQuiz}
-                    className="bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 font-bold py-3 px-6 rounded-lg"
-                  >
-                    🔄 {again}
-                  </button>
-                  <button
-                    onClick={() => window.location.reload()}
-                    className={`bg-gradient-to-r ${houseData.colors} font-bold py-3 px-6 transform hover:scale-105 transition-all rounded-lg`}
-                  >
-                    🎮 {back}
-                  </button>
-                </div>
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <button
+                  onClick={resetQuiz}
+                  className="flex-1 px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-cinzel rounded-xl transition-all border border-white/10"
+                >
+                  🔄 {again}
+                </button>
+                <button
+                  onClick={() => window.location.reload()}
+                  className={`flex-1 px-8 py-4 bg-gradient-to-r ${houseData.colors} text-white font-cinzel font-bold rounded-xl transform hover:scale-105 transition-all shadow-lg`}
+                >
+                  🏰 {back}
+                </button>
               </div>
+              
+              <p className="text-center text-gray-500 font-spectral italic text-sm">
+                "{yes}... {resultHouse} {thinks}"
+              </p>
             </div>
           </div>
         </div>
@@ -618,51 +639,67 @@ export default function HogwartsSortingQuiz({
   }
 
   return (
-    <div className="relative overflow-hidden">
-      <div className="absolute inset-0 " />
+    <div className="relative min-h-[600px] flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-slate-950">
+        <img src="/assets/img/icons/hat-card.png" className="absolute inset-0 w-full h-full object-cover opacity-10 grayscale" alt="bg" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-950"></div>
+      </div>
 
-      <div className="relative z-10 flex items-center justify-center p-4">
-        <div className="w-full max-w-2xl h-full bg-gray-900/95 border-2 border-purple-500/50 text-white shadow-2xl rounded-lg">
-          <div className="space-y-4 p-6 border-b border-purple-500/30">
-            <div className="flex justify-between items-center">
-              <span className="text-purple-300 font-semibold">
-                {ask} {currentQuestion + 1} {of} {questions.length}
-              </span>
-              <div className="text-4xl opacity-70">🎩</div>
+      <div className="relative z-10 w-full max-w-2xl bg-slate-900/60 backdrop-blur-xl border border-[#B39D4E]/20 rounded-3xl shadow-2xl overflow-hidden">
+        <div className="p-6 md:p-8 space-y-6">
+          
+          {/* Header & Progress */}
+          <div className="space-y-4">
+            <div className="flex justify-between items-end">
+              <div className="space-y-1">
+                <p className="text-[10px] font-cinzel text-[#B39D4E] uppercase tracking-[0.2em]">{ask} {currentQuestion + 1} {of} {questions.length}</p>
+                <h2 className="text-2xl md:text-3xl font-cinzel font-bold text-white leading-tight">
+                  {questions[currentQuestion].question}
+                </h2>
+              </div>
+              <img src="/assets/img/icons/hat-card.png" className="w-12 h-12 object-contain opacity-50" alt="Hat" />
             </div>
-            <div className="w-full bg-gray-700 rounded-full h-3">
+            
+            <div className="relative w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
               <div
-                className="bg-gradient-to-r from-purple-500 to-pink-500 h-3 rounded-full transition-all duration-300"
+                className="absolute inset-0 bg-gradient-to-r from-amber-600 via-yellow-400 to-amber-600 h-full rounded-full shadow-[0_0_10px_rgba(218,165,32,0.6)] transition-all duration-500 ease-out"
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <h2 className="text-2xl font-bold text-center text-yellow-300 leading-relaxed">
-              {questions[currentQuestion].question}
-            </h2>
           </div>
 
-          <div className="space-y-4 p-6">
-            <div className="grid gap-4">
-              {shuffledAnswers.map((answer, index) => (
-                <button
-                  key={`${currentQuestion}-${answer.key}`}
-                  onClick={() => handleAnswer(answer.key)}
-                  disabled={isAnimating}
-                  className={`p-6 text-left h-auto bg-gray-800/50 hover:bg-gray-700/70 border-2 border-gray-600/50 hover:border-purple-400/70 text-white font-medium text-lg leading-relaxed transform hover:scale-105 transition-all duration-300 rounded-lg ${
-                    selectedAnswer === answer.key ? "bg-purple-600/50 border-purple-400" : ""
-                  } ${isAnimating ? "animate-pulse" : ""}`}
-                >
-                  <span className="block">
-                    <span className="text-purple-300 font-bold mr-3">{String.fromCharCode(65 + index)}.</span>
+          {/* Answers Grid */}
+          <div className="grid grid-cols-1 gap-3">
+            {shuffledAnswers.map((answer, index) => (
+              <button
+                key={`${currentQuestion}-${answer.key}`}
+                onClick={() => handleAnswer(answer.key)}
+                disabled={isAnimating}
+                className={`group relative p-5 text-left rounded-2xl border transition-all duration-300 overflow-hidden
+                  ${selectedAnswer === answer.key 
+                    ? "bg-[#B39D4E]/20 border-[#B39D4E] scale-[1.02] shadow-[0_0_20px_rgba(218,165,32,0.1)]" 
+                    : "bg-white/5 border-white/10 hover:border-[#B39D4E]/40 hover:bg-white/[0.08]"
+                  } ${isAnimating ? "opacity-50 scale-95" : "opacity-100"}`}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-[#B39D4E]/0 via-[#B39D4E]/5 to-[#B39D4E]/0 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                <div className="relative flex items-center gap-4">
+                  <div className={`w-10 h-10 rounded-xl border flex items-center justify-center font-cinzel transition-all
+                    ${selectedAnswer === answer.key ? "bg-[#B39D4E] text-black border-[#B39D4E]" : "bg-black/40 text-[#B39D4E] border-[#B39D4E]/20 group-hover:border-[#B39D4E]/50"}
+                  `}>
+                    {String.fromCharCode(65 + index)}
+                  </div>
+                  <span className="flex-1 font-spectral text-lg text-gray-200 group-hover:text-white transition-colors">
                     {answer.text}
                   </span>
-                </button>
-              ))}
-            </div>
+                </div>
+              </button>
+            ))}
+          </div>
 
-            <div className="text-center pt-4">
-              <p className="text-gray-400 italic">{interesting}</p>
-            </div>
+          <div className="text-center pt-2">
+            <p className="text-gray-500 font-spectral italic text-sm animate-pulse">
+              {interesting}
+            </p>
           </div>
         </div>
       </div>

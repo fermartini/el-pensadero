@@ -8,4 +8,13 @@ titleLayout: "El Pensadero: Teorías de Harry Potter, 'What Ifs' y Secretos Mág
 descriptionLayout: "Sumérgete en El Pensadero. Explora teorías de Harry Potter, escenarios 'What If', datos curiosos y análisis profundos del Mundo Mágico."
 titleButton: "Más artículos mágicos"
 readMore: "Leer Mas"
+cardLibrary: "La Biblioteca"
+cardGames: "El Gran Comedor"
+cardSorting: "Ceremonia"
+cardBlogTitle: "Blog y Teorías"
+cardBlogDesc: "Explora los misterios más profundos."
+cardGamesTitle: "Trivias y Juegos"
+cardGamesDesc: "Pon a prueba tu conocimiento hardcore."
+cardSortingTitle: "Elegir Casa"
+cardSortingDesc: "Descubre tu verdadero lugar."
 ---

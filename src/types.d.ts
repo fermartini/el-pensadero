@@ -11,7 +11,16 @@ export interface HomeContent {
   titleLayout: string;
   descriptionLayout: string;
   titleButton: string;
-  readMore: string
+  readMore: string;
+  cardLibrary: string;
+  cardGames: string;
+  cardSorting: string;
+  cardBlogTitle: string;
+  cardBlogDesc: string;
+  cardGamesTitle: string;
+  cardGamesDesc: string;
+  cardSortingTitle: string;
+  cardSortingDesc: string;
 }
 
 export interface BlogContent {
@@ -30,7 +39,7 @@ export interface GamesContent {
   descriptionLayout: string;
   titleGame: string;
   descriptionGame: string;
-  hat:string;
+  hat: string;
   start: string;
   finishGame: string;
   cualities: string;
@@ -43,6 +52,15 @@ export interface GamesContent {
   ask: string;
   of: string;
   interesting: string;
+  // Patronus Game Translations
+  patronusTitle: string;
+  patronusSubtitle: string;
+  patronusStart: string;
+  patronusGameOver: string;
+  patronusScoreLabel: string;
+  patronusRetry: string;
+  patronusVitalMagic: string;
+  patronusScoreHUD: string;
 }
 
 

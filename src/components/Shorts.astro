@@ -37,33 +37,44 @@ type Video = {
 
 <section
   id="shorts"
-  class="min-h-screen w-full flex flex-col items-center justify-center px-4 mb-10"
+  class="relative min-h-screen w-full flex flex-col items-center justify-center px-4 py-20 overflow-hidden"
 >
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(146,137,82,0.1),transparent_50%)]"></div>
+
   <h2
-    class="text-3xl md:text-6xl font-cinzel text-center text-[#928952] mb-10 pt-20"
+    class="text-3xl md:text-6xl font-cinzel text-center text-transparent bg-clip-text bg-gradient-to-b from-[#FFF8D6] to-[#B39D4E] mb-16 relative z-10 drop-shadow-[0_0_15px_rgba(218,165,32,0.3)]"
   >
     {h1}
   </h2>
 
   <div
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full max-w-6xl relative z-10"
   >
     {
       shorts.map((video: Video) => {
         return (
           <article
-            class="video-card relative group w-full max-w-[360px] aspect-[9/16] overflow-hidden rounded-xl shadow-lg cursor-pointer"
+            class="video-card group relative w-full aspect-[9/16] overflow-hidden rounded-[2rem] border border-white/5 hover:border-[#B39D4E]/40 transition-all duration-700 shadow-2xl hover:shadow-[#B39D4E]/20 cursor-pointer bg-slate-900/40 backdrop-blur-sm"
             data-src={video.src}
             data-title={video.title}
             aria-label={`Video corto: ${video.title}`}
           >
+            <div class="absolute inset-0 z-10 pointer-events-none bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80 group-hover:opacity-40 transition-opacity duration-500"></div>
+            
             <YouTube
               id={video.videoId}
               poster={video.thumbnail}
               title={video.title}
-              class="w-full h-full object-cover"
+              class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               playlabel={`Reproducir: ${video.title}`}
             />
+
+            <div class="absolute bottom-0 left-0 w-full p-6 z-20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+               <h3 class="text-lg md:text-xl font-cinzel font-bold text-white drop-shadow-lg leading-tight">
+                 {video.title}
+               </h3>
+               <div class="mt-2 h-1 w-0 bg-[#B39D4E] group-hover:w-full transition-all duration-700"></div>
+            </div>
 
             <script
               type="application/ld+json"
@@ -74,10 +85,13 @@ type Video = {
       })
     }
   </div>
-  <Button
-    title="✨ + Videos"
-    slug="https://www.youtube.com/@elpensadero_HP?sub_confirmation=1"
-    blank="_blank"
-    aria={arias}
-  />
+  
+  <div class="mt-16 relative z-10">
+    <Button
+      title="✨ + Videos"
+      slug="https://www.youtube.com/@elpensadero_HP?sub_confirmation=1"
+      blank="_blank"
+      aria={arias}
+    />
+  </div>
 </section>

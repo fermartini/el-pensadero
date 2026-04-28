@@ -64,23 +64,24 @@ orderedItems = orderedItems.reverse();
   canonical={`https://elpensaderohp.com/${lang}/blog/`}
   alternate={`https://elpensaderohp.com/${langDif}/blog/`}
 >
-  <main class="h-full w-full flex gap-7 items-center justify-center mb-10">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="mx-auto mt-32 lg:mx-0">
-        <h1
-          class="text-4xl font-semibold tracking-tight text-pretty sm:text-6xl text-[#928952] text-center"
-        >
+  <main class="relative min-h-screen pt-32 pb-20 px-4 overflow-hidden">
+    {/* Background effects */}
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-[radial-gradient(circle_at_center,rgba(179,157,78,0.15)_0%,transparent_70%)] pointer-events-none"></div>
+
+    <div class="mx-auto max-w-7xl relative z-10">
+      <div class="text-center mb-20 space-y-4">
+        <h1 class="text-4xl md:text-7xl font-cinzel font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#FFF8D6] to-[#B39D4E] drop-shadow-[0_0_15px_rgba(218,165,32,0.3)]">
           {title}
         </h1>
-        <h2 class="mt-2 text-lg/8 sm:text-xl text-center">
+        <p class="text-xl md:text-2xl font-spectral italic text-gray-400 max-w-2xl mx-auto">
           {subTitle}
-        </h2>
+        </p>
+        <div class="w-24 h-1 bg-gradient-to-r from-transparent via-[#B39D4E] to-transparent mx-auto mt-6"></div>
       </div>
-      <div
-        class="mx-auto mt-10 grid grid-col-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-2"
-      >
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
         {
-          orderedItems.map((post: any) => {
+          orderedItems.map((post: any, index) => {
             const { data } = post;
             const {
               title,
@@ -90,97 +91,94 @@ orderedItems = orderedItems.reverse();
               date,
               readtime,
               slug,
-              tags,
-              important,
               category,
-              lang,
+              important,
             } = data;
+            
             return (
               <article
                 class:list={[
-                  "flex   items-start justify-between gap-5 flex-col bg-gray-600 bg-opacity-20 rounded-2xl",
+                  "group relative flex flex-col bg-slate-900/40 backdrop-blur-md rounded-[2.5rem] border border-white/5 hover:border-[#B39D4E]/40 transition-all duration-500 overflow-hidden shadow-2xl hover:shadow-[#B39D4E]/10",
                   {
-                    "lg:col-span-2 lg:flex-row": important,
-                    "col-span-1 ": !important,
+                    "lg:col-span-2 md:flex-row": important,
+                    "col-span-1": !important,
                   },
                 ]}
+                style={`animation-delay: ${index * 0.1}s`}
               >
-                <div
-                  class:list={[
-                    "flex items-center justify-cente rounded-xl",
-                    {
-                      "w-full": !important,
-                    },
-                  ]}
-                >
-                  <a href={`/${data.lang}/blog/${slug}`}>
+                {/* Image Section */}
+                <div class:list={[
+                  "relative overflow-hidden aspect-video bg-slate-950",
+                  { "md:w-1/2 lg:w-3/5": important, "w-full": !important }
+                ]}>
+                  <a href={`/${data.lang}/blog/${slug}`} class="block h-full relative overflow-hidden">
+                    {/* Blurred Background */}
+                    <img
+                      src={img}
+                      alt=""
+                      aria-hidden="true"
+                      class="absolute inset-0 w-full h-full object-cover blur-2xl opacity-40 scale-110"
+                    />
+                    {/* Main Image */}
                     <img
                       src={img}
                       alt={title}
                       transition:name={`img-${slug}`}
-                      width="1408"
-                      height="768"
-                      class="rounded-lg"
+                      class="relative w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
                     />
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-40"></div>
                   </a>
+                  {important && (
+                    <div className="absolute top-6 left-6 px-4 py-1 bg-[#B39D4E] text-black font-cinzel text-xs font-bold uppercase tracking-widest rounded-full shadow-lg">
+                      Destacado
+                    </div>
+                  )}
                 </div>
-                <div
-                  class:list={[
-                    "col-span-3  px-5 flex flex-col flex-grow justify-between",
-                    {
-                      "pt-5 ": important,
-                      "pt-2": !important,
-                    },
-                  ]}
-                >
-                  <div class="flex items-center gap-x-4 text-xs ">
-                    <time datetime="2020-03-16" class="text-gray-500">
-                      {date}
-                    </time>
-                    <a
-                      href={`/${data.lang}/blog/${slug}`}
-                      class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
-                    >
-                      {category}
-                    </a>
-                  </div>
-                  <div class="group relative">
-                    <h3
-                      class:list={[
-                        "mt-3 font-semibold text-gray-200 ",
-                        {
-                          "text-3xl": important,
-                          "text-2xl": !important,
-                        },
-                      ]}
-                    >
-                      <a href={`/${data.lang}/blog/${slug}`}>
-                        <span class="absolute inset-0 " />
+
+                {/* Content Section */}
+                <div class:list={[
+                  "p-8 md:p-10 flex flex-col flex-grow justify-between",
+                  { "md:w-1/2 lg:w-2/5": important }
+                ]}>
+                  <div class="space-y-4">
+                    <div class="flex items-center gap-4">
+                      <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-cinzel text-[#B39D4E] uppercase tracking-wider">
+                        {category}
+                      </span>
+                      <time datetime={date} class="text-xs font-spectral text-gray-500 italic">
+                        {date}
+                      </time>
+                    </div>
+
+                    <a href={`/${data.lang}/blog/${slug}`} class="block group/title">
+                      <h3 class:list={[
+                        "font-cinzel font-bold text-white group-hover/title:text-[#B39D4E] transition-colors duration-300 leading-tight",
+                        { "text-3xl md:text-4xl": important, "text-2xl": !important }
+                      ]}>
                         {title}
-                      </a>
-                    </h3>
-                    <p class="mt-5 line-clamp-3 text-lg text-gray-400">
+                      </h3>
+                    </a>
+
+                    <p class="text-gray-400 font-spectral text-lg line-clamp-3 leading-relaxed">
                       {description}
                     </p>
                   </div>
-                  <div class="relative flex items-end justify-around gap-x-4 mb-5 ">
-                    <div class="text-sm/6 p-5">
-                      <p class="font-semibold text-gray-200">
-                        <a href={`/${data.lang}/blog/${slug}`}>
-                          <span class="absolute inset-0" />
-                          {x} {author}
-                        </a>
-                      </p>
-                      <p class="text-gray-500">{read}: {readtime}</p>
+
+                  <div class="pt-8 mt-auto border-t border-white/5 flex items-center justify-between">
+                    <div class="flex flex-col">
+                      <span class="text-xs font-cinzel text-gray-500 uppercase tracking-tighter">{x} {author}</span>
+                      <span class="text-xs font-spectral text-[#B39D4E]/80 italic">{read}: {readtime}</span>
                     </div>
-                    <div class="justify-center  flex z-10 ">
-                      <a
-                        href={`/${data.lang}/blog/${slug}`}
-                        class="text-white border-slate-600 rounded-xl p-5 border text-2xl font-medium mt-10 hover:border-[#928952] transition-all text-nowrap"
-                      >
-                        🪄 {readMore}
-                      </a>
-                    </div>
+
+                    <a
+                      href={`/${data.lang}/blog/${slug}`}
+                      class="group/btn relative px-6 py-3 bg-white/5 hover:bg-[#B39D4E]/10 rounded-xl border border-white/10 hover:border-[#B39D4E]/40 transition-all duration-300 flex items-center gap-2"
+                    >
+                      <span class="font-cinzel text-sm text-white group-hover/btn:text-[#B39D4E] transition-colors">{readMore}</span>
+                      <svg class="w-4 h-4 text-[#B39D4E] transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </a>
                   </div>
                 </div>
               </article>

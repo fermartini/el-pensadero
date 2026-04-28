@@ -5,6 +5,7 @@ import Layout from "../../layouts/Layout.astro";
 import Blog from "../../components/Blog.astro";
 import Footer from "../../components/Footer.astro";
 import HogwartsSortingQuiz from "../../components/games/HogwartsSortingQuiz";
+import PatronusGame from "../../components/games/PatronusGame.jsx";
 import type { HomeContent } from "../../types.d.ts";
 import type { GamesContent } from "../../types.d.ts";
 // src/pages/[lang]/index.astro
@@ -22,37 +23,37 @@ export function getStaticPaths() {
 const { lang } = Astro.params;
 
 // 3. Carga el contenido correspondiente
-const {frontmatter } = await import(`../../content/${lang}/home.md`) as { frontmatter: HomeContent };
-const { frontmatter: game } = (await import(`../../content/${lang}/games.md`)) as {
+const { frontmatter: homeData } = await import(`../../content/${lang}/home.md`) as { frontmatter: HomeContent };
+const { frontmatter: gamesData } = (await import(`../../content/${lang}/games.md`)) as {
   frontmatter: GamesContent;
 };
 
 
-const titleGame = game.titleGame;
-const descriptionGame = game.descriptionGame;
-const hat = game.hat;
-const start = game.start;
-const cualities = game.cualities;
-const fundador = game.fundador;
-const element = game.element;
-const yes = game.yes;
-const thinks = game.thinks;
-const again = game.again;
-const back = game.back;
-const ask = game.ask;
-const of = game.of;
-const interesting = game.interesting;
-const finishGame = game.finishGame;
+const titleGame = gamesData.titleGame;
+const descriptionGame = gamesData.descriptionGame;
+const hat = gamesData.hat;
+const start = gamesData.start;
+const cualities = gamesData.cualities;
+const fundador = gamesData.fundador;
+const element = gamesData.element;
+const yes = gamesData.yes;
+const thinks = gamesData.thinks;
+const again = gamesData.again;
+const back = gamesData.back;
+const ask = gamesData.ask;
+const of = gamesData.of;
+const interesting = gamesData.interesting;
+const finishGame = gamesData.finishGame;
 
-const title = frontmatter.title
-const subTitle = frontmatter.subTitle
-const labelledby = frontmatter.labelledby
-const blog = frontmatter.blog
-const games = frontmatter.games
-const titleLayout = frontmatter.titleLayout
-const descriptionLayout = frontmatter.descriptionLayout
-const titleButton = frontmatter.titleButton
-const readMore = frontmatter.readMore
+const title = homeData.title
+const subTitle = homeData.subTitle
+const labelledby = homeData.labelledby
+const blog = homeData.blog
+const games = homeData.games
+const titleLayout = homeData.titleLayout
+const descriptionLayout = homeData.descriptionLayout
+const titleButton = homeData.titleButton
+const readMore = homeData.readMore
 
 ---
 
@@ -61,16 +62,49 @@ const readMore = frontmatter.readMore
   description={descriptionLayout}
   url=`/${lang}`
 >
-  <Home title={title} subTitle={subTitle} labelledby={labelledby}/>
+  <Home 
+    title={title} 
+    subTitle={subTitle} 
+    labelledby={labelledby} 
+    lang={lang}
+    cardLibrary={homeData.cardLibrary}
+    cardGames={homeData.cardGames}
+    cardSorting={homeData.cardSorting}
+    cardBlogTitle={homeData.cardBlogTitle}
+    cardBlogDesc={homeData.cardBlogDesc}
+    cardGamesTitle={homeData.cardGamesTitle}
+    cardGamesDesc={homeData.cardGamesDesc}
+    cardSortingTitle={homeData.cardSortingTitle}
+    cardSortingDesc={homeData.cardSortingDesc}
+  />
   <Blog blog={blog} lang={lang} titleButton={titleButton} readMore={readMore}/>
 
-  <section class="min-h-screen">
+  <!-- Patronus Game Section -->
+  <section class="min-h-screen py-20 border-b border-[#B39D4E]/20" id="patronus-game">
+    <h2 class="text-3xl md:text-6xl font-cinzel text-center text-transparent bg-clip-text bg-gradient-to-b from-[#FFF8D6] to-[#B39D4E] mb-6 drop-shadow-[0_0_15px_rgba(218,165,32,0.3)] px-4">
+      {lang === 'en' ? 'Expecto Patronum: Dementor Defense' : 'Expecto Patronum: Defensa contra Dementores'}
+    </h2>
+    <p class="text-center text-gray-400 font-spectral mb-10 max-w-2xl mx-auto px-4">
+      {lang === 'en' ? 'Defend the Pensieve from the Dementors in this fast-paced game!' : '¡Defiende el Pensadero de los Dementores en este mini-juego de reflejos!'}
+    </p>
+    <PatronusGame 
+      client:load 
+      patronusTitle={gamesData.patronusTitle}
+      patronusSubtitle={gamesData.patronusSubtitle}
+      patronusStart={gamesData.patronusStart}
+      patronusGameOver={gamesData.patronusGameOver}
+      patronusScoreLabel={gamesData.patronusScoreLabel}
+      patronusRetry={gamesData.patronusRetry}
+      patronusVitalMagic={gamesData.patronusVitalMagic}
+      patronusScoreHUD={gamesData.patronusScoreHUD}
+    />
+  </section>
+
+  <section class="min-h-screen" id="featured-game">
   <h2
-    class="text-3xl md:text-6xl font-cinzel text-center text-[#928952] mb-10 pt-20"
-    id="noticias-title"
+    class="text-3xl md:text-6xl font-cinzel text-center text-transparent bg-clip-text bg-gradient-to-b from-[#FFF8D6] to-[#B39D4E] mb-12 drop-shadow-[0_0_15px_rgba(218,165,32,0.3)] pt-20"
   >
   {games}
-    
   </h2> <HogwartsSortingQuiz
       client:load
       lang={lang}

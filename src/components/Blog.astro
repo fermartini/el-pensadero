@@ -33,64 +33,67 @@ type Post = {
 
 ---
 
-<section aria-labelledby="noticias-title" id="blog">
+<section aria-labelledby="noticias-title" id="blog" class="relative py-20 px-4">
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(146,137,82,0.1),transparent_50%)]"></div>
+  
   <h2
-    class="text-3xl md:text-6xl font-cinzel text-center text-[#928952] mb-10 pt-20"
+    class="text-3xl md:text-6xl font-cinzel text-center text-transparent bg-clip-text bg-gradient-to-b from-[#FFF8D6] to-[#B39D4E] mb-16 relative z-10 drop-shadow-[0_0_15px_rgba(218,165,32,0.3)]"
     id="noticias-title"
   >
     {blog}
   </h2>
-  <div class="md:flex justify-center gap-8 grid grid-cols-1">
+
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 relative z-10">
     {
-      limitedPosts.map((post: Post) => {
+      limitedPosts.map((post: Post, index) => {
         const { data } = post;
         const { title, img, description, slug } = data;
         return (
-          <article class="flex flex-col m-5 xl:m-0  max-w-sm border rounded-lg shadow-sm bg-gray-800 border-gray-700">
-            <a href={`/${lang}/blog/${slug}`} aria-label={`Leer más sobre: ${title}`}>
+          <article class="group relative flex flex-col h-full bg-slate-900/40 backdrop-blur-md rounded-3xl border border-white/5 hover:border-[#B39D4E]/40 transition-all duration-500 overflow-hidden shadow-2xl hover:shadow-[#B39D4E]/10" style={`animation-delay: ${index * 0.1}s`}>
+            <a href={`/${lang}/blog/${slug}`} class="relative block overflow-hidden aspect-video group bg-slate-950">
+              {/* Blurred Background to fill space */}
               <img
-                class="rounded-t-lg"
+                class="absolute inset-0 w-full h-full object-cover blur-2xl opacity-40 scale-110"
+                src={img}
+                alt=""
+                aria-hidden="true"
+              />
+              {/* Main Image */}
+              <img
+                class="relative w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
                 src={img}
                 alt={title}
                 transition:name={`img-${slug}`}
-                width="1408"
-                height="768"
                 loading="lazy"
-                sizes="(max-width: 768px) 100vw, 33vw"
               />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-40"></div>
             </a>
-            <div class="p-5 flex flex-col flex-grow">
+
+            <div class="p-8 flex flex-col flex-grow space-y-4">
               <a href={`/${lang}/blog/${slug}`}>
-                <h3 class="mb-2 text-xl xl:text-2xl font-bold tracking-tight  text-white">
+                <h3 class="text-xl md:text-2xl font-cinzel font-bold text-white group-hover:text-[#B39D4E] transition-colors duration-300 leading-tight">
                   {title}
                 </h3>
               </a>
-              <div class="mt-auto">
-                <p class="mb-3 font-normal text-gray-400 text-sm xl:text-lg">
-                  {description}
-                </p>
-              </div>
-              <div class="mt-auto">
+              
+              <p class="text-gray-400 font-spectral text-base md:text-lg line-clamp-3 leading-relaxed flex-grow">
+                {description}
+              </p>
+
+              <div class="pt-4 mt-auto border-t border-white/5">
                 <a
                   href={`/${lang}/blog/${slug}`}
-                  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white 0 rounded-lg  focus:ring-4 focus:outline-none  bg-gray-600 hover:bg-[#928952] focus:ring-gray-800"
+                  class="group/btn relative inline-flex items-center gap-2 text-[#B39D4E] font-cinzel text-sm uppercase tracking-widest hover:text-white transition-colors"
                   aria-label={`Leer más sobre: ${title}`}
                 >
-                  {readMore}
+                  <span class="relative z-10">{readMore}</span>
                   <svg
-                    class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-                    aria-hidden="true"
-                    xmlns="https://www.w3.org/2000/svg"
+                    class="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1"
                     fill="none"
-                    viewBox="0 0 14 10"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                   >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M1 5h12m0 0L9 1m4 4L9 9"
-                    />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </a>
               </div>
@@ -100,5 +103,8 @@ type Post = {
       })
     }
   </div>
-  <Button title=`🪄 ${titleButton}` slug=`/${lang}/blog` aria={lang == "es"? "Ir al blog" : "Go To Blog"}/>
+
+  <div class="mt-16 flex justify-center relative z-10">
+    <Button title=`🪄 ${titleButton}` slug=`/${lang}/blog` aria={lang == "es"? "Ir al blog" : "Go To Blog"}/>
+  </div>
 </section>

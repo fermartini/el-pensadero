@@ -17,5 +17,12 @@ back: "Return to Start"
 ask: "Question"
 of: "of"
 interesting: "Interesting... very interesting..."
-
+patronusTitle: "Soul Defense"
+patronusSubtitle: "Use your arrows or touch the sides to summon the Patronus and protect the wall."
+patronusStart: "🪄 Start"
+patronusGameOver: "Dementor's Kiss!"
+patronusScoreLabel: "You lost your soul with {score} points"
+patronusRetry: "Try Again"
+patronusVitalMagic: "Vital Magic"
+patronusScoreHUD: "Score"
 ---
