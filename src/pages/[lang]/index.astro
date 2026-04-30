@@ -4,6 +4,7 @@ import Shorts from "../../components/Shorts.astro";
 import Layout from "../../layouts/Layout.astro";
 import Blog from "../../components/Blog.astro";
 import Footer from "../../components/Footer.astro";
+import PromoSections from "../../components/PromoSections.astro";
 import HogwartsSortingQuiz from "../../components/games/HogwartsSortingQuiz";
 import PatronusGame from "../../components/games/PatronusGame.jsx";
 import type { HomeContent } from "../../types.d.ts";
@@ -125,6 +126,14 @@ const readMore = homeData.readMore
       interesting={interesting}
     />
  </section>
+  <PromoSections 
+    gamePromoTitle={homeData.gamePromoTitle}
+    gamePromoDesc={homeData.gamePromoDesc}
+    ytPromoTitle={homeData.ytPromoTitle}
+    ytPromoDesc={homeData.ytPromoDesc}
+    downloadBtn={homeData.downloadBtn}
+    visitYtBtn={homeData.visitYtBtn}
+  />
   <Shorts lang={lang}/>
 
   <Footer />
