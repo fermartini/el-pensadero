@@ -2,7 +2,10 @@
 import Layout from "../../../layouts/Layout.astro";
 import Footer from "../../../components/Footer.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
 import type { BlogContent } from "../../../types.d.ts";
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/img/**/*.{jpeg,jpg,png,gif,webp}');
 
 type Post = CollectionEntry<"posts">;
 
@@ -70,7 +73,10 @@ orderedItems = orderedItems.reverse();
 
     <div class="mx-auto max-w-7xl relative z-10">
       <div class="text-center mb-20 space-y-4">
-        <h1 class="text-4xl md:text-7xl font-cinzel font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#FFF8D6] to-[#B39D4E] drop-shadow-[0_0_15px_rgba(218,165,32,0.3)]">
+        <h1 
+          class="text-4xl md:text-7xl font-cinzel font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#FFF8D6] to-[#B39D4E] drop-shadow-[0_0_15px_rgba(218,165,32,0.3)]"
+          transition:name="blog-title"
+        >
           {title}
         </h1>
         <p class="text-xl md:text-2xl font-spectral italic text-gray-400 max-w-2xl mx-auto">
@@ -79,7 +85,7 @@ orderedItems = orderedItems.reverse();
         <div class="w-24 h-1 bg-gradient-to-r from-transparent via-[#B39D4E] to-transparent mx-auto mt-6"></div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
+      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
         {
           orderedItems.map((post: any, index) => {
             const { data } = post;
@@ -95,10 +101,14 @@ orderedItems = orderedItems.reverse();
               important,
             } = data;
             
+            // Resolve image path from /assets/img/ to /src/assets/img/
+            const imagePath = img.replace('/assets/img/', '/src/assets/img/');
+            const imageMetadata = images[imagePath];
+            
             return (
-              <article
+              <li
                 class:list={[
-                  "group relative flex flex-col bg-slate-900/40 backdrop-blur-md rounded-[2.5rem] border border-white/5 hover:border-[#B39D4E]/40 transition-all duration-500 overflow-hidden shadow-2xl hover:shadow-[#B39D4E]/10",
+                  "group relative flex flex-col bg-slate-900/50 backdrop-blur-md rounded-[2.5rem] border border-white/10 hover:border-[#B39D4E]/40 transition-all duration-500 overflow-hidden shadow-2xl hover:shadow-[#B39D4E]/10",
                   {
                     "lg:col-span-2 md:flex-row": important,
                     "col-span-1": !important,
@@ -112,20 +122,26 @@ orderedItems = orderedItems.reverse();
                   { "md:w-1/2 lg:w-3/5": important, "w-full": !important }
                 ]}>
                   <a href={`/${data.lang}/blog/${slug}`} class="block h-full relative overflow-hidden">
-                    {/* Blurred Background */}
-                    <img
-                      src={img}
-                      alt=""
-                      aria-hidden="true"
-                      class="absolute inset-0 w-full h-full object-cover blur-2xl opacity-40 scale-110"
-                    />
-                    {/* Main Image */}
-                    <img
-                      src={img}
-                      alt={title}
-                      transition:name={`img-${slug}`}
-                      class="relative w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
-                    />
+                    {imageMetadata ? (
+                      <Image
+                        src={imageMetadata()}
+                        alt={title}
+                        width={important ? 800 : 600}
+                        height={important ? 450 : 337}
+                        format="webp"
+                        quality="mid"
+                        loading={index < 2 ? "eager" : "lazy"}
+                        fetchpriority={index === 0 ? "high" : "auto"}
+                        transition:name={`img-${slug}`}
+                        class="relative w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    ) : (
+                      <img
+                        src={img}
+                        alt={title}
+                        class="relative w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    )}
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-40"></div>
                   </a>
                   {important && (
@@ -145,34 +161,34 @@ orderedItems = orderedItems.reverse();
                       <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-cinzel text-[#B39D4E] uppercase tracking-wider">
                         {category}
                       </span>
-                      <time datetime={date} class="text-xs font-spectral text-gray-500 italic">
+                      <time datetime={date} class="text-xs font-spectral text-gray-400 italic">
                         {date}
                       </time>
                     </div>
 
                     <a href={`/${data.lang}/blog/${slug}`} class="block group/title">
-                      <h3 class:list={[
+                      <h2 class:list={[
                         "font-cinzel font-bold text-white group-hover/title:text-[#B39D4E] transition-colors duration-300 leading-tight",
                         { "text-3xl md:text-4xl": important, "text-2xl": !important }
                       ]}>
                         {title}
-                      </h3>
+                      </h2>
                     </a>
 
-                    <p class="text-gray-400 font-spectral text-lg line-clamp-3 leading-relaxed">
+                    <p class="text-gray-300 font-spectral text-lg line-clamp-3 leading-relaxed">
                       {description}
                     </p>
                   </div>
 
-                  <div class="pt-8 mt-auto border-t border-white/5 flex items-center justify-between">
+                  <div class="pt-8 mt-auto border-t border-white/10 flex items-center justify-between">
                     <div class="flex flex-col">
-                      <span class="text-xs font-cinzel text-gray-500 uppercase tracking-tighter">{x} {author}</span>
-                      <span class="text-xs font-spectral text-[#B39D4E]/80 italic">{read}: {readtime}</span>
+                      <span class="text-xs font-cinzel text-gray-400 uppercase tracking-tighter">{x} {author}</span>
+                      <span class="text-xs font-spectral text-[#B39D4E] italic font-medium">{read}: {readtime}</span>
                     </div>
 
                     <a
                       href={`/${data.lang}/blog/${slug}`}
-                      class="group/btn relative px-6 py-3 bg-white/5 hover:bg-[#B39D4E]/10 rounded-xl border border-white/10 hover:border-[#B39D4E]/40 transition-all duration-300 flex items-center gap-2"
+                      class="group/btn relative px-6 py-3 bg-white/10 hover:bg-[#B39D4E]/10 rounded-xl border border-white/10 hover:border-[#B39D4E]/40 transition-all duration-300 flex items-center gap-2"
                     >
                       <span class="font-cinzel text-sm text-white group-hover/btn:text-[#B39D4E] transition-colors">{readMore}</span>
                       <svg class="w-4 h-4 text-[#B39D4E] transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -181,11 +197,11 @@ orderedItems = orderedItems.reverse();
                     </a>
                   </div>
                 </div>
-              </article>
+              </li>
             );
           })
         }
-      </div>
+      </ul>
     </div>
   </main>
   <Footer />

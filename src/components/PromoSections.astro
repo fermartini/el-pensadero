@@ -1,4 +1,8 @@
 ---
+import { Image } from "astro:assets";
+import gameBanner from "../assets/img/icons/game_details_banner_v2.png";
+import ytBanner from "../assets/img/icons/youtube_details_banner.png";
+
 const { 
   gamePromoTitle, 
   gamePromoDesc, 
@@ -14,10 +18,15 @@ const {
   <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
     <div class="w-full lg:w-1/2 group relative">
       <div class="absolute -inset-4 bg-gradient-to-r from-[#B39D4E]/20 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-      <img 
-        src="/assets/img/icons/game_details_banner_v2.png" 
+      <Image 
+        src={gameBanner} 
         alt="Academia Mágica Game" 
+        width={800}
+        height={450}
+        format="webp"
+        quality="mid"
         class="relative rounded-3xl shadow-2xl border border-[#B39D4E]/20 w-full object-cover aspect-video transform transition-transform duration-700 group-hover:scale-[1.02]"
+        loading="lazy"
       />
     </div>
     
@@ -52,10 +61,15 @@ const {
   <div class="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
     <div class="w-full lg:w-1/2 group relative">
       <div class="absolute -inset-4 bg-gradient-to-l from-red-600/20 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-      <img 
-        src="/assets/img/icons/youtube_details_banner.png" 
+      <Image 
+        src={ytBanner} 
         alt="Canal El Pensadero" 
+        width={800}
+        height={450}
+        format="webp"
+        quality="mid"
         class="relative rounded-3xl shadow-2xl border border-red-600/20 w-full object-cover aspect-video transform transition-transform duration-700 group-hover:scale-[1.02]"
+        loading="lazy"
       />
     </div>
     

@@ -1,0 +1,58 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/Footer.astro";
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: "es" } },
+    { params: { lang: "en" } },
+  ];
+}
+
+const { lang } = Astro.params;
+
+const content = {
+  es: {
+    title: "Política de Privacidad",
+    intro: "En El Pensadero, valoramos tu privacidad. Esta política explica cómo manejamos tu información.",
+    sections: [
+      { t: "1. Datos que recolectamos", c: "Solo recolectamos datos analíticos anónimos a través de Vercel Analytics y Google AdSense para mejorar tu experiencia." },
+      { t: "2. Cookies", c: "Utilizamos cookies para personalizar anuncios y analizar el tráfico. Puedes configurar tu navegador para rechazar cookies, aunque algunas funciones podrían no estar disponibles." },
+      { t: "3. Publicidad de Terceros", c: "Google, como proveedor de terceros, utiliza cookies para publicar anuncios en este sitio basados en tus visitas anteriores." }
+    ]
+  },
+  en: {
+    title: "Privacy Policy",
+    intro: "At El Pensadero, we value your privacy. This policy explains how we handle your information.",
+    sections: [
+      { t: "1. Data Collection", c: "We only collect anonymous analytical data through Vercel Analytics and Google AdSense to improve your experience." },
+      { t: "2. Cookies", c: "We use cookies to personalize ads and analyze traffic. You can set your browser to refuse cookies, though some features may not be available." },
+      { t: "3. Third Party Advertising", c: "Google, as a third-party vendor, uses cookies to serve ads on this site based on your prior visits." }
+    ]
+  }
+};
+
+const t = content[lang] || content.es;
+---
+
+<Layout title={t.title} description={t.intro} url={`/${lang}/privacy`}>
+  <main class="pt-32 pb-20 max-w-4xl mx-auto px-6 min-h-screen">
+    <h1 class="font-cinzel text-4xl md:text-6xl text-[#B39D4E] mb-12 border-b border-[#B39D4E]/20 pb-6">
+      {t.title}
+    </h1>
+    
+    <p class="font-spectral text-xl text-gray-300 italic mb-10 leading-relaxed">
+      {t.intro}
+    </p>
+
+    <div class="space-y-12">
+      {t.sections.map(s => (
+        <section class="space-y-4">
+          <h2 class="font-cinzel text-2xl text-white">{s.t}</h2>
+          <p class="font-spectral text-lg text-gray-400 leading-relaxed">{s.c}</p>
+        </section>
+      ))}
+    </div>
+  </main>
+  <Footer lang={lang} />
+</Layout>

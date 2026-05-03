@@ -66,13 +66,17 @@ const langSwitchUrl = lang == "en"
             <img
               src={esFlag}
               alt="Bandera España"
-              class={`${lang == "es" ? "w-10" : "w-5"} transition-all h-fit`}
+              width={lang == "es" ? 40 : 20}
+              height={lang == "es" ? 28 : 14}
+              class={`${lang == "es" ? "w-10" : "w-5"} transition-all h-auto`}
             />
             <span class="text-gray-300">|</span>
             <img
               src={usFlag}
               alt="Bandera EEUU"
-              class={`${lang == "en" ? "w-10" : "w-5"} transition-all h-fit`}
+              width={lang == "en" ? 40 : 20}
+              height={lang == "en" ? 28 : 14}
+              class={`${lang == "en" ? "w-10" : "w-5"} transition-all h-auto`}
             />
           </a>
         </div>

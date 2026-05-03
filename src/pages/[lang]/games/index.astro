@@ -13,6 +13,26 @@ export function getStaticPaths() {
   ];
 }
 
+import { getImage } from "astro:assets";
+import roscoCover from "../../../assets/img/icons/rosco-cover.webp";
+import bgForest from "../../../assets/game/bg-forest.webp";
+import dementorBody from "../../../assets/game/dementor-body.webp";
+import dementorAuraLeft from "../../../assets/game/dementor-aura-left.webp";
+import dementorAuraRight from "../../../assets/game/dementor-aura-right.webp";
+import harryIdle from "../../../assets/game/harry-idle.webp";
+import harryDead from "../../../assets/game/harry-dead.webp";
+import patronusBlast from "../../../assets/game/patronus-blast.webp";
+
+// Optimize images for games
+const optimizedRoscoCover = await getImage({ src: roscoCover, width: 400, format: 'webp' });
+const optimizedBgForest = await getImage({ src: bgForest, width: 1200, format: 'webp' });
+const optDementorBody = await getImage({ src: dementorBody, width: 200, format: 'webp' });
+const optDementorLeft = await getImage({ src: dementorAuraLeft, width: 300, format: 'webp' });
+const optDementorRight = await getImage({ src: dementorAuraRight, width: 300, format: 'webp' });
+const optHarryIdle = await getImage({ src: harryIdle, width: 200, format: 'webp' });
+const optHarryDead = await getImage({ src: harryDead, width: 200, format: 'webp' });
+const optPatronusBlast = await getImage({ src: patronusBlast, width: 200, format: 'webp' });
+
 const { lang } = Astro.params;
 const langDif = lang == 'es'? 'en' : 'es'
 // 3. Carga el contenido correspondiente
@@ -49,7 +69,7 @@ const finishGame = frontmatter.finishGame;
   alternate={`https://elpensaderohp.com/${langDif}/games/`}
   ><main class="min-h-screen pb-20">
     <h1
-      class="opacity-0 animate-fadeIn font-cinzel font-semibold text-2xl md:text-5xl mt-20 mb-10 text-center text-[#928952] drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)] max-w-4xl mx-auto px-4"
+      class="opacity-0 animate-fadeIn font-cinzel font-semibold text-2xl md:text-5xl mt-20 mb-10 text-center text-[#B39D4E] drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)] max-w-4xl mx-auto px-4"
     >
       {title}
     </h1>
@@ -58,19 +78,28 @@ const finishGame = frontmatter.finishGame;
       <h2 class="text-3xl md:text-5xl font-cinzel text-center text-[#B39D4E] mb-12 drop-shadow-lg max-w-4xl mx-auto">
         {lang === 'en' ? 'The Wizarding Rosco: A-Z Challenge' : 'El Rosco Mágico: Desafío de la A a la Z'}
       </h2>
-      <RoscoGame client:load lang={lang} />
+      <RoscoGame client:load lang={lang} coverImg={optimizedRoscoCover.src} />
     </div>
 
     <div class="border-t border-white/10 pt-20 mb-20 max-w-7xl mx-auto px-4">
       <h2 class="text-3xl md:text-5xl font-cinzel text-center text-[#B39D4E] mb-6 drop-shadow-lg max-w-4xl mx-auto">
         {lang === 'en' ? 'Expecto Patronum: Dementor Defense' : 'Expecto Patronum: Defensa contra Dementores'}
       </h2>
-      <PatronusGame client:load />
+      <PatronusGame 
+        client:visible 
+        bgImg={optimizedBgForest.src}
+        dementorBodyImg={optDementorBody.src}
+        dementorAuraLeftImg={optDementorLeft.src}
+        dementorAuraRightImg={optDementorRight.src}
+        harryIdleImg={optHarryIdle.src}
+        harryDeadImg={optHarryDead.src}
+        patronusBlastImg={optPatronusBlast.src}
+      />
     </div>
 
     <div class="border-t border-white/10 pt-20 mb-10">
       <HogwartsSortingQuiz
-        client:load
+        client:visible
         lang={lang}
         titleGame={titleGame}
         descriptionGame={descriptionGame}
@@ -89,7 +118,6 @@ const finishGame = frontmatter.finishGame;
         interesting={interesting}
       />
     </div>
+    <Footer />
   </main>
 </Layout>
-
-<Footer />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const RoscoGame = ({ lang }) => {
+const RoscoGame = ({ lang, coverImg }) => {
   const roscoData = {
     es: [
       { letter: 'A', definition: 'Mago que puede transformarse en un animal.', answer: 'ANIMAGO' },
@@ -243,7 +243,7 @@ const RoscoGame = ({ lang }) => {
     return (
       <div className="relative overflow-hidden min-h-[600px] flex items-center justify-center p-4 rounded-[3rem] border border-[#B39D4E]/20">
         <div className="absolute inset-0 bg-slate-950">
-           <img src="/assets/img/icons/rosco-cover.webp" className="absolute inset-0 w-full h-full object-cover opacity-30 blur-[2px]" alt="bg" />
+           <img src={coverImg || "/assets/img/icons/rosco-cover.webp"} className="absolute inset-0 w-full h-full object-cover opacity-30 blur-[2px]" alt="bg" />
            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/60 to-slate-950"></div>
         </div>
 
@@ -251,7 +251,7 @@ const RoscoGame = ({ lang }) => {
             <div className="relative inline-block group">
               <div className="absolute inset-0 bg-[#B39D4E]/20 blur-3xl rounded-full scale-150 animate-pulse"></div>
               <div className="relative w-40 h-40 md:w-52 md:h-52 rounded-full border-4 border-[#B39D4E]/40 p-2 overflow-hidden shadow-2xl transform group-hover:scale-105 transition-transform duration-700">
-                 <img src="/assets/img/icons/rosco-cover.webp" className="w-full h-full object-cover rounded-full" alt="Rosco" />
+                 <img src={coverImg || "/assets/img/icons/rosco-cover.webp"} className="w-full h-full object-cover rounded-full" alt="Rosco" />
               </div>
             </div>
 

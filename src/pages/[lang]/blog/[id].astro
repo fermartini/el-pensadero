@@ -4,10 +4,17 @@ import Layout from "../../../layouts/Layout.astro";
 import Button from "../../../components/Button.astro";
 import Footer from "../../../components/Footer.astro";
 import { YouTube } from "@astro-community/astro-embed-youtube";
+import { Image, getImage } from "astro:assets";
 import Blog from "../../../components/Blog.astro";
-import HogwartsSortingQuiz from "../../../components/games/HogwartsSortingQuiz";
+import HogwartsSortingQuiz from "../../../components/games/HogwartsSortingQuiz.tsx";
 import ParticulasMagicas from "../../../components/ParticulasMagicas";
 import type { HomeContent, GamesContent } from "../../../types.d.ts";
+
+// Import assets
+import academyIcon from "../../../assets/img/icons/academy_game_card_v2.png";
+import ytBanner from "../../../assets/img/icons/youtube_details_banner.png";
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/img/**/*.{jpeg,jpg,png,gif,webp}');
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -37,6 +44,14 @@ const {
 } = data;
 
 const langDif = lang == 'es'? 'en' : 'es'
+
+// Resolve post image metadata and get optimized URL for the poster
+const imagePath = img.replace('/assets/img/', '/src/assets/img/');
+const postImageMetadata = images[imagePath];
+const imageModule = postImageMetadata ? await postImageMetadata() : null;
+const optimizedPoster = imageModule 
+  ? await getImage({ src: imageModule.default, width: 1280, height: 720, format: 'webp' })
+  : { src: img };
 
 const { frontmatter: homeData } = await import(`../../../content/${lang}/home.md`) as { frontmatter: HomeContent };
 const { frontmatter: gameData } = await import(`../../../content/${lang}/games.md`) as { frontmatter: GamesContent };
@@ -100,7 +115,7 @@ const generateBlogJSONLD = (post: any) => {
   <main class="relative pt-32 pb-20 overflow-hidden selection:bg-[#B39D4E]/30 selection:text-white">
     {/* Background Effects */}
     <div class="fixed inset-0 pointer-events-none opacity-40">
-       <ParticulasMagicas client:load />
+       <ParticulasMagicas client:idle />
     </div>
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[800px] bg-[radial-gradient(circle_at_center,rgba(179,157,78,0.12)_0%,transparent_70%)] pointer-events-none"></div>
 
@@ -121,7 +136,7 @@ const generateBlogJSONLD = (post: any) => {
         <h1 class="text-3xl md:text-6xl font-cinzel font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#FFF8D6] via-[#B39D4E] to-[#8C7A3A] drop-shadow-[0_0_30px_rgba(218,165,32,0.3)] leading-tight w-full">
           {title}
         </h1>
-        <p class="text-lg md:text-xl font-spectral italic text-gray-400 max-w-2xl mx-auto leading-relaxed border-l-2 border-[#B39D4E]/20 pl-6 py-2">
+        <p class="text-lg md:text-xl font-spectral italic text-gray-300 max-w-2xl mx-auto leading-relaxed border-l-2 border-[#B39D4E]/20 pl-6 py-2">
           {description}
         </p>
       </div>
@@ -130,13 +145,15 @@ const generateBlogJSONLD = (post: any) => {
       <div class="relative group mb-20 w-full flex justify-center">
         <div class="relative w-full">
           <div class="absolute -inset-4 bg-gradient-to-r from-[#B39D4E]/20 via-transparent to-[#B39D4E]/20 blur-3xl opacity-30 group-hover:opacity-60 transition duration-1000"></div>
-          <div class="relative bg-slate-900 rounded-[2.5rem] md:rounded-[4rem] overflow-hidden border-2 border-white/5 shadow-[0_0_80px_rgba(0,0,0,0.6)] w-full">
+          <div 
+            class="relative bg-slate-900 rounded-[2.5rem] md:rounded-[4rem] overflow-hidden border-2 border-white/5 shadow-[0_0_80px_rgba(0,0,0,0.6)] w-full aspect-video"
+            transition:name={`img-${slug}`}
+          >
             <YouTube
               id={videoId}
-              poster={img}
-              class="w-full max-w-full aspect-video object-cover transition-transform duration-1000 group-hover:scale-[1.01]"
+              poster={optimizedPoster.src}
+              class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.01]"
               playlabel={`Reproducir: ${title}`}
-              transition:name={`img-${slug}`}
             />
           </div>
         </div>
@@ -160,7 +177,15 @@ const generateBlogJSONLD = (post: any) => {
           <div class="relative z-10 flex flex-col lg:flex-row items-center gap-10">
             <div class="w-full lg:w-1/2">
               <div class="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl transform transition-transform duration-700 group-hover:scale-[1.02]">
-                <img src="/assets/img/icons/youtube_details_banner.png" alt="YouTube Challenges" class="w-full h-full object-cover" />
+                <Image 
+                  src={ytBanner} 
+                  alt="YouTube Challenges" 
+                  width={600}
+                  height={337}
+                  format="webp"
+                  quality="mid"
+                  class="w-full h-full object-cover" 
+                />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               </div>
             </div>
@@ -244,28 +269,6 @@ const generateBlogJSONLD = (post: any) => {
       href="https://play.google.com/store/apps/details?id=com.khalldragon.elpensadero"
       target="_blank"
       rel="noopener noreferrer"
-      class="fixed bottom-8 right-8 z-[100] group"
-      aria-label={lang == "es" ? "Descargar Academia Mágica" : "Download Magic Academy"}
-    >
-      <div class="absolute -inset-4 bg-[#B39D4E]/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse"></div>
-      <div class="relative flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-[#B39D4E] to-[#8C7A3A] rounded-full shadow-[0_0_30px_rgba(179,157,78,0.4)] border-2 border-[#FFF8D6]/30 transform transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-2 group-active:scale-95">
-        <img 
-          src="/assets/img/icons/academy_game_card_v2.png" 
-          class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full border border-white/20 p-1 bg-black/20" 
-          alt="App Icon" 
-        />
-        {/* Tooltip */}
-        <span class="absolute right-full mr-4 px-4 py-2 bg-black/80 backdrop-blur-md border border-[#B39D4E]/40 rounded-xl text-[#B39D4E] font-cinzel text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-2xl">
-          {homeData.downloadBtn}
-        </span>
-      </div>
-    </a>
-
-    {/* Floating Download Button (Strategic) */}
-    <a 
-      href="https://play.google.com/store/apps/details?id=com.khalldragon.elpensadero"
-      target="_blank"
-      rel="noopener noreferrer"
       class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[100] group flex items-center bg-black/80 backdrop-blur-md border border-[#B39D4E]/40 rounded-full md:bg-transparent md:border-0 md:backdrop-blur-none md:shadow-none p-1 md:p-0 shadow-2xl"
       aria-label={lang == "es" ? "Descargar Academia Mágica" : "Download Magic Academy"}
     >
@@ -275,8 +278,12 @@ const generateBlogJSONLD = (post: any) => {
       <div class="relative">
         <div class="absolute -inset-2 bg-[#B39D4E]/40 rounded-full blur-lg opacity-40 group-hover:opacity-100 transition-opacity duration-500 animate-pulse hidden md:block"></div>
         <div class="relative flex items-center justify-center w-12 h-12 md:w-20 md:h-20 bg-gradient-to-br from-[#B39D4E] to-[#8C7A3A] rounded-full shadow-[0_0_40px_rgba(0,0,0,0.5)] border-2 border-[#FFF8D6]/50 overflow-hidden transform transition-all duration-500 md:group-hover:scale-110 md:group-hover:-translate-y-2">
-          <img 
-            src="/assets/img/icons/academy_game_card_v2.png" 
+          <Image 
+            src={academyIcon} 
+            width={80}
+            height={80}
+            format="webp"
+            quality="mid"
             class="w-full h-full object-cover" 
             alt="App Icon" 
           />
@@ -285,16 +292,24 @@ const generateBlogJSONLD = (post: any) => {
     </a>
 
     {/* Mid-Post Promotion Template (Moved by script) */}
-    <div id="mid-post-promo-template" class="hidden">
-      <div class="not-prose my-16 p-8 md:p-12 rounded-[2.5rem] bg-gradient-to-br from-slate-900 via-slate-950 to-black border border-[#B39D4E]/30 shadow-2xl relative overflow-hidden group">
+    <div id="mid-post-promo-template" class="hidden" aria-hidden="true">
+      <div class="not-prose my-16 p-8 md:p-12 rounded-[2.5rem] bg-gradient-to-br from-slate-900 via-slate-950 to-black border border-[#B39D4E]/30 shadow-2xl relative overflow-hidden group min-h-[200px]">
         <div class="absolute top-0 right-0 w-64 h-64 bg-[#B39D4E]/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
         <div class="relative z-10 flex flex-col md:flex-row items-center gap-8">
           <div class="w-24 h-24 md:w-32 md:h-32 flex-shrink-0">
-             <img src="/assets/img/icons/academy_game_card_v2.png" class="w-full h-full object-contain rounded-3xl shadow-2xl border border-[#B39D4E]/20" alt="Icon" />
+             <Image 
+               src={academyIcon} 
+               width={128}
+               height={128}
+               format="webp"
+               quality="mid"
+               class="w-full h-full object-contain rounded-3xl shadow-2xl border border-[#B39D4E]/20" 
+               alt="Icon" 
+             />
           </div>
           <div class="flex-grow text-center md:text-left space-y-4">
             <h3 class="text-2xl md:text-3xl font-cinzel font-bold text-[#FFF8D6]">{homeData.midPostPromoTitle}</h3>
-            <p class="text-gray-400 font-spectral text-base md:text-lg italic leading-relaxed">
+            <p class="text-gray-300 font-spectral text-base md:text-lg italic leading-relaxed">
               {homeData.midPostPromoDesc}
             </p>
             <div class="pt-2">
@@ -321,14 +336,19 @@ const generateBlogJSONLD = (post: any) => {
         const template = document.querySelector('#mid-post-promo-template');
         
         if (content && template) {
+          const promo = template.firstElementChild;
+          if (!promo) return;
+          
           const sections = content.querySelectorAll('section');
-          if (sections.length >= 2) {
-            // Insert after the second section
-            sections[1].after(template.firstElementChild);
-          } else {
-            // Fallback: insert at the end if content is short
-            content.appendChild(template.firstElementChild);
-          }
+          
+          // Use requestAnimationFrame to avoid blocking and minimize perceived shift
+          requestAnimationFrame(() => {
+            if (sections.length >= 2) {
+              sections[1].insertAdjacentElement('afterend', promo);
+            } else {
+              content.appendChild(promo);
+            }
+          });
         }
       });
     </script>
@@ -339,7 +359,7 @@ const generateBlogJSONLD = (post: any) => {
         {gameData.games}
       </h2>
       <HogwartsSortingQuiz
-        client:load
+        client:visible
         lang={lang}
         titleGame={gameData.titleGame} 
         descriptionGame={gameData.descriptionGame} 

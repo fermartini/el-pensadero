@@ -23,7 +23,14 @@ export default function PatronusGame({
   patronusScoreLabel = "Has perdido tu alma con {score} puntos",
   patronusRetry = "Intentar de nuevo",
   patronusVitalMagic = "Magia Vital",
-  patronusScoreHUD = "Puntuación"
+  patronusScoreHUD = "Puntuación",
+  bgImg = "/assets/game/bg-forest.webp",
+  dementorBodyImg = "/assets/game/dementor-body.webp",
+  dementorAuraLeftImg = "/assets/game/dementor-aura-left.webp",
+  dementorAuraRightImg = "/assets/game/dementor-aura-right.webp",
+  harryIdleImg = "/assets/game/harry-idle.webp",
+  harryDeadImg = "/assets/game/harry-dead.webp",
+  patronusBlastImg = "/assets/game/patronus-blast.webp"
 }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [gameOver, setGameOver] = useState(false);
@@ -189,7 +196,7 @@ export default function PatronusGame({
           
           {/* Background ambient magic / Forest */}
           {USE_IMAGES ? (
-            <img src="/assets/game/bg-forest.webp" className="absolute inset-0 w-full h-full object-cover opacity-50 bg-breathe origin-center" alt="background" />
+            <img src={bgImg} className="absolute inset-0 w-full h-full object-cover opacity-50 bg-breathe origin-center" alt="background" />
           ) : (
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,100,255,0.05)_0%,transparent_100%)] bg-breathe"></div>
           )}
@@ -202,12 +209,12 @@ export default function PatronusGame({
               <React.Fragment key={chunk.id}>
                 {chunk.obstacle === 'left' && (
                   <div className="absolute right-full bottom-0 h-[90px] md:h-[110px] flex items-center justify-end pr-0 z-50 pointer-events-none fly-left-up">
-                    {USE_IMAGES ? <img src="/assets/game/dementor-aura-left.webp" className="h-[100px] md:h-[130px] w-auto max-w-[180px] object-contain origin-right scale-110" alt="Flying" /> : <span className="text-5xl transform scale-x-[-1]">🌫️</span>}
+                    {USE_IMAGES ? <img src={dementorAuraLeftImg} className="h-[100px] md:h-[130px] w-auto max-w-[180px] object-contain origin-right scale-110" alt="Flying" /> : <span className="text-5xl transform scale-x-[-1]">🌫️</span>}
                   </div>
                 )}
                 {chunk.obstacle === 'right' && (
                   <div className="absolute left-full bottom-0 h-[90px] md:h-[110px] flex items-center justify-start pl-0 z-50 pointer-events-none fly-right-up">
-                    {USE_IMAGES ? <img src="/assets/game/dementor-aura-right.webp" className="h-[100px] md:h-[130px] w-auto max-w-[180px] object-contain origin-left scale-110" alt="Flying" /> : <span className="text-5xl">🌫️</span>}
+                    {USE_IMAGES ? <img src={dementorAuraRightImg} className="h-[100px] md:h-[130px] w-auto max-w-[180px] object-contain origin-left scale-110" alt="Flying" /> : <span className="text-5xl">🌫️</span>}
                   </div>
                 )}
               </React.Fragment>
@@ -218,7 +225,7 @@ export default function PatronusGame({
                 {/* Dementor Body (Muro) */}
                 {USE_IMAGES ? (
                   <img 
-                    src="/assets/game/dementor-body.webp" 
+                    src={dementorBodyImg} 
                     className={`w-full h-full object-cover opacity-80 ${index % 2 !== 0 ? 'scale-y-[-1]' : ''}`} 
                     alt="Muro de Almas" 
                   />
@@ -229,12 +236,12 @@ export default function PatronusGame({
                 {/* Obstacle (Swooping Dementor Hand/Aura) */}
                 {obstacle === 'left' && (
                   <div className="absolute right-full h-full flex items-center justify-end pr-0 z-20">
-                    {USE_IMAGES ? <img src="/assets/game/dementor-aura-left.webp" className="h-[100px] md:h-[130px] w-auto max-w-[180px] object-contain origin-right scale-110 drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]" alt="Dementor Atacando Izquierda" /> : <span className="text-5xl transform scale-x-[-1] animate-bounce block">🌫️</span>}
+                    {USE_IMAGES ? <img src={dementorAuraLeftImg} className="h-[100px] md:h-[130px] w-auto max-w-[180px] object-contain origin-right scale-110 drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]" alt="Dementor Atacando Izquierda" /> : <span className="text-5xl transform scale-x-[-1] animate-bounce block">🌫️</span>}
                   </div>
                 )}
                 {obstacle === 'right' && (
                   <div className="absolute left-full h-full flex items-center justify-start pl-0 z-20">
-                    {USE_IMAGES ? <img src="/assets/game/dementor-aura-right.webp" className="h-[100px] md:h-[130px] w-auto max-w-[180px] object-contain origin-left scale-110 drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]" alt="Dementor Atacando Derecha" /> : <span className="text-5xl animate-bounce block">🌫️</span>}
+                    {USE_IMAGES ? <img src={dementorAuraRightImg} className="h-[100px] md:h-[130px] w-auto max-w-[180px] object-contain origin-left scale-110 drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]" alt="Dementor Atacando Derecha" /> : <span className="text-5xl animate-bounce block">🌫️</span>}
                   </div>
                 )}
               </div>
@@ -251,14 +258,14 @@ export default function PatronusGame({
             }}
           >
             {USE_IMAGES ? (
-              <img src={gameOver ? "/assets/game/harry-dead.webp" : "/assets/game/harry-idle.webp"} className="w-24 h-24 md:w-32 md:h-32 object-contain drop-shadow-[0_0_15px_rgba(0,0,0,0.8)]" alt="Harry" />
+              <img src={gameOver ? harryDeadImg : harryIdleImg} className="w-24 h-24 md:w-32 md:h-32 object-contain drop-shadow-[0_0_15px_rgba(0,0,0,0.8)]" alt="Harry" />
             ) : (
               <div className="text-6xl">{gameOver ? '💀' : '🧙‍♂️'}</div>
             )}
             
             {isPlaying && !gameOver && attackAnim && (
               <div className="absolute bottom-8 left-[80%] shoot-anim z-40">
-                {USE_IMAGES ? <img src="/assets/game/patronus-blast.webp" className="w-24 h-24 md:w-32 md:h-32 object-contain" alt="Patronus" /> : <span className="text-6xl block">✨</span>}
+                {USE_IMAGES ? <img src={patronusBlastImg} className="w-24 h-24 md:w-32 md:h-32 object-contain" alt="Patronus" /> : <span className="text-6xl block">✨</span>}
               </div>
             )}
           </div>

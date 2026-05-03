@@ -1,0 +1,58 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/Footer.astro";
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: "es" } },
+    { params: { lang: "en" } },
+  ];
+}
+
+const { lang } = Astro.params;
+
+const content = {
+  es: {
+    title: "Términos y Condiciones",
+    intro: "Al acceder a El Pensadero, aceptas los siguientes términos de uso.",
+    sections: [
+      { t: "1. Uso del Contenido", c: "Todo el contenido de este sitio es para fines de entretenimiento e información. Queda prohibida la reproducción total o parcial sin consentimiento." },
+      { t: "2. Descargo de Responsabilidad", c: "Este es un sitio de fans. No estamos afiliados a Warner Bros ni J.K. Rowling. Los nombres y marcas pertenecen a sus respectivos dueños." },
+      { t: "3. Cambios en los Términos", c: "Nos reservamos el derecho de modificar estos términos en cualquier momento. El uso continuado del sitio implica la aceptación de los mismos." }
+    ]
+  },
+  en: {
+    title: "Terms and Conditions",
+    intro: "By accessing El Pensadero, you agree to the following terms of use.",
+    sections: [
+      { t: "1. Content Use", c: "All content on this site is for entertainment and information purposes. Total or partial reproduction without consent is prohibited." },
+      { t: "2. Disclaimer", c: "This is a fan site. We are not affiliated with Warner Bros or J.K. Rowling. Names and trademarks belong to their respective owners." },
+      { t: "3. Changes to Terms", c: "We reserve the right to modify these terms at any time. Continued use of the site implies acceptance of them." }
+    ]
+  }
+};
+
+const t = content[lang] || content.es;
+---
+
+<Layout title={t.title} description={t.intro} url={`/${lang}/terms`}>
+  <main class="pt-32 pb-20 max-w-4xl mx-auto px-6 min-h-screen">
+    <h1 class="font-cinzel text-4xl md:text-6xl text-[#B39D4E] mb-12 border-b border-[#B39D4E]/20 pb-6">
+      {t.title}
+    </h1>
+    
+    <p class="font-spectral text-xl text-gray-300 italic mb-10 leading-relaxed">
+      {t.intro}
+    </p>
+
+    <div class="space-y-12">
+      {t.sections.map(s => (
+        <section class="space-y-4">
+          <h2 class="font-cinzel text-2xl text-white">{s.t}</h2>
+          <p class="font-spectral text-lg text-gray-400 leading-relaxed">{s.c}</p>
+        </section>
+      ))}
+    </div>
+  </main>
+  <Footer lang={lang} />
+</Layout>
