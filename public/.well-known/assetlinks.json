@@ -4,6 +4,9 @@
     "namespace": "android_app",
     "package_name": "com.khalldragon.elpensadero",
     "sha256_cert_fingerprints":
-    ["78:BF:38:8E:1F:6C:1B:58:C2:EE:BB:4E:75:DA:A5:1D:DC:B7:39:E7:E1:7A:8E:C2:52:DB:22:CD:C8:DD:77:19"]
+    [
+      "78:BF:38:8E:1F:6C:1B:58:C2:EE:BB:4E:75:DA:A5:1D:DC:B7:39:E7:E1:7A:8E:C2:52:DB:22:CD:C8:DD:77:19",
+      "BB:34:63:86:ED:EA:A0:7E:D9:20:4E:50:B3:FD:EA:A0:0B:6B:D9:D0:35:C6:82:80:77:55:3B:04:87:4E:05:F0"
+    ]
   }
 }]
