@@ -7,9 +7,10 @@ const games = lang == "es" ? "juegos" : "Games";
 
 // --- LÓGICA MEJORADA PARA SABER QUÉ PÁGINA ESTÁ ACTIVA ---
 const pathname = Astro.url.pathname;
-const isHome = pathname === `/${lang}` || pathname === `/${lang}/`;
+const isHome = pathname === `/${lang}` || pathname === `/${lang}/` || pathname === `/`;
 const isBlog = pathname.startsWith(`/${lang}/blog`);
 const isGames = pathname.startsWith(`/${lang}/games`);
+const isLinks = pathname.startsWith(`/${lang}/links`);
 
 // --- Lógica para el link de cambio de idioma ---
 // Usamos 'section' para saber si estamos en 'blog' o 'games'
@@ -26,14 +27,14 @@ const langSwitchUrl = lang == "en"
   <div
     class="max-w-screen-xl flex flex-wrap justify-between xl:items-center xl:justify-center mx-auto p-4 backdrop-blur-sm"
   >
-    <div class="items-center justify-between flex md:w-auto">
+    <div class="items-center justify-center flex w-full">
       <ul
-        class="flex md:p-0 rounded-lg md:gap-52 space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 font-bold"
+        class="flex items-center justify-center rounded-lg gap-3 sm:gap-6 md:gap-10 xl:gap-32 font-bold text-xs sm:text-sm md:text-base w-full px-2"
       >
         <li>
           <a
             href={`/${lang}`}
-            class="block py-2 px-3 text-gray-300 hover:text-[#928952] hover:scale-110 transition-all"
+            class={`block py-2 transition-all ${isHome ? 'text-white scale-110 drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] border-b border-[#928952]' : 'text-gray-300 hover:text-[#928952] hover:scale-110'}`}
             aria-current={isHome ? "page" : false}
           >
             Home
@@ -42,7 +43,7 @@ const langSwitchUrl = lang == "en"
         <li>
           <a
             href={`/${lang}/blog`}
-            class="block py-2 px-3 text-gray-300 hover:text-[#928952] hover:scale-110 transition-all"
+            class={`block py-2 transition-all ${isBlog ? 'text-white scale-110 drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] border-b border-[#928952]' : 'text-gray-300 hover:text-[#928952] hover:scale-110'}`}
             aria-current={isBlog ? "page" : false}
           >
             Blog
@@ -51,32 +52,42 @@ const langSwitchUrl = lang == "en"
         <li>
           <a
             href={`/${lang}/games`}
-            class="block py-2 px-3 text-gray-300 hover:text-[#928952] hover:scale-110 transition-all"
+            class={`block py-2 transition-all ${isGames ? 'text-white scale-110 drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] border-b border-[#928952]' : 'text-gray-300 hover:text-[#928952] hover:scale-110'}`}
             aria-current={isGames ? "page" : false}
           >
             {games}
           </a>
         </li>
-        <div class="flex justify-end w-fit align-top">
+        <li>
+          <a
+            href={`/${lang}/links`}
+            class={`block py-2 font-bold transition-all text-center leading-tight text-[#DAA520] ${isLinks ? 'scale-110 drop-shadow-[0_0_12px_rgba(218,165,32,0.8)] border-b border-[#DAA520]' : 'hover:text-white hover:scale-110'}`}
+            aria-current={isLinks ? "page" : false}
+          >
+            <span class="hidden sm:inline">{lang === 'es' ? 'Academia Mágica' : 'Magic Academy'}</span>
+            <span class="sm:hidden">{lang === 'es' ? 'App' : 'App'}</span>
+          </a>
+        </li>
+        <div class="flex justify-end w-fit align-middle">
           <a
             href={langSwitchUrl}
-            class="flex gap-1 md:gap-2 cursor-pointer w-fit h-fit items-center"
+            class="flex gap-1 cursor-pointer w-fit h-fit items-center ml-1 sm:ml-4"
             aria-label={lang == 'es' ? 'Change to English' : 'Cambiar a Español'}
           >
             <img
               src={esFlag}
               alt="Bandera España"
-              width={lang == "es" ? 40 : 20}
-              height={lang == "es" ? 28 : 14}
-              class={`${lang == "es" ? "w-10" : "w-5"} transition-all h-auto`}
+              width={lang == "es" ? 32 : 16}
+              height={lang == "es" ? 22 : 11}
+              class={`md:w-[${lang == "es" ? '40px' : '20px'}] md:h-[${lang == "es" ? '28px' : '14px'}] transition-all h-auto`}
             />
-            <span class="text-gray-300">|</span>
+            <span class="text-gray-400 text-xs sm:text-base mx-1">|</span>
             <img
               src={usFlag}
               alt="Bandera EEUU"
-              width={lang == "en" ? 40 : 20}
-              height={lang == "en" ? 28 : 14}
-              class={`${lang == "en" ? "w-10" : "w-5"} transition-all h-auto`}
+              width={lang == "en" ? 32 : 16}
+              height={lang == "en" ? 22 : 11}
+              class={`md:w-[${lang == "en" ? '40px' : '20px'}] md:h-[${lang == "en" ? '28px' : '14px'}] transition-all h-auto`}
             />
           </a>
         </div>

@@ -75,14 +75,14 @@ const finishGame = frontmatter.finishGame;
     </h1>
     
     <div class="mb-20 max-w-7xl mx-auto px-4">
-      <h2 class="text-3xl md:text-5xl font-cinzel text-center text-[#B39D4E] mb-12 drop-shadow-lg max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-5xl font-cinzel text-center text-transparent bg-clip-text bg-gradient-to-b from-slate-200 to-slate-500 mb-12 drop-shadow-[0_0_15px_rgba(200,200,200,0.3)] max-w-4xl mx-auto">
         {lang === 'en' ? 'The Wizarding Rosco: A-Z Challenge' : 'El Rosco Mágico: Desafío de la A a la Z'}
       </h2>
       <RoscoGame client:load lang={lang} coverImg={optimizedRoscoCover.src} />
     </div>
 
     <div class="border-t border-white/10 pt-20 mb-20 max-w-7xl mx-auto px-4">
-      <h2 class="text-3xl md:text-5xl font-cinzel text-center text-[#B39D4E] mb-6 drop-shadow-lg max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-5xl font-cinzel text-center text-transparent bg-clip-text bg-gradient-to-b from-slate-200 to-slate-500 mb-6 drop-shadow-[0_0_15px_rgba(200,200,200,0.3)] max-w-4xl mx-auto">
         {lang === 'en' ? 'Expecto Patronum: Dementor Defense' : 'Expecto Patronum: Defensa contra Dementores'}
       </h2>
       <PatronusGame 

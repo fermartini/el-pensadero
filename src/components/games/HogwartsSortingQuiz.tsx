@@ -519,7 +519,7 @@ export default function HogwartsSortingQuiz({
             </div>
 
             <div className="space-y-4">
-              <h1 className="text-4xl md:text-6xl font-cinzel font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#FFF8D6] to-[#B39D4E] drop-shadow-lg">
+              <h1 className="text-4xl md:text-6xl font-cinzel font-bold text-transparent bg-clip-text bg-gradient-to-b from-slate-200 to-slate-500 drop-shadow-[0_0_15px_rgba(200,200,200,0.3)]">
                 {titleGame}
               </h1>
               <p className="text-xl md:text-2xl font-spectral italic text-gray-300 leading-relaxed max-w-lg mx-auto">
