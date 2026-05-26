@@ -1,18 +1,13 @@
 {
   "redirects": [
-     {
-      "source": "/",
-      "destination": "/en",
-      "permanent": true
-    },
     {
       "source": "/blog",
-      "destination": "/en/blog",
+      "destination": "/es/blog",
       "permanent": true
     },
     {
       "source": "/blog/",
-      "destination": "/en/blog",
+      "destination": "/es/blog",
       "permanent": true
     },
     {
