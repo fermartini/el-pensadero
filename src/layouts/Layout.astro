@@ -5,20 +5,38 @@ import Analytics from '@vercel/analytics/astro'
 import { ClientRouter } from "astro:transitions";
 
 const { lang } = Astro.params;
-const langDif = lang == 'es' ? 'en' : 'es'
+const currentLang = lang || 'es'; // Default a español si no hay parámetro
+const langDif = currentLang == 'es' ? 'en' : 'es';
+
+let path = Astro.props.url !== undefined ? Astro.props.url : Astro.url.pathname;
+// Asegurarnos de que el path comience con /
+if (path !== "" && !path.startsWith('/')) path = `/${path}`;
+
+let alternatePath = path;
+if (path === '' || path === '/') {
+  alternatePath = `/${langDif}`;
+} else if (path.startsWith(`/${currentLang}/`)) {
+  alternatePath = path.replace(`/${currentLang}/`, `/${langDif}/`);
+} else if (path === `/${currentLang}`) {
+  alternatePath = `/${langDif}`;
+} else {
+  alternatePath = `/${langDif}${path}`;
+}
+
+const defaultCanonical = `https://elpensaderohp.com${path}`;
+const defaultAlternate = `https://elpensaderohp.com${alternatePath}`;
+
 const {
   title,
   description,
-  url,
+  url = path,
   img = "/assets/img/banner-el-pensadero.webp",
   background = true,
   slugLang = "",
-  canonical = `https://elpensaderohp.com/${lang}`,
-  alternate = `https://elpensaderohp.com/${langDif}`,
+  canonical = defaultCanonical,
+  alternate = defaultAlternate,
   type = "website"
 } = Astro.props;
-
-const currentLang = lang || 'es'; // Default a español si no hay parámetro
 
 import "../style/global.css";
 ---
@@ -81,7 +99,7 @@ import "../style/global.css";
 
   <title>{title}</title>
   <link rel="canonical" href={canonical} />
-  <link rel="alternate" hreflang={lang} href={canonical} />
+  <link rel="alternate" hreflang={currentLang} href={canonical} />
   <link rel="alternate" hreflang={langDif} href={alternate} />
   <link rel="alternate" hreflang="x-default"  href="https://elpensaderohp.com" />
   
